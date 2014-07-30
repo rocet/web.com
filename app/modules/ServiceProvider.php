@@ -13,8 +13,8 @@ abstract class ServiceProvider extends \Illuminate\Support\ServiceProvider
     public function register(){
         if ($module = $this->getModule(func_get_args())){
             $this->app['config']->package('app/'.$module, app_path().'/modules/'.$module.'/config');
-            foreach (\Config::get('app.aliases') as $key => $value) {
-                class_alias($value, 'App\Modules\\'.$module.'\Controllers\\'.$key);
+            foreach (\Config::get('app.aliases') as $alias => $source) {
+                class_alias($source, 'App\Modules\\'.$module.'\Controllers\\'.$alias);
             }
             $routes = app_path().'/modules/'.$module.'/routes.php';
             if (file_exists($routes)) require $routes;

@@ -22,7 +22,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 * @var array
 	 */
 	protected $hidden = array('password', 'remember_token');
-
+	protected $fillable = array('user_name', 'password', 'email', 'mobile', 'region_id', 'orgnaze_id', 'state' );
 	public function region()
 	{
 		return $this->belongsTo('Region');
@@ -48,4 +48,24 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return $this->belongsToMany("Orgnaze")->withTimestamps();
 	}
 
+	public static function validate($input)
+	{
+		$validate = array(
+			'user_name' => 'unique:user',
+			'mobile' => 'unique:user',
+			'email' => 'unique:user'
+		);
+		return Validator::make( $input, $validate );
+	}
+
+	public static function register($input)
+	{
+		$valid = static::validate( $input );
+		if( $valid->passes() ){
+			// return \User::firstOrNew( $input );
+			return static::firstOrCreate( $input );
+		} else {
+			return array( 'errors' => $valid->errors() );
+		}
+	}
 }

@@ -1,6 +1,6 @@
 <?php
 namespace App\Modules\Api;
-class ApiServiceProvider extends \App\Modules\ServiceProvider 
+class ApiServiceProvider extends \App\Modules\ServiceProvider
 {
     public function register()
     {

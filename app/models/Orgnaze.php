@@ -1,9 +1,10 @@
 <?php
 
-class Orgnaze extends Nested
+class Orgnaze extends Tree
 {
 	protected $table = "orgnaze";
 	protected $parentColumn = 'pid';
+	protected $guarded = array( 'orgnaze_name', 'user_id', 'region_id', 'state' );
 
 	public function region()
 	{
