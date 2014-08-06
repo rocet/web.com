@@ -127,6 +127,7 @@ return array(
 		'Baum\BaumServiceProvider',
 		'App\Modules\Admin\AdminServiceProvider',
 		'App\Modules\Api\ApiServiceProvider',
+		'App\Modules\Data\DataServiceProvider',
 
 	),
 

@@ -3,6 +3,7 @@
 class Region extends Eloquent
 {
 	protected $table = "region";
+	// public $timestamps = false;
 
 	public function users()
 	{

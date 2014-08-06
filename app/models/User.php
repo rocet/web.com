@@ -65,7 +65,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 			// return \User::firstOrNew( $input );
 			return static::firstOrCreate( $input );
 		} else {
-			return array( 'errors' => $valid->errors() );
+			return $valid;
 		}
 	}
 }
