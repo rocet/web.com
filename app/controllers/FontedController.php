@@ -1,6 +1,6 @@
 <?php
 
-class FontedController extends \BaseController {
+class FontedController extends BaseController {
 
 	/**
 	 * Display a listing of the resource.
