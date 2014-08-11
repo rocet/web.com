@@ -8,21 +8,7 @@ class InitController extends \Controller
 	 * @return Response
 	 */
 	protected function modelName(){
-		$modelName = substr(strrchr(get_class($this), '\\'), 1, -10);
-		$relation = explode('_', snake_case($modelName));
-		return $modelName == $relation[0] ? $modelName : ucfirst(end($relation));
-	}
-
-
-	/**
-	 * 关系模型名称
-	 *
-	 * @return Response
-	 */
-	protected function relationModelNames(){
-		$relations = explode('_', snake_case(substr(strrchr(get_class($this), '\\'), 1, -10)));
-		array_pop( $relations );
-		return $relations;
+		return substr(strrchr(get_class($this), '\\'), 1, -10);
 	}
 
 
@@ -64,7 +50,7 @@ class InitController extends \Controller
 	 *
 	 * @return Response
 	 */
-	public function paginate($page = 0)
+	public function paginate()
 	{
 		return call_user_func("\\".$this->modelName()."::paginate", $this->perPageNum());
 	}
@@ -100,7 +86,7 @@ class InitController extends \Controller
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show($id=null)
 	{
 		//
 		return call_user_func("\\".$this->modelName()."::find", $id);
@@ -113,7 +99,7 @@ class InitController extends \Controller
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit($id=null)
 	{
 		//
 		return __METHOD__;
@@ -126,7 +112,7 @@ class InitController extends \Controller
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($id=null)
 	{
 		//
 		return __METHOD__;
@@ -139,10 +125,10 @@ class InitController extends \Controller
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy($id=null)
 	{
 		//
-		return __METHOD__;
+		return call_user_func("\\".$this->modelName()."::delete", $id);
 	}
 
 
@@ -152,9 +138,9 @@ class InitController extends \Controller
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function selections($id = 0)
+	public function selections($id=null)
 	{
 		//
-		return __METHOD__;
+		return call_user_func("\\".$this->modelName()."::selections", $id);
 	}
 }

@@ -9,4 +9,12 @@ return array(
 		'user' => 3,
 		'group' => 2
 	),
+	// 排序
+	'order' => array(
+		// 默认排序
+		'default' => 'desc',
+		// 自定义排序
+		'user' => 'desc',
+		'group' => 'asc'
+	),
 );
