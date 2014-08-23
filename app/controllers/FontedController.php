@@ -12,6 +12,24 @@ class FontedController extends BaseController {
 		//
 	}
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function login()
+    {
+        $input = array(
+            User::accountType(Input::get('account')) => Input::get('account'),
+            'password' => Input::get('password')
+        );
+        if (Auth::attempt($input, true))
+        {
+            return Redirect::to('/');
+        }
+    }
+
+
 
 	/**
 	 * Show the form for creating a new resource.

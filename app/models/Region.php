@@ -1,9 +1,9 @@
 <?php
 
-class Region extends Eloquent
+class Region extends Tree
 {
 	protected $table = "region";
-	// public $timestamps = false;
+	public $timestamps = false;
 
 	public function users()
 	{

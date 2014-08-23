@@ -2,15 +2,24 @@
 namespace App\Modules\Data\Controllers;
 class InitRelationController extends InitController
 {
+
+    /**
+     * 模型名称
+     *
+     * @return Response
+     */
+    protected function relationModels(){
+        return explode('_', snake_case(substr(strrchr(get_class($this), '\\'), 1, -10)));
+    }
+
 	/**
 	 * 模型名称
 	 *
 	 * @return Response
 	 */
 	protected function modelName(){
-		$modelName = substr(strrchr(get_class($this), '\\'), 1, -10);
-		$relation = explode('_', snake_case($modelName));
-		return $modelName == $relation[0] ? $modelName : ucfirst(end($relation));
+        $relationModels = $this->relationModels();
+        return ucfirst($relationModels[0]);
 	}
 
 
@@ -20,9 +29,8 @@ class InitRelationController extends InitController
 	 * @return Response
 	 */
 	protected function relationModelName(){
-		$relations = explode('_', snake_case(substr(strrchr(get_class($this), '\\'), 1, -10)));
-		array_pop( $relations );
-		return ucfirst($relations[0]);
+        $relationModels = $this->relationModels();
+		return ucfirst($relationModels[1]);
 	}
 
 
@@ -33,7 +41,7 @@ class InitRelationController extends InitController
 	 */
 	public function index($relation_id=null, $id=null)
 	{
-		return $this->paginate($relation_id, $id);
+		return $this->paginate($relation_id, $id)->toArray();
 	}
 
 
@@ -44,7 +52,7 @@ class InitRelationController extends InitController
 	 */
 	public function paginate($relation_id=null, $id=null)
 	{
-		return __METHOD__;
+        return call_user_func("\\".$this->modelName()."::paginate", $this->perPageNum());
 	}
 
 

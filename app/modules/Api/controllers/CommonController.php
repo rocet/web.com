@@ -2,21 +2,12 @@
 namespace App\Modules\Api\Controllers;
 class CommonController extends ApiController
 {
-	
-	public function selections($pid = 0){
+	public function selections($pid = 0, $fields=array()){
 		$pid = intval($pid);
 		if( !$pid ){
-			return \Region::whereRaw('pid = ?', array(0))->get(array('id','pid','region_name'));
+			return \Region::whereRaw('pid = ?', array(0))->get($fields);
 		} else {
-			return \Region::whereRaw('pid = ?', array($pid))->get(array('id','pid','region_name'));
-		}
-	}
-	public function regions($pid = 0){
-		$pid = intval($pid);
-		if( !$pid ){
-			return \Region::whereRaw('pid = ?', array(0))->get(array('id','pid','region_name'));
-		} else {
-			return \Region::whereRaw('pid = ?', array($pid))->get(array('id','pid','region_name'));
+			return \Region::whereRaw('pid = ?', array($pid))->get($fields);
 		}
 	}
 	public function showWelcome()
@@ -59,11 +50,11 @@ class CommonController extends ApiController
 		// var_dump( $user->save(), \User::all()->toArray() );
 		// \User::all()->last()->delete();
 		// return \User::all()->toArray();
-
-		return View::make('Admin::admin');
 		// return \Group::roots()->paginate()->toArray();
 		// return \Group::whereNull('pid')->get();
 		// return \Group::roots()->first()->toArray();
 		// return \User::all()->toArray();
+
+		return View::make('Admin::admin');
 	}
 }

@@ -4,7 +4,7 @@ class Group extends Tree
 {
 	protected $table = "group";
 	protected $parentColumn = 'pid';
-	protected $guarded = array( 'group_name', 'user_id', 'state' );
+	protected $guarded = array( 'group_name', 'user_id', 'state');
 
 	public function user()
 	{

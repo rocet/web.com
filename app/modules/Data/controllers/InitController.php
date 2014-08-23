@@ -1,6 +1,6 @@
 <?php
 namespace App\Modules\Data\Controllers;
-class InitController extends \Controller 
+class InitController extends \Controller
 {
 	/**
 	 * 模型名称
@@ -41,7 +41,7 @@ class InitController extends \Controller
 	 */
 	public function index()
 	{
-		return $this->paginate();
+		return $this->paginate()->toArray();
 	}
 
 
@@ -140,7 +140,8 @@ class InitController extends \Controller
 	 */
 	public function selections($id=null)
 	{
-		//
-		return call_user_func("\\".$this->modelName()."::selections", $id);
+		//,
+		$fields = Input::get('fields') ?: null;
+		return call_user_func_array("\\".$this->modelName()."::selections", array($id,$fields));
 	}
 }

@@ -2,8 +2,12 @@
 
 abstract class Tree extends Nested
 {
-	public function selections($pid=null)
+	public static function selections($pid=null,$fields=array())
 	{
-		return $this->whereNull('pid')->get();
+		if( $pid ){
+			return static::whereRaw('pid = ?', array($pid))->get($fields);
+		} else {
+			return static::whereNull('pid')->get($fields);
+		}
 	}
 }

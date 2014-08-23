@@ -5,7 +5,11 @@ return array(
 
 	'hello' => '欢迎回来',
 
-
+    'register' => '注册',
+    'forgetPassword' => '忘记密码',
+    'changePassword' => '修改密码',
+    'reminder' => '设置密码',
+    'remember_me' => '下次自动登录',
 
 	'logerror' => "无效的用户名或者密码！",
 	'unauthorized' => '无权访问！',
@@ -28,7 +32,7 @@ return array(
 	'region' => '地区',
 	'select' => '请选择',
 	'reset' => '重置',
-	'cancel' => '取消',
+    'cancel' => '取消',
 
 
 	'delete_group_confirm' => '确认删除这个用户组',
