@@ -9,6 +9,7 @@ return array(
     'changePassword' => 'change password',
     'reminder' => 'reminder password',
     'remember_me' => 'remember me',
+    'password-confirm' => 'Confirm Password',
 
 	'logerror' => "Username and/or Password Invalid.",
 	'unauthorized' => 'Deny.Unauthorized',

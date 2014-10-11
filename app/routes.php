@@ -1,6 +1,5 @@
 <?php
 Route::get('/', array('as' => 'home', 'uses' => function(){
-    var_dump( Auth::check(), Auth::viaRemember() );
     return View::make('hello');
 }));
 Route::get('/doc', array('as' => 'doc', 'uses' => function(){
@@ -15,9 +14,11 @@ Route::group(array("before" => "guest"), function() {
         array('path' => '/register', 'alias' => 'register', 'action' => function () {
             return View::make('hello');
         }),
+        array('path' => '/register', 'alias' => 'register', 'action' => 'FontedController@register', 'method'=> 'post'),
         array('path' => '/forgetPassword', 'alias' => 'forgetPassword', 'action' => function () {
             return View::make('hello');
         }),
+        array('path' => '/forgetPassword', 'alias' => 'forgetPassword', 'action' => 'FontedController@forgetPassword', 'method'=> 'post'),
         array('path' => '/reminder', 'alias' => 'reminder', 'action' => function () {
             return View::make('hello');
         }),
@@ -32,6 +33,7 @@ Route::group(array("before" => "auth"), function() {
         array('path' => '/changePassword', 'alias' => 'changePassword', 'action' => function () {
             return View::make('hello');
         }),
+        array('path' => '/changePassword', 'alias' => 'changePassword', 'action' => 'FontedController@changePassword', 'method'=> 'post'),
         array('path' => '/logout', 'alias' => 'logout', 'action' => function () {
             Auth::logout();
             return Redirect::to('/');

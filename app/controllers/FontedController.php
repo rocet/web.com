@@ -2,6 +2,10 @@
 
 class FontedController extends BaseController {
 
+    protected function dataApi($model = null){
+        $controller = 'App\Modules\Data\Controllers\\'.($model ?: $this->modelName()).'Controller';
+        return class_exists($controller) ? App::make($controller) : false;
+    }
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -19,17 +23,32 @@ class FontedController extends BaseController {
      */
     public function login()
     {
-        $input = array(
+        if ($this->dataApi('User')->login(array(
             User::accountType(Input::get('account')) => Input::get('account'),
             'password' => Input::get('password')
-        );
-        if (Auth::attempt($input, true)) {
+        ), Input::has('remember'))) {
             return Redirect::to('/');
         }
         return Redirect::guest('login');
     }
 
+    public function register(){
+        if ($this->dataApi('User')->register(array(
+            User::accountType(Input::get('account')) => Input::get('account'),
+            'password' => Input::get('password')
+        ))) {
+            return Redirect::to('/');
+        }
+        return Redirect::guest('register');
+    }
 
+    public function changePassword(){
+
+    }
+
+    public function forgetPassword(){
+
+    }
 
 	/**
 	 * Show the form for creating a new resource.
