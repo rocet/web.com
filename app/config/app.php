@@ -124,6 +124,7 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
 		'Barryvdh\Debugbar\ServiceProvider',
+        'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
 		'Baum\BaumServiceProvider',
 		'App\Modules\Admin\AdminServiceProvider',
 		'App\Modules\Api\ApiServiceProvider',

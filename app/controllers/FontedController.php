@@ -23,10 +23,10 @@ class FontedController extends BaseController {
             User::accountType(Input::get('account')) => Input::get('account'),
             'password' => Input::get('password')
         );
-        if (Auth::attempt($input, true))
-        {
+        if (Auth::attempt($input, true)) {
             return Redirect::to('/');
         }
+        return Redirect::guest('login');
     }
 
 
