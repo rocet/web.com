@@ -36,30 +36,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		return $this->belongsToMany("Orgnaze")->withTimestamps();
 	}
 
-	public static function validate($input)
-	{
-		return Validator::make($input, array(
-			'user_name' => 'unique:user',
-			'mobile' => 'unique:user',
-			'email' => 'unique:user'
-		));
-	}
-
-	public static function register($input)
-	{
-		$valid = static::validate( $input );
-		if( $valid->passes() ){
-			return static::firstOrCreate( $input );
-		} else {
-			return $valid;
-		}
-	}
-
-    public static function login($input, $remember)
-    {
-        return Auth::attempt($input, $remember);
-    }
-
     public function getAuthIdentifier()
     {
         return $this->getKey();
@@ -88,6 +64,30 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     public function getReminderEmail()
     {
         return $this->email;
+    }
+
+    public static function validate($input)
+    {
+        return Validator::make($input, array(
+            'user_name' => 'unique:user',
+            'mobile' => 'unique:user',
+            'email' => 'unique:user'
+        ));
+    }
+
+    public static function register($input)
+    {
+        $valid = static::validate( $input );
+        if( $valid->passes() ){
+            return static::firstOrCreate( $input );
+        } else {
+            return $valid;
+        }
+    }
+
+    public static function login($input, $remember)
+    {
+        return Auth::attempt($input, $remember);
     }
 
     public static function accountType($account){
