@@ -6,6 +6,7 @@ class CapchaController extends ApiController
 	{
 
 	}
+
 	public function code()
 	{
 		Crypt::decrypt(Crypt::encrypt('secret'));

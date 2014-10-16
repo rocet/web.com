@@ -1,6 +1,6 @@
 <?php
 namespace App\Modules\Api\Controllers;
-class HomeApiController extends ApiController 
+class HomeApiController extends ApiController
 {
 	public function showWelcome()
 	{
@@ -17,8 +17,7 @@ class HomeApiController extends ApiController
 		// 	$group = \Group::find(1);
 		// 	return $group->users->toArray() ;
 		// }
-		if (Auth::attempt(array('email' => 'admin@admin.com', 'password' => 'admin'), true))
-		{
+		if (Auth::attempt(array('email' => 'admin@admin.com', 'password' => 'admin'), true)) {
 			// var_dump( Auth::check(), Auth::viaRemember() );
 			// var_dump( Crypt::decrypt(Crypt::encrypt('secret')) );
 			// if(!\Group::root()) {
@@ -32,16 +31,16 @@ class HomeApiController extends ApiController
 			// var_dump( $user->exists );
 
 			$input = array(
-				'user_name'   => 'rocetk',
-				'password'    => Hash::make('rocetk'),
-				'email'       => 'rocetk@qq.com',
-				'mobile'      => '13558616654',
-				'region_id'   => 410302,
-				'orgnaze_id'  => 1,
-				'state'       => 1,
+				'user_name' => 'rocetk',
+				'password' => Hash::make('rocetk'),
+				'email' => 'rocetk@qq.com',
+				'mobile' => '13558616654',
+				'region_id' => 410302,
+				'orgnaze_id' => 1,
+				'state' => 1,
 			);
 
-			\User::register( $input );
+			\User::register($input);
 
 			// $user = \User::firstOrNew(array('user_name' => 'rocetk', 'email'=>'rocetk@qq.com', 'mobile' => '13558616654'));	
 			// $user->user_name   = 'rocetk';

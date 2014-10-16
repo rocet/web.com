@@ -1,6 +1,6 @@
 <?php
 namespace App\Modules\Data\Controllers;
-class RegionController extends InitController 
+class RegionController extends InitController
 {
 
 }

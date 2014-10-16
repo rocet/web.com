@@ -2,62 +2,64 @@
 
 class UserForm extends BaseForm
 {
-    public function isValidForLogin($accountType)
-    {
-        return $this->isValid($this->getAccountTypeValid($accountType) + array(
-            "password" => "required"
-        ));
-    }
-    
-    public function isValidForRegist($accountType)
-    {
-        return $this->isValid($this->getAccountTypeValid($accountType, 0) + array(
-            "password"              => "required|min:6",
-            "password_confirmation" => "required|same:password"
-        ));
-    }
+	public function isValidForLogin($account)
+	{
+		return $this->isValid($this->getAccountValid($account) + array(
+				"password" => "required"
+			));
+	}
 
-    public function isValidForRequest($accountType)
-    {
-        return $this->isValid($this->getAccountTypeValid($accountType));
-    }
+	public function isValidForRegist($account)
+	{
+		return $this->isValid($this->getAccountValid($account, 0) + array(
+				"password" => "required|min:6",
+				"password_confirmation" => "required|same:password"
+			));
+	}
 
-    public function isValidForReset($accountType)
-    {
-        return $this->isValid($this->getAccountTypeValid($accountType) + array(
-            "password"              => "required|min:6",
-            "password_confirmation" => "required|same:password",
-            "token"                 => "required|exists:token,token"
-        ));
-    }
+	public function isValidForRequest($account)
+	{
+		return $this->isValid($this->getAccountValid($account));
+	}
 
-    public function isValidForRepassword()
-    {
-        return $this->isValid(array(
-            "password"              => "required|min:6",
-            "password_confirmation" => "required|same:password"
-        ));
-    }
+	public function isValidForReset($account)
+	{
+		return $this->isValid($this->getAccountValid($account) + array(
+				"password" => "required|min:6",
+				"password_confirmation" => "required|same:password",
+				"token" => "required|exists:token,token"
+			));
+	}
 
-    public function isValidForPerfinfo($accountType){
-        return $this->isValid($this->getAccountTypeValid($accountType, 0));
-    }
+	public function isValidForRepassword()
+	{
+		return $this->isValid(array(
+			"password" => "required|min:6",
+			"password_confirmation" => "required|same:password"
+		));
+	}
 
-    protected function getAccountTypeValid($accountType, $exists = 1){
-        $accountValid = array(
-            "email"                 => "required|email|".($exists ? "exists" : "unique").":user,email",
-            "phone"                 => "required|numeric|min:11|".($exists ? "exists" : "unique").":user,phone",
-            "user_name"              => "required|min:5|".($exists ? "exists" : "unique").":user,username",
-            "region"              => "required|numeric",
-        );
-        if( !is_array( $accountType ) ){
-            return array('account' => $accountValid[$accountType]);
-        } else{
-            $return = array();
-            foreach ($accountType as $value) {
-                $return[$value] = $accountValid[$value];
-            }
-            return $return;
-        }
-    }
+	public function isValidForPerfinfo($account)
+	{
+		return $this->isValid($this->getAccountValid($account, 0));
+	}
+
+	protected function getAccountValid($account, $exists = 1)
+	{
+		$accountValid = array(
+			"email" => "required|email|" . ($exists ? "exists" : "unique") . ":user,email",
+			"mobile" => "required|numeric|min:11|" . ($exists ? "exists" : "unique") . ":user,mobile",
+			"user_name" => "required|min:5|" . ($exists ? "exists" : "unique") . ":user,user_name",
+			"region" => "required|numeric",
+		);
+		if (!is_array($account)) {
+			return array('account' => $accountValid[$account]);
+		} else {
+			$return = array();
+			foreach ($account as $value) {
+				$return[$value] = $accountValid[$value];
+			}
+			return $return;
+		}
+	}
 }

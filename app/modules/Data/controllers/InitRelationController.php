@@ -3,23 +3,25 @@ namespace App\Modules\Data\Controllers;
 class InitRelationController extends InitController
 {
 
-    /**
-     * 模型名称
-     *
-     * @return Response
-     */
-    protected function relationModels(){
-        return explode('_', snake_case(substr(strrchr(get_class($this), '\\'), 1, -10)));
-    }
+	/**
+	 * 模型名称
+	 *
+	 * @return Response
+	 */
+	protected function relationModels()
+	{
+		return explode('_', snake_case(substr(strrchr(get_class($this), '\\'), 1, -10)));
+	}
 
 	/**
 	 * 模型名称
 	 *
 	 * @return Response
 	 */
-	protected function modelName(){
-        $relationModels = $this->relationModels();
-        return ucfirst($relationModels[0]);
+	protected function modelName()
+	{
+		$relationModels = $this->relationModels();
+		return ucfirst($relationModels[0]);
 	}
 
 
@@ -28,8 +30,9 @@ class InitRelationController extends InitController
 	 *
 	 * @return Response
 	 */
-	protected function relationModelName(){
-        $relationModels = $this->relationModels();
+	protected function relationModelName()
+	{
+		$relationModels = $this->relationModels();
 		return ucfirst($relationModels[1]);
 	}
 
@@ -39,7 +42,7 @@ class InitRelationController extends InitController
 	 *
 	 * @return Response
 	 */
-	public function index($relation_id=null, $id=null)
+	public function index($relation_id = null, $id = null)
 	{
 		return $this->paginate($relation_id, $id)->toArray();
 	}
@@ -50,9 +53,9 @@ class InitRelationController extends InitController
 	 *
 	 * @return Response
 	 */
-	public function paginate($relation_id=null, $id=null)
+	public function paginate($relation_id = null, $id = null)
 	{
-        return call_user_func("\\".$this->modelName()."::paginate", $this->perPageNum());
+		return call_user_func("\\" . $this->modelName() . "::paginate", $this->perPageNum());
 	}
 
 
@@ -61,7 +64,7 @@ class InitRelationController extends InitController
 	 *
 	 * @return Response
 	 */
-	public function store($relation_id=null)
+	public function store($relation_id = null)
 	{
 		//
 		return __METHOD__;
@@ -71,10 +74,10 @@ class InitRelationController extends InitController
 	/**
 	 * 单条记录
 	 *
-	 * @param  int  $id
+	 * @param  int $id
 	 * @return Response
 	 */
-	public function show($relation_id=null, $id=null)
+	public function show($relation_id = null, $id = null)
 	{
 		//
 		return __METHOD__;
@@ -84,10 +87,10 @@ class InitRelationController extends InitController
 	/**
 	 * 保存修改
 	 *
-	 * @param  int  $id
+	 * @param  int $id
 	 * @return Response
 	 */
-	public function update($relation_id=null, $id=null)
+	public function update($relation_id = null, $id = null)
 	{
 		//
 		return __METHOD__;
@@ -97,10 +100,10 @@ class InitRelationController extends InitController
 	/**
 	 * 删除记录
 	 *
-	 * @param  int  $id
+	 * @param  int $id
 	 * @return Response
 	 */
-	public function destroy($relation_id=null, $id=null)
+	public function destroy($relation_id = null, $id = null)
 	{
 		//
 		return __METHOD__;

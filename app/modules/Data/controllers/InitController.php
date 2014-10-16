@@ -7,7 +7,8 @@ class InitController extends \Controller
 	 *
 	 * @return Response
 	 */
-	protected function modelName(){
+	protected function modelName()
+	{
 		return substr(strrchr(get_class($this), '\\'), 1, -10);
 	}
 
@@ -17,8 +18,9 @@ class InitController extends \Controller
 	 *
 	 * @return Response
 	 */
-	protected function perPageNum(){
-		$pageNum = Config::get('Data::common.per_page.'.strtolower($this->modelName()));
+	protected function perPageNum()
+	{
+		$pageNum = Config::get('Data::common.per_page.' . strtolower($this->modelName()));
 		return $pageNum ?: Config::get('Data::common.per_page.default');
 	}
 
@@ -28,7 +30,8 @@ class InitController extends \Controller
 	 *
 	 * @return Response
 	 */
-	protected function serch(){
+	protected function serch()
+	{
 		$serch = Input::request('serch');
 		return $serch;
 	}
@@ -52,7 +55,7 @@ class InitController extends \Controller
 	 */
 	public function paginate()
 	{
-		return call_user_func("\\".$this->modelName()."::paginate", $this->perPageNum());
+		return call_user_func("\\" . $this->modelName() . "::paginate", $this->perPageNum());
 	}
 
 
@@ -83,23 +86,23 @@ class InitController extends \Controller
 	/**
 	 * 单条记录
 	 *
-	 * @param  int  $id
+	 * @param  int $id
 	 * @return Response
 	 */
-	public function show($id=null)
+	public function show($id = null)
 	{
 		//
-		return call_user_func("\\".$this->modelName()."::find", $id);
+		return call_user_func("\\" . $this->modelName() . "::find", $id);
 	}
 
 
 	/**
 	 * 修改界面
 	 *
-	 * @param  int  $id
+	 * @param  int $id
 	 * @return Response
 	 */
-	public function edit($id=null)
+	public function edit($id = null)
 	{
 		//
 		return __METHOD__;
@@ -109,10 +112,10 @@ class InitController extends \Controller
 	/**
 	 * 保存修改
 	 *
-	 * @param  int  $id
+	 * @param  int $id
 	 * @return Response
 	 */
-	public function update($id=null)
+	public function update($id = null)
 	{
 		//
 		return __METHOD__;
@@ -122,26 +125,26 @@ class InitController extends \Controller
 	/**
 	 * 删除记录
 	 *
-	 * @param  int  $id
+	 * @param  int $id
 	 * @return Response
 	 */
-	public function destroy($id=null)
+	public function destroy($id = null)
 	{
 		//
-		return call_user_func("\\".$this->modelName()."::delete", $id);
+		return call_user_func("\\" . $this->modelName() . "::delete", $id);
 	}
 
 
 	/**
 	 * 下拉列表
 	 *
-	 * @param  int  $id
+	 * @param  int $id
 	 * @return Response
 	 */
-	public function selections($id=null)
+	public function selections($id = null)
 	{
 		//,
 		$fields = Input::get('fields') ?: null;
-		return call_user_func_array("\\".$this->modelName()."::selections", array($id,$fields));
+		return call_user_func_array("\\" . $this->modelName() . "::selections", array($id, $fields));
 	}
 }

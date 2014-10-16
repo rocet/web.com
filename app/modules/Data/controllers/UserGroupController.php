@@ -1,6 +1,6 @@
 <?php
 namespace App\Modules\Data\Controllers;
-class UserGroupController extends InitRelationController 
+class UserGroupController extends InitRelationController
 {
 
 }

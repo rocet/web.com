@@ -1,14 +1,14 @@
 <?php
 namespace App\Modules\Admin;
-class AdminServiceProvider extends \App\Modules\ServiceProvider 
+class AdminServiceProvider extends \App\Modules\ServiceProvider
 {
-    public function register()
-    {
-        parent::register('Admin');
-    }
+	public function register()
+	{
+		parent::register('Admin');
+	}
 
-    public function boot()
-    {
-        parent::boot('Admin');
-    }
+	public function boot()
+	{
+		parent::boot('Admin');
+	}
 }

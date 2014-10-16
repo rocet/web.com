@@ -9,7 +9,7 @@ class Region extends Tree
 	{
 		return $this->hasMany('User');
 	}
-	
+
 	public function orgnazes()
 	{
 		return $this->hasMany('Orgnazes');

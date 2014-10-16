@@ -11,6 +11,6 @@
 |
 */
 
-Route::group(array('domain' => 'admin.web.com'), function(){
+Route::group(array('domain' => 'admin.web.com'), function () {
 	Route::get('/', 'App\Modules\Admin\Controllers\HomesController@showWelcome');
 });

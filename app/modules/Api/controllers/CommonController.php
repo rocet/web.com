@@ -2,14 +2,16 @@
 namespace App\Modules\Api\Controllers;
 class CommonController extends ApiController
 {
-	public function selections($pid = 0, $fields=array()){
+	public function selections($pid = 0, $fields = array())
+	{
 		$pid = intval($pid);
-		if( !$pid ){
+		if (!$pid) {
 			return \Region::whereRaw('pid = ?', array(0))->get($fields);
 		} else {
 			return \Region::whereRaw('pid = ?', array($pid))->get($fields);
 		}
 	}
+
 	public function showWelcome()
 	{
 		// var_dump( Crypt::decrypt(Crypt::encrypt('secret')) );
