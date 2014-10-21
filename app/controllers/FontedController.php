@@ -2,33 +2,11 @@
 
 class FontedController extends BaseController
 {
-
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	protected function dataApi($model = null)
-	{
-		$controller = 'App\Modules\Data\Controllers\\' . ($model ?: $this->modelName()) . 'Controller';
-		return class_exists($controller) ? App::make($controller) : false;
-	}
-
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
 	public function index()
 	{
 		//
 	}
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
 	public function loginWithFrontValid()
 	{
 		$form = new UserForm();
@@ -49,6 +27,12 @@ class FontedController extends BaseController
 			}
 		}
 		return Redirect::guest('login');
+	}
+
+	protected function dataApi($model = null)
+	{
+		$controller = 'App\Modules\Data\Controllers\\' . ($model ?: $this->modelName()) . 'Controller';
+		return class_exists($controller) ? App::make($controller) : false;
 	}
 
 	public function registerWithFrontValid()
@@ -73,12 +57,6 @@ class FontedController extends BaseController
 		return Redirect::guest('register');
 	}
 
-
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
 	public function login()
 	{
 		if (Request::isMethod('post')) {
@@ -97,11 +75,6 @@ class FontedController extends BaseController
 		return Redirect::guest('login');
 	}
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
 	public function register()
 	{
 		if (Request::isMethod('post')) {

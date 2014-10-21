@@ -80,7 +80,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface
 		);
 		$valid = Validator::make($input, $valid);
 		if ($valid->passes()) {
-			$callback($args);
+			return $callback($args);
 		}
 		return $valid;
 	}
@@ -101,9 +101,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface
 
 	public function account($account)
 	{
+		$mobile_code = array(134, 135, 136, 137, 138, 139, 150, 151, 152, 157, 158, 159, 182, 183, 184, 187, 188, 178, 147, 130, 131, 132, 155, 156, 185, 186, 176, 145, 133, 153, 180, 181, 189, 177, 170);
 		if (filter_var($account, FILTER_VALIDATE_EMAIL)) {
 			$account = 'email';
-		} else if ($account + 0 && $account + 0 > 10000000000 && in_array(intval(substr($account, 0, 3)), array(134, 135, 136, 137, 138, 139, 150, 151, 152, 157, 158, 159, 182, 183, 184, 187, 188, 178, 147, 130, 131, 132, 155, 156, 185, 186, 176, 145, 133, 153, 180, 181, 189, 177, 170))) {
+		} else if ($account + 0 && $account + 0 > 13000000000 && $account + 0 < 19000000000 && in_array(intval(substr($account, 0, 3)), $mobile_code)) {
 			$account = 'mobile';
 		} else {
 			$account = 'user_name';
