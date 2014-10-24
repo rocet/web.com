@@ -10,7 +10,7 @@ return array(
     'changePassword' => '修改密码',
     'reminder' => '设置密码',
     'remember_me' => '下次自动登录',
-    'password-confirm' => '确认密码',
+    'password_confirm' => '确认密码',
 
 	'logerror' => "无效的用户名或者密码！",
 	'unauthorized' => '无权访问！',

@@ -6,7 +6,7 @@
     {{ Form::password('password', array(
         'placeholder' => '••••••••••'
     )) }}
-    {{ Form::label('password-confirm', Lang::get('user.password-confirm')) }}
+    {{ Form::label('password-confirm', Lang::get('user.password_confirm')) }}
     {{ Form::password('password-confirm', array(
         'placeholder' => '••••••••••'
     )) }}
@@ -15,7 +15,7 @@
             {{ $error }}
         </div>
     @endif
-    @if ($error = $errors->first('password-confirm'))
+    @if ($error = $errors->first('password_confirm'))
         <div class='error'>
             {{ $error }}
         </div>

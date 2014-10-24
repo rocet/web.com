@@ -15,4 +15,14 @@ class BaseController extends Controller
 		}
 	}
 
+	protected function validPass($input)
+	{
+		if(!$input){
+			return 0;
+		}
+		if (is_object($input)) {
+			return substr(strrchr(get_class($input), '\\'), 1) === 'Validator' ? 0 : 1;
+		}
+		return 1;
+	}
 }

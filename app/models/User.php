@@ -19,12 +19,12 @@ class User extends Eloquent implements UserInterface, RemindableInterface
 
 	public function group()
 	{
-		return $this->belongsTo("Group");
+		return $this->belongsTo('Group');
 	}
 
 	public function groups()
 	{
-		return $this->belongsToMany("Group")->withTimestamps();
+		return $this->belongsToMany('Group')->withTimestamps();
 	}
 
 	public function orgnaze()
@@ -34,7 +34,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface
 
 	public function orgnazes()
 	{
-		return $this->belongsToMany("Orgnaze")->withTimestamps();
+		return $this->belongsToMany('Orgnaze')->withTimestamps();
 	}
 
 	public function getAuthIdentifier()
@@ -67,48 +67,4 @@ class User extends Eloquent implements UserInterface, RemindableInterface
 		return $this->email;
 	}
 
-	public function validate(Closure $callback, array $args, $input, $exists = 0)
-	{
-		$valid = array(
-			"email" => "required|email|" . ($exists ? "exists" : "unique") . ":user,email",
-			"mobile" => "required|numeric|min:11|" . ($exists ? "exists" : "unique") . ":user,mobile",
-			"user_name" => "required|min:5|" . ($exists ? "exists" : "unique") . ":user,user_name",
-			"region" => "required|numeric",
-			"password" => "required|min:6",
-			"password_confirmation" => "required|same:password",
-			"token" => "required|exists:token,token"
-		);
-		$valid = Validator::make($input, $valid);
-		if ($valid->passes()) {
-			return $callback($args);
-		}
-		return $valid;
-	}
-
-	public function register($input)
-	{
-		return $this->validate(function ($args) {
-			return $this->firstOrCreate($args[0]);
-		}, array($input), $input, 1);
-	}
-
-	public function login($input, $remember = false)
-	{
-		return $this->validate(function ($args) {
-			return Auth::attempt($args[0], $args[1]);
-		}, array($input, $remember), $input, 1);
-	}
-
-	public function account($account)
-	{
-		$mobile_code = array(134, 135, 136, 137, 138, 139, 150, 151, 152, 157, 158, 159, 182, 183, 184, 187, 188, 178, 147, 130, 131, 132, 155, 156, 185, 186, 176, 145, 133, 153, 180, 181, 189, 177, 170);
-		if (filter_var($account, FILTER_VALIDATE_EMAIL)) {
-			$account = 'email';
-		} else if ($account + 0 && $account + 0 > 13000000000 && $account + 0 < 19000000000 && in_array(intval(substr($account, 0, 3)), $mobile_code)) {
-			$account = 'mobile';
-		} else {
-			$account = 'user_name';
-		}
-		return $account;
-	}
 }
