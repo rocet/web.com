@@ -44,6 +44,7 @@ Route::filter('auth', function()
 		else
 		{
 			return Redirect::guest('login');
+			//return Response::view('unauthorized', array(), 401);
 		}
 	}
 });

@@ -5,11 +5,12 @@ return array(
 	'hello' => 'Hello',
 
     'register' => 'register',
-    'forgetPassword' => 'forget password',
+    'reset' => 'forget password',
     'changePassword' => 'change password',
     'reminder' => 'reminder password',
     'remember_me' => 'remember me',
     'password_confirm' => 'Confirm Password',
+	'password_old' => 'Old Password',
 
 	'logerror' => "Username and/or Password Invalid.",
 	'unauthorized' => 'Deny.Unauthorized',

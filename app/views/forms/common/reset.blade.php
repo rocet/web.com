@@ -1,17 +1,8 @@
 {{ Form::open(array(
-    'route' => 'changePassword',
+    'route' => 'reset',
     'autocomplete' => 'off'
 )) }}
-    {{ Form::label('password_old', Lang::get('user.password_old')) }}
-    {{ Form::password('password_old', array(
-        'placeholder' => '••••••••••'
-    )) }}
-    @if ($error = $errors->first('password_old'))
-        <div class='error'>
-            {{ $error }}
-        </div>
-    @endif
-    {{ Form::label('password', Lang::get('user.password')) }}
+    {{ Form::label('password', Lang::get('user.password') )}}
     {{ Form::password('password', array(
         'placeholder' => '••••••••••'
     )) }}
@@ -34,5 +25,5 @@
             {{ $error }}
         </div>
     @endif
-    {{ Form::submit(Lang::get('user.save')) }}
+    {{ Form::submit(Lang::get('user.reset')) }}
 {{ Form::close() }}

@@ -8,10 +8,10 @@
             <a href="{{ URL::route("register") }}">{{ Lang::get('user.register') }}</a>
         </li>
         <li>
-            <a href="{{ URL::route("forgetPassword") }}">{{ Lang::get('user.forgetPassword') }}</a>
+            <a href="{{ URL::route("reminder") }}">{{ Lang::get('user.reminder') }}</a>
         </li>
         <li>
-            <a href="{{ URL::route("reminder") }}">{{ Lang::get('user.reminder') }}</a>
+            <a href="{{ URL::route("reset") }}">{{ Lang::get('user.reset') }}</a>
         </li>
     @else
         <li>

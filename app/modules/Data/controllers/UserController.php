@@ -17,40 +17,77 @@ class UserController extends InitController
 
 	public function register($input)
 	{
-		return $this->validate(function ($args) {
-			$args[0]['password'] = \Hash::make($args[0]['password']);
-			unset($args[0]['password_confirm']);
-			if ($user = $this->model()->firstOrCreate($args[0])) {
+		return $this->validate(function () use ($input) {
+			$input['password'] = \Hash::make($input['password']);
+			unset($input['password_confirm']);
+			if ($user = $this->model()->firstOrCreate($input)) {
 				$user->groups()->attach(2);
-				$this->login($args[0]);
+				\Auth::login($user);
 				return $user;
 			}
 			return 0;
-		}, array($input), $input);
+		}, $input, 0);
 	}
 
-	public function validate(\Closure $callback, array $args, $input, $exists = 0)
+	public function validate(\Closure $callback, $input, $exists = 1)
 	{
 		$valid = array(
 			'email' => 'required|email|' . ($exists ? 'exists' : 'unique') . ':user,email',
 			'mobile' => 'required|numeric|min:11|' . ($exists ? 'exists' : 'unique') . ':user,mobile',
 			'user_name' => 'required|min:5|' . ($exists ? 'exists' : 'unique') . ':user,user_name',
 			'region' => 'required|numeric',
-			'password' => 'required|min:5',
+			'password' => 'required|'. (isset($input['password_old']) ? 'different:password_old|' : '') .'min:5',
 			'password_confirm' => 'required|same:password',
+			'password_old' => 'required|min:5',
 			'token' => 'required|exists:token,token'
 		);
+
 		$valid = \Validator::make($input, array_intersect_key($valid, $input));
 		if ($valid->passes()) {
-			return $callback($args);
+			return $callback();
 		}
 		return $valid;
 	}
 
 	public function login($input, $remember = false)
 	{
-		return $this->validate(function ($args) {
-			return \Auth::attempt($args[0], $args[1]);
-		}, array($input, $remember), $input, 1);
+		return $this->validate(function () use ($input, $remember) {
+			return \Auth::attempt($input, $remember);
+		}, $input);
+	}
+
+	public function reminder($input)
+	{
+		return $this->validate(function () use ($input) {
+			return \Password::remind($input, function ($message, $user) {
+				// TODO: send token email
+				$message->subject("chris@example.com Password Reminder");
+				return 1;
+			});
+		}, $input);
+	}
+
+	public function reset($input)
+	{
+		return $this->validate(function () use ($input) {
+			return \Password::reset($input, function ($user, $password) {
+				$user->password = \Hash::make($password);
+				$user->save();
+				\Auth::login($user);
+				return 1;
+			});
+		}, $input);
+	}
+
+	public function changePassword($input)
+	{
+		return $this->validate(function () use ($input) {
+			$user = Auth::user();
+			$user->password = Hash::make($input['password']);
+			$user->save();
+			\Auth::logout();
+			\Auth::login($user);
+			return 1;
+		}, $input);
 	}
 }

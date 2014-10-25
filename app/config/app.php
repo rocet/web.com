@@ -130,6 +130,7 @@ return array(
 		'App\Modules\Api\ApiServiceProvider',
 		'App\Modules\Data\DataServiceProvider',
 
+		'App\External\Shop\ShopServiceProvider',
 	),
 
 	/*
