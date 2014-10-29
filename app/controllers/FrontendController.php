@@ -1,6 +1,6 @@
 <?php
 
-class FontedController extends BaseController
+class FrontendController extends BaseController
 {
 
 	public function index()
