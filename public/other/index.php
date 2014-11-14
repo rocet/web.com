@@ -618,7 +618,7 @@ namespace App\Controller {
 
 			echo '<hr />';
 
-			\Vendor\Core\Response::json( \Vendor\Core\DB::query( 'SHOW DATABASES' )->fetchAll() );
+			// \Vendor\Core\Response::json( \Vendor\Core\DB::query( 'SHOW DATABASES' )->fetchAll() );
 
 			View::make( $this->dump( $logged->getCart()->allGoods(), 1 ) . Debug::showTime() . Debug::showMemory(), 'utf8' );
 		}
