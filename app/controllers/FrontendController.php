@@ -1,8 +1,11 @@
 <?php
 
 class FrontendController extends BaseController {
-	public function index() {
-		//
+
+	protected function dataApi( $model = null ) {
+		$controller = 'App\Modules\Data\Controllers\\' . ( $model ?: $this->modelName() ) . 'Controller';
+
+		return class_exists( $controller ) ? App::make( $controller ) : false;
 	}
 
 	public function login() {
@@ -25,12 +28,6 @@ class FrontendController extends BaseController {
 		}
 
 		return Redirect::guest( 'login' );
-	}
-
-	protected function dataApi( $model = null ) {
-		$controller = 'App\Modules\Data\Controllers\\' . ( $model ?: $this->modelName() ) . 'Controller';
-
-		return class_exists( $controller ) ? App::make( $controller ) : false;
 	}
 
 	public function register() {
@@ -56,36 +53,12 @@ class FrontendController extends BaseController {
 		return Redirect::guest( 'register' );
 	}
 
-	public function changePassword() {
-		if ( Auth::validate( array(
-					'user_name' => Auth::user()->user_name,
-					'password'  => Input::get( 'password_old' )
-				) ) && Request::isMethod( 'post' )
-		) {
-			$posts = array(
-				'password'         => Input::get( 'password' ),
-				'password_confirm' => Input::get( 'password_confirm' ),
-				'password_old'     => Input::get( 'password_old' )
-			);
-			if ( $this->validPass( $process = $this->dataApi( 'User' )->changePassword( $posts ) ) ) {
-				return Redirect::to( 'message' )->with( 'message', 'Password Changed' );
-			}
-			if ( ! $process ) {
-				$process = new \Illuminate\Support\MessageBag( array( 'sys_error' => 'error' ) );
-			}
-
-			return Redirect::guest( 'changePassword' )->withErrors( $process );
-		}
-
-		return Redirect::guest( 'changePassword' );
-	}
-
 	public function reset() {
-		if ( Input::get( "token" ) && Request::isMethod( 'post' ) ) {
+		if ( Input::get( 'token' ) && Request::isMethod( 'post' ) ) {
 			$posts = array(
 				'password'         => Input::get( 'password' ),
 				'password_confirm' => Input::get( 'password_confirm' ),
-				'token'            => Input::get( "token" ),
+				'token'            => Input::get( 'token' ),
 			);
 			if ( $this->validPass( $process = $this->dataApi( 'User' )->reset( $posts ) ) ) {
 				return Redirect::to( 'message' )->with( 'message', 'Password Changed' );
@@ -121,72 +94,47 @@ class FrontendController extends BaseController {
 		return Redirect::guest( 'reminder' );
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create() {
-		//
+	public function changePassword() {
+		if ( Auth::validate( array(
+				'user_name' => Auth::user()->user_name,
+				'password'  => Input::get( 'password_old' )
+			) ) && Request::isMethod( 'post' )
+		) {
+			$posts = array(
+				'password'         => Input::get( 'password' ),
+				'password_confirm' => Input::get( 'password_confirm' ),
+				'password_old'     => Input::get( 'password_old' )
+			);
+			if ( $this->validPass( $process = $this->dataApi( 'User' )->changePassword( $posts ) ) ) {
+				return Redirect::to( 'message' )->with( 'message', 'Password Changed' );
+			}
+			if ( ! $process ) {
+				$process = new \Illuminate\Support\MessageBag( array( 'sys_error' => 'error' ) );
+			}
+
+			return Redirect::guest( 'changePassword' )->withErrors( $process );
+		}
+
+		return Redirect::guest( 'changePassword' );
 	}
 
+	public function profile() {
+		if ( Request::isMethod( 'post' ) ) {
+			$posts = array(
+				'password'         => Input::get( 'password' ),
+				'password_confirm' => Input::get( 'password_confirm' ),
+				'password_old'     => Input::get( 'password_old' )
+			);
+			if ( $this->validPass( $process = $this->dataApi( 'User' )->profile( $posts ) ) ) {
+				return Redirect::to( 'message' )->with( 'message', 'Password Changed' );
+			}
+			if ( ! $process ) {
+				$process = new \Illuminate\Support\MessageBag( array( 'sys_error' => 'error' ) );
+			}
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store() {
-		//
+			return Redirect::guest( 'profile' )->withErrors( $process );
+		}
+
+		return Redirect::guest( 'profile' )->withInput( Auth::user()->toArray() );
 	}
-
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int $id
-	 *
-	 * @return Response
-	 */
-	public function show( $id ) {
-		//
-	}
-
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int $id
-	 *
-	 * @return Response
-	 */
-	public function edit( $id ) {
-		//
-	}
-
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int $id
-	 *
-	 * @return Response
-	 */
-	public function update( $id ) {
-		//
-	}
-
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int $id
-	 *
-	 * @return Response
-	 */
-	public function destroy( $id ) {
-		//
-	}
-
-
 }

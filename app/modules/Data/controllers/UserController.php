@@ -15,20 +15,6 @@ class UserController extends InitController
 		return $account;
 	}
 
-	public function register($input)
-	{
-		return $this->validate(function () use ($input) {
-			$input['password'] = \Hash::make($input['password']);
-			unset($input['password_confirm']);
-			if ($user = $this->model()->firstOrCreate($input)) {
-				$user->groups()->attach(2);
-				\Auth::login($user);
-				return $user;
-			}
-			return 0;
-		}, $input, 0);
-	}
-
 	public function validate(\Closure $callback, $input, $exists = 1)
 	{
 		$valid = array(
@@ -42,7 +28,16 @@ class UserController extends InitController
 			'token' => 'required|exists:token,token'
 		);
 
-		$valid = \Validator::make($input, array_intersect_key($valid, $input));
+		$valid = \Validator::make($input, array_intersect_key($valid, $input), array(), array(
+			'email' => Lang::get('user.email'),
+			'mobile' => Lang::get('user.mobile'),
+			'user_name' => Lang::get('user.account'),
+			'region' => Lang::get('user.region'),
+			'password' => Lang::get('user.password'),
+			'password_confirm' => Lang::get('user.password_confirm'),
+			'password_old' => Lang::get('user.password_old'),
+			'token' => Lang::get('user.token'),
+		) );
 		if ($valid->passes()) {
 			return $callback();
 		}
@@ -54,6 +49,20 @@ class UserController extends InitController
 		return $this->validate(function () use ($input, $remember) {
 			return \Auth::attempt($input, $remember);
 		}, $input);
+	}
+
+	public function register($input)
+	{
+		return $this->validate(function () use ($input) {
+			$input['password'] = \Hash::make($input['password']);
+			unset($input['password_confirm']);
+			if ($user = $this->model()->firstOrCreate($input)) {
+				$user->groups()->attach(2);
+				\Auth::login($user);
+				return $user;
+			}
+			return 0;
+		}, $input, 0);
 	}
 
 	public function reminder($input)
@@ -84,6 +93,19 @@ class UserController extends InitController
 		return $this->validate(function () use ($input) {
 			$user = Auth::user();
 			$user->password = Hash::make($input['password']);
+			$user->save();
+			\Auth::logout();
+			\Auth::login($user);
+			return 1;
+		}, $input);
+	}
+
+	public function profile($input) {
+		return $this->validate(function () use ($input) {
+			$user = Auth::user();
+			foreach($input as $field => $value){
+				$user->$field = $value;
+			}
 			$user->save();
 			\Auth::logout();
 			\Auth::login($user);

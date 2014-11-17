@@ -34,6 +34,10 @@ Route::group(array("before" => "guest"), function () {
 });
 Route::group(array("before" => "auth"), function () {
 	$auth_agrees = array(
+		array('path' => '/profile', 'alias' => 'profile', 'action' => function () {
+			return View::make('hello');
+		}),
+		array('path' => '/profile', 'alias' => 'profile', 'action' => 'FrontendController@profile', 'method' => 'post'),
 		array('path' => '/changePassword', 'alias' => 'changePassword', 'action' => function () {
 			return View::make('hello');
 		}),

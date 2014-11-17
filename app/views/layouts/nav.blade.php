@@ -15,6 +15,9 @@
         </li>
     @else
         <li>
+            <a href="{{ URL::route("profile") }}">{{ Lang::get('user.profile') }}</a>
+        </li>
+        <li>
             <a href="{{ URL::route("changePassword") }}">{{ Lang::get('user.changePassword') }}</a>
         </li>
         <li>

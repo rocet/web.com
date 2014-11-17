@@ -1,97 +1,145 @@
 <?php
 
 header( 'Content-Type:text/html;charset=UTF-8' );
+function dump() {
+	echo '<pre>';
+	foreach ( func_get_args() as $dump ) {
+		ob_start();
+		echo '<?php ' . PHP_EOL;
+		var_dump( $dump );
+		echo highlight_string( ob_get_clean(), true );
+	}
+	echo '</pre>';
+}
 
 echo '<h2>工厂模式</h2>';
 
 interface IFactory {
-	public static function factory( $config );
+	public static function build( $config );
+}
+
+interface IPrototype {
+	public function copy();
+
+	public function copyFull();
 }
 
 abstract class Factory implements IFactory {
-//	public static function factory($item){
-//		$computerReflection = class_exists($item) ? new ReflectionClass($item) : null;
-//		return $computerReflection && $computerReflection->isSubclassOf(substr(__CLASS__, 0, -7)) ? new $item : null;
-//	}
-}
-
-class ComputerFactory extends Factory {
-	public static function factory( $computer ) {
-		$computerReflection = class_exists( $computer ) ? new ReflectionClass( $computer ) : null;
-
-		return $computerReflection && $computerReflection->isSubclassOf( substr( __CLASS__, 0, - 7 ) ) ? new $computer : null;
+	public static function build( $config ) {
+		$prototype           = substr( get_called_class(), 0, - 7 );
+		$prototypeReflection = class_exists( $prototype ) ? new ReflectionClass( $prototype ) : null;
+		$iterator = new RecursiveIteratorIterator( new RecursiveArrayIterator( $config ), RecursiveIteratorIterator::CHILD_FIRST );
+		while ( $iterator->valid() ) {
+			if ( $iterator->hasChildren() ) {
+				$attrPrototype = $iterator->key();
+				$attrPrototypeReflection = class_exists( $attrPrototype ) ? new ReflectionClass( $attrPrototype ) : null;
+				if( $attrPrototypeReflection && $attrPrototypeReflection->implementsInterface( 'IPrototype' ) ){
+					$iterator->offsetSet($attrPrototype, $attrPrototypeReflection->getMethod( 'copyFull' )->invoke( new $attrPrototype( $iterator->getChildren() ) ) );
+				}
+			}
+			$iterator->next();
+		}
+		return $prototypeReflection && $prototypeReflection->implementsInterface( 'IPrototype' ) ? $prototypeReflection->getMethod( 'copyFull' )->invoke( new $prototype( $iterator->getArrayCopy() ) ) : null;
 	}
 }
 
-abstract class Computer {
+abstract class Prototype implements IPrototype {
+	public function __construct( $config = null ) {
+		foreach ( $config as $key => $item ) {
+			$this->$key = $item;
+		}
+	}
 
-}
+	public function copy() {
+		return clone $this;
+	}
 
-class Mac extends Computer {
-	public function __construct() {
-		echo ' [' . __CLASS__ . '] ';
+	public function copyFull() {
+		return unserialize( serialize( $this ) );
 	}
 }
 
-class Pc extends Computer {
-	public function __construct() {
-		echo ' [' . __CLASS__ . '] ';
-	}
-}
-
-ComputerFactory::factory( 'Mac' );
-ComputerFactory::factory( 'Pc' );
-
-
-echo '<h2>工厂方法模式</h2>';
-
-abstract class Monitor {
+class Bord extends Prototype {
 
 }
 
-class CRT extends Monitor {
-	public function __construct() {
-		echo ' [' . __CLASS__ . '] ';
-	}
+class Cpu extends Prototype {
+
 }
 
-class LCD extends Monitor {
-	public function __construct() {
-		echo ' [' . __CLASS__ . '] ';
-	}
+class Memory extends Prototype {
+
+}
+
+class Disk extends Prototype {
+
+}
+
+class Monitor extends Prototype {
+
+}
+
+interface IComputerComponents {
+
+}
+
+interface IComputer {
+
+}
+
+class ComputerComponents extends Prototype implements IComputerComponents {
+
+}
+
+class Computer extends Prototype implements IComputer  {
+
+}
+
+class Brand extends Prototype{
+
+}
+
+class BordFactory extends Factory {
+
+}
+
+class CpuFactory extends Factory {
+
+}
+
+class MemoryFactory extends Factory {
+
+}
+
+class DiskFactory extends Factory {
+
 }
 
 class MonitorFactory extends Factory {
-	public static function factory( $monitor ) {
-		$monitorReflection = class_exists( $monitor ) ? new ReflectionClass( $monitor ) : null;
 
-		return $monitorReflection && $monitorReflection->isSubclassOf( substr( __CLASS__, 0, - 7 ) ) ? new $monitor : null;
-	}
 }
 
-class FinalFactory {
-	public static function factory( $config = null ) {
-		foreach ( $config as $factory => $items ) {
-			$factory           = $factory . 'Factory';
-			$factoryReflection = class_exists( $factory ) ? new ReflectionClass( $factory ) : null;
-			if ( $factoryReflection && $factoryReflection->implementsInterface( 'IFactory' ) ) {
-				array_walk( $items, function ( $item, $k, $factory ) {
-					$itemReflection = class_exists( $item ) ? new ReflectionClass( $item ) : null;
-					if ( $itemReflection && $itemReflection->isSubclassOf( substr( $factory, 0, - 7 ) ) ) {
-						call_user_func( $factory . '::factory', $item );
-					}
-					//$config[$factory][$k] = $itemReflection && $itemReflection->isSubclassOf($factory) ? new $item : null;
-				}, $factory );
-			}
-		}
-	}
+class ComputerComponentsFactory extends Factory {
+
 }
 
-FinalFactory::factory( array(
-	'Computer' => array( 'Mac', 'Pc' ),
-	'Monitor'  => array( 'CRT', 'LCD' ),
-) );
+class ComputerFactory extends Factory {
 
+}
+
+dump( $mac = BordFactory::build( array( 'brand' => 'MIS' ) ), $pc = CpuFactory::build( array( 'brand' => 'AMD' ) ) );
+
+echo '<h2>工厂方法模式, 建造者模式</h2>';
+
+dump( $mycomputer = ComputerFactory::build( array(
+	'Bord'    => array( 'Brand' => array('sss' => 'MIS')  ),
+	'Cpu'     => array( 'brand' => 'Inter' ),
+	'Memory'  => array( 'brand' => 'Hynix' ),
+	'Disk'    => array( 'brand' => 'Ibm' ),
+	'Monitor' => array( 'brand' => 'LCD' ),
+) ) );
+
+dump( ComputerComponentsFactory::build(array( 'Bord' => array('ss') )));
 
 echo '<h2>观察者模式</h2>';
 
@@ -154,10 +202,6 @@ interface IStrategy {
 	public function doSomething();
 }
 
-
-interface Prototype {
-	public function copy();
-}
 
 abstract class Subject implements SplSubject {
 	use TSubject;
@@ -242,7 +286,8 @@ $context->execute();
 
 echo '<h2>原型模式</h2>';
 
-class ConcretePrototype implements Prototype {
+
+class ConcretePrototype implements IPrototype {
 	private $name;
 
 	function __construct( $name ) {
@@ -322,10 +367,4 @@ print_r( $m3 );
 print_r( $manager->getPrototypes() );
 
 echo '<h2>装饰模式</h2>';
-
-
-
-
-
-
 

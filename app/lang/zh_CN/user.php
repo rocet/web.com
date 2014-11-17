@@ -40,7 +40,10 @@ return array(
 	'delete_group_confirm' => '确认删除这个用户组',
 	'no_groups' => '还没有用户组',
 
-
+	'profile' => '个人信息',
+	'orgnaze_id' => '组织',
+	'region_id' => '地区',
+	'user_name' => '账号',
 	'nikename' => '昵称',
 	'account' => '账号',
 	'account_type' => "邮箱/用户名/手机",
@@ -48,6 +51,7 @@ return array(
 	'password_confirmation' => '确认密码',
 	'email' => '邮箱',
 	'phone' => '手机',
+	'mobile' => '手机',
 
 	'phonenumber'  => '手机号码',
 	'emailsample' => '电子邮箱',
