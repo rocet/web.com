@@ -39,6 +39,12 @@ class CreateUserTable extends Migration {
 				->default(null);
 
 			$table
+				->integer("group_id")
+				->nullable()
+				->unsigned()
+				->default(null);
+
+			$table
 				->integer("region_id")
 				->nullable()
 				->unsigned()

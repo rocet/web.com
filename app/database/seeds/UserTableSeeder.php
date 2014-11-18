@@ -8,12 +8,14 @@ class UserTableSeeder extends DatabaseSeeder
 			array(
 				"user_name" => "admin",
 				"password" => Hash::make("admin"),
-				"email"    => "admin@admin.com"
+				"email"    => "admin@admin.com",
+				"group_id" => "1"
 			),
 			array(
 				"user_name" => "rocet",
 				"password" => Hash::make("rocet"),
-				"email"    => "rocet@admin.com"
+				"email"    => "rocet@admin.com",
+				"group_id" => "1"
 			)
 		);
 

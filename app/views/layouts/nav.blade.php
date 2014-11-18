@@ -14,6 +14,14 @@
             <a href="{{ URL::route("reset") }}">{{ Lang::get('user.reset') }}</a>
         </li>
     @else
+        @if( Auth::user()->group->group_name == 'admin')
+        <li>
+            <a href="{{ URL::route("admin") }}">{{ Lang::get('user.admin') }}</a>
+        </li>
+        @endif
+        <li>
+            <a href="{{ URL::route("member") }}">{{ Lang::get('user.member') }}</a>
+        </li>
         <li>
             <a href="{{ URL::route("profile") }}">{{ Lang::get('user.profile') }}</a>
         </li>
@@ -24,5 +32,8 @@
             <a href="{{ URL::route("logout") }}">{{ Lang::get('user.logout') }}</a>
         </li>
     @endif
+        <li>
+            <a href="{{ URL::route("shop") }}">{{ Lang::get('user.shop') }}</a>
+        </li>
     </ul>
 @show

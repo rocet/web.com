@@ -1,14 +1,13 @@
 <?php
 namespace App\Modules\Data\Controllers;
-class InitController extends \Controller
-{
+
+class InitController extends \Controller {
 	/**
 	 * 首页
 	 *
 	 * @return Response
 	 */
-	public function index()
-	{
+	public function index() {
 		return $this->paginate()->toArray();
 	}
 
@@ -17,9 +16,8 @@ class InitController extends \Controller
 	 *
 	 * @return Response
 	 */
-	public function paginate()
-	{
-		return call_user_func("\\" . $this->modelName() . "::paginate", $this->perPageNum());
+	public function paginate() {
+		return call_user_func( "\\" . $this->modelName() . "::paginate", $this->perPageNum() );
 	}
 
 	/**
@@ -27,10 +25,10 @@ class InitController extends \Controller
 	 *
 	 * @return Response
 	 */
-	protected function perPageNum()
-	{
-		$pageNum = Config::get('Data::common.per_page.' . strtolower($this->modelName()));
-		return $pageNum ?: Config::get('Data::common.per_page.default');
+	protected function perPageNum() {
+		$pageNum = Config::get( 'Data::common.per_page.' . strtolower( $this->modelName() ) );
+
+		return $pageNum ?: Config::get( 'Data::common.per_page.default' );
 	}
 
 	/**
@@ -38,8 +36,7 @@ class InitController extends \Controller
 	 *
 	 * @return Response
 	 */
-	public function create()
-	{
+	public function create() {
 		//
 		return __METHOD__;
 	}
@@ -49,8 +46,7 @@ class InitController extends \Controller
 	 *
 	 * @return Response
 	 */
-	public function store()
-	{
+	public function store() {
 		//
 		return __METHOD__;
 	}
@@ -59,22 +55,22 @@ class InitController extends \Controller
 	 * 单条记录
 	 *
 	 * @param  int $id
+	 *
 	 * @return Response
 	 */
-	public function show($id = null)
-	{
+	public function show( $id = null ) {
 		//
-		return call_user_func("\\" . $this->modelName() . "::find", $id);
+		return call_user_func( "\\" . $this->modelName() . "::find", $id );
 	}
 
 	/**
 	 * 修改界面
 	 *
 	 * @param  int $id
+	 *
 	 * @return Response
 	 */
-	public function edit($id = null)
-	{
+	public function edit( $id = null ) {
 		//
 		return __METHOD__;
 	}
@@ -83,10 +79,10 @@ class InitController extends \Controller
 	 * 保存修改
 	 *
 	 * @param  int $id
+	 *
 	 * @return Response
 	 */
-	public function update($id = null)
-	{
+	public function update( $id = null ) {
 		//
 		return __METHOD__;
 	}
@@ -95,25 +91,23 @@ class InitController extends \Controller
 	 * 删除记录
 	 *
 	 * @param  int $id
+	 *
 	 * @return Response
 	 */
-	public function destroy($id = null)
-	{
+	public function destroy( $id = null ) {
 		//
-		return call_user_func("\\" . $this->modelName() . "::delete", $id);
+		return call_user_func( "\\" . $this->modelName() . "::delete", $id );
 	}
 
 	/**
 	 * 下拉列表
 	 *
 	 * @param  int $id
+	 *
 	 * @return Response
 	 */
-	public function selections($id = null)
-	{
-		//,
-		$fields = Input::get('fields') ?: null;
-		return call_user_func_array("\\" . $this->modelName() . "::selections", array($id, $fields));
+	public function selections( $field, $pid = 0, $id = null ) {
+		return call_user_func_array( "\\" . $this->modelName() . "::selections", array( $field, $pid, $id ) );
 	}
 
 	/**
@@ -121,9 +115,9 @@ class InitController extends \Controller
 	 *
 	 * @return Response
 	 */
-	protected function model()
-	{
+	protected function model() {
 		$modelName = $this->modelName();
+
 		return new $modelName();
 	}
 
@@ -132,9 +126,8 @@ class InitController extends \Controller
 	 *
 	 * @return Response
 	 */
-	protected function modelName()
-	{
-		return substr(strrchr(get_class($this), '\\'), 1, -10);
+	protected function modelName() {
+		return substr( strrchr( get_class( $this ), '\\' ), 1, - 10 );
 	}
 
 	/**
@@ -142,9 +135,9 @@ class InitController extends \Controller
 	 *
 	 * @return Response
 	 */
-	protected function serch()
-	{
-		$serch = Input::request('serch');
+	protected function serch() {
+		$serch = Input::request( 'serch' );
+
 		return $serch;
 	}
 }

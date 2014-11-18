@@ -5,6 +5,7 @@ Route::get('/', array('as' => 'home', 'uses' => function () {
 Route::get('/doc', array('as' => 'doc', 'uses' => function () {
 	return View::make('doc');
 }));
+Route::get('/selections', array('as' => 'selections', 'uses' => 'FrontendController@selections'));
 Route::group(array("before" => "guest"), function () {
 	$guest_agrees = array(
 		array('path' => '/message', 'alias' => 'message', 'action' => function () {

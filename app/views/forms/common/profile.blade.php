@@ -8,9 +8,15 @@
     {{ Form::hidden($field, $value) }}
     @else
     {{ Form::label($field, Lang::get('user.'.$field) )}}
+        @if ($field == 'region_id')
+        {{ Form::select('region_id', Region::selections('region_name', 0)) }}
+        @elseif ($field == 'orgnaze_id')
+        {{ Form::select('orgnaze_id', Orgnaze::selections('orgnaze_name')) }}
+        @else
         {{ Form::text($field, $value, array(
             'placeholder' => Lang::get('user.'.$field)
         )) }}
+        @endif
         @if ($error = $errors->first($field))
             <div class='error'>
                 {{ $error }}

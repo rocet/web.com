@@ -119,14 +119,16 @@ class FrontendController extends BaseController {
 	}
 
 	public function profile() {
-		if ( Request::isMethod( 'post' ) ) {
+		if ( Request::isMethod( 'post' ) && Auth::user()->id == Input::get( 'id' ) ) {
 			$posts = array(
-				'password'         => Input::get( 'password' ),
-				'password_confirm' => Input::get( 'password_confirm' ),
-				'password_old'     => Input::get( 'password_old' )
+				'user_name'  => Input::get( 'user_name' ),
+				'email'      => Input::get( 'email' ),
+				'mobile'     => Input::get( 'mobile' ),
+				'region_id'  => Input::get( 'region_id' ),
+				'orgnaze_id' => Input::get( 'orgnaze_id' )
 			);
 			if ( $this->validPass( $process = $this->dataApi( 'User' )->profile( $posts ) ) ) {
-				return Redirect::to( 'message' )->with( 'message', 'Password Changed' );
+				return Redirect::to( 'message' )->with( 'message', 'profile Changed' );
 			}
 			if ( ! $process ) {
 				$process = new \Illuminate\Support\MessageBag( array( 'sys_error' => 'error' ) );
@@ -135,6 +137,15 @@ class FrontendController extends BaseController {
 			return Redirect::guest( 'profile' )->withErrors( $process );
 		}
 
-		return Redirect::guest( 'profile' )->withInput( Auth::user()->toArray() );
+		return Redirect::guest( 'profile' );
+	}
+
+	public function selections(){
+		$model = Input::get('model') ?: null;
+		$field = Input::get('field') ?: null;
+		$pid = Input::get('pid') ?: 0;
+		$id = Input::get('id') ?: null;
+		$selections = $model ? $this->dataApi( ucfirst($model) )->selections($field, $pid, $id) : array();
+		return Response::json( $selections );
 	}
 }

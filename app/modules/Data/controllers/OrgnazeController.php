@@ -1,6 +1,6 @@
 <?php
 namespace App\Modules\Data\Controllers;
-class OgnazeController extends InitController
+class OrgnazeController extends InitController
 {
 
 }
