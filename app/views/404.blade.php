@@ -1,4 +1,4 @@
 @extends('layouts.main')
 @section('main')
-ERROR!
+ERROR 404!
 @stop

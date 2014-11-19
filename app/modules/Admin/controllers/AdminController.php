@@ -11,11 +11,11 @@ class AdminController extends \BaseController {
 		return array( 'errors' => $error );
 	}
 
-	protected function dataApi( $model = null ) {
-		$controller = 'App\Modules\Data\Controllers\\' . ( $model ?: $this->modelName() ) . 'Controller';
+    protected function dataApi( $model = null ) {
+        $controller = 'App\Modules\Data\Controllers\\' . ( $model ?: $this->modelName() ) . 'Controller';
 
-		return class_exists( $controller ) ? App::make( $controller ) : false;
-	}
+        return class_exists( $controller ) ? App::make( $controller ) : false;
+    }
 
 	/**
 	 * Display a listing of the resource.
@@ -24,7 +24,7 @@ class AdminController extends \BaseController {
 	 */
 	public function index() {
 		//
-		return Response::json( $this->dataApi()->index() );
+        return View::make('Admin::'. strtolower( $this->modelName()) );
 	}
 
 

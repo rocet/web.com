@@ -1,6 +1,6 @@
 <?php
 
-class Region extends Tree
+class Region extends Eloquent
 {
 	protected $table = "region";
 	public $timestamps = false;
@@ -14,4 +14,12 @@ class Region extends Tree
 	{
 		return $this->hasMany('Orgnazes');
 	}
+
+    public static function selections($field, $pid = 'root', $id = 'id')
+    {
+        if ( is_string($pid) && $pid = 'root' ) {
+            return static::whereNull('pid')->lists($field, $id);
+        }
+        return static::whereRaw('pid = ?', array($pid))->lists($field, $id);
+    }
 }

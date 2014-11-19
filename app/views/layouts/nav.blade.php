@@ -14,7 +14,7 @@
             <a href="{{ URL::route("reset") }}">{{ Lang::get('user.reset') }}</a>
         </li>
     @else
-        @if( Auth::user()->group->group_name == 'admin')
+        @if( Auth::user()->group_id == 1)
         <li>
             <a href="{{ URL::route("admin") }}">{{ Lang::get('user.admin') }}</a>
         </li>

@@ -12,19 +12,19 @@
     <body class="container">
         <a class="sr-only" href="#content">Skip to main content</a>
         <header class="row">
-            @include('layouts.header')
+            @include('Admin::layouts.header')
         </header>
         <nav class="row">
-            @include('layouts.nav')
+            @include('Admin::layouts.nav')
         </nav>
         <main class="row">
             <aside>
-                @include('layouts.aside')
+                @include('Admin::layouts.aside')
             </aside>
             @yield('main')
         </main>
         <footer class="row">
-            @include('layouts.footer')
+            @include('Admin::layouts.footer')
         </footer>
         <script type="text/javascript" src="/assets/js/app.js"></script>
     </body>

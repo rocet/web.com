@@ -1,0 +1,6 @@
+{
+    "name": "web.com",
+    "dependencies": {
+        "bootstrap": "~3.3.1"
+    }
+}

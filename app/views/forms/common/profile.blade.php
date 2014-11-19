@@ -10,6 +10,8 @@
     {{ Form::label($field, Lang::get('user.'.$field) )}}
         @if ($field == 'region_id')
         {{ Form::select('region_id', Region::selections('region_name', 0)) }}
+        @elseif ($field == 'group_id')
+        {{ Form::select('group_id', Group::selections('group_name')) }}
         @elseif ($field == 'orgnaze_id')
         {{ Form::select('orgnaze_id', Orgnaze::selections('orgnaze_name')) }}
         @else

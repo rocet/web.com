@@ -28,7 +28,7 @@ class CreateRegionTable extends Migration {
 				->nullable()
 				->unsigned()
 				->default(null);
-				
+
 			$table
 				->integer("sort")
 				->nullable()
