@@ -8,7 +8,7 @@ class InitController extends \Controller {
 	 * @return Response
 	 */
 	public function index() {
-		return $this->paginate()->toArray();
+		return $this->paginate();
 	}
 
 	/**
@@ -72,7 +72,7 @@ class InitController extends \Controller {
 	 */
 	public function edit( $id = null ) {
 		//
-		return __METHOD__;
+		return call_user_func( "\\" . $this->modelName() . "::find", $id );
 	}
 
 	/**

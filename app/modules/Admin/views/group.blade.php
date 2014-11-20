@@ -1,4 +1,5 @@
 @extends('Admin::layouts.main')
 @section('main')
-group index
+    @include('Admin::layouts.restful')
+    group pages
 @stop

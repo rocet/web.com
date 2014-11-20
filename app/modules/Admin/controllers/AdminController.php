@@ -24,7 +24,7 @@ class AdminController extends \BaseController {
 	 */
 	public function index() {
 		//
-        return View::make('Admin::'. strtolower( $this->modelName()) );
+        return View::make('Admin::'. strtolower( $this->modelName()) )->with('item', $this->dataApi()->index());
 	}
 
 
@@ -35,6 +35,7 @@ class AdminController extends \BaseController {
 	 */
 	public function create() {
 		//
+		return View::make('Admin::'.strtolower( $this->modelName()) );
 	}
 
 
@@ -57,6 +58,7 @@ class AdminController extends \BaseController {
 	 */
 	public function show( $id ) {
 		//
+		return View::make('Admin::'.strtolower( $this->modelName()) )->with('item', $this->dataApi()->show($id))->with('id', $id);
 	}
 
 
@@ -69,6 +71,7 @@ class AdminController extends \BaseController {
 	 */
 	public function edit( $id ) {
 		//
+		return View::make('Admin::'.strtolower( $this->modelName()) )->with('item', $this->dataApi()->edit($id))->with('id', $id);
 	}
 
 
@@ -93,5 +96,6 @@ class AdminController extends \BaseController {
 	 */
 	public function destroy( $id ) {
 		//
+		var_dump( $id );
 	}
 }

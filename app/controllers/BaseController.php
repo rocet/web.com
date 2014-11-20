@@ -13,6 +13,8 @@ class BaseController extends Controller
 		if (!is_null($this->layout)) {
 			$this->layout = View::make($this->layout);
 		}
+		define( 'CURRENT_ACTION',  substr(strrchr(Route::currentRouteName(), '.'), 1) );
+		define( 'CURRENT_CONTROLLER',  strstr(Route::currentRouteName(), '.', true ) );
 	}
 
 	protected function validPass($input)
