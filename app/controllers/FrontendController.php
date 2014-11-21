@@ -144,7 +144,7 @@ class FrontendController extends BaseController {
 		$model = Input::get('model') ?: null;
 		$field = Input::get('field') ?: null;
 		$pid = Input::get('pid') ?: 0;
-		$id = Input::get('id') ?: null;
+		$id = Input::get('id') ?: 'id';
 		$selections = $model ? $this->dataApi( ucfirst($model) )->selections($field, $pid, $id) : array();
 		return Response::json( $selections );
 	}

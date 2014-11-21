@@ -46,6 +46,8 @@ class AdminController extends \BaseController {
 	 */
 	public function store() {
 		//
+		dd( Input::all() );
+		return View::make('forms.common.message' )->with('message', $this->dataApi()->store( Input::all() ));
 	}
 
 
@@ -84,6 +86,7 @@ class AdminController extends \BaseController {
 	 */
 	public function update( $id ) {
 		//
+		return View::make('forms.common.message' )->with('message', $this->dataApi()->update($id, Input::all() ));
 	}
 
 
@@ -96,6 +99,6 @@ class AdminController extends \BaseController {
 	 */
 	public function destroy( $id ) {
 		//
-		var_dump( $id );
+		var_dump( 'destroy' . $id );
 	}
 }

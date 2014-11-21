@@ -9,7 +9,8 @@
     @else
     {{ Form::label($field, Lang::get('user.'.$field) )}}
         @if ($field == 'region_id')
-        {{ Form::select('region_id', Region::selections('region_name', 0)) }}
+        @include( 'forms.common.region' )
+        {{ Form::hidden('region_id', Auth::user()->region_id ) }}
         @elseif ($field == 'group_id')
         {{ Form::select('group_id', Group::selections('group_name')) }}
         @elseif ($field == 'orgnaze_id')

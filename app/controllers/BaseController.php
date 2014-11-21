@@ -13,8 +13,10 @@ class BaseController extends Controller
 		if (!is_null($this->layout)) {
 			$this->layout = View::make($this->layout);
 		}
-		define( 'CURRENT_ACTION',  substr(strrchr(Route::currentRouteName(), '.'), 1) );
-		define( 'CURRENT_CONTROLLER',  strstr(Route::currentRouteName(), '.', true ) );
+		View::share('_curent_action', substr(strrchr(Route::currentRouteName(), '.'), 1));
+		View::share('_curent_controller', strstr(Route::currentRouteName(), '.', true ));
+//		define( 'CURRENT_ACTION',  substr(strrchr(Route::currentRouteName(), '.'), 1) );
+//		define( 'CURRENT_CONTROLLER',  strstr(Route::currentRouteName(), '.', true ) );
 	}
 
 	protected function validPass($input)

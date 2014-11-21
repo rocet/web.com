@@ -1,14 +1,14 @@
 <?php
 
-Route::group(array('domain' => 'www.web.com'), function () {
-	if( strstr(URL::current(), 'www.web.com') ){
+Route::group(array('domain' => 'http://web.com'), function () {
+	if( strstr(URL::current(), 'http://web.com') ){
 		Header( 'HTTP/1.1 301 Moved Permanently' );
-		Header( 'Location: '.str_replace( 'www.web.com', 'web.com', URL::current() ) );
+		Header( 'Location: '.str_replace( 'http://web.com', 'http://www.web.com', URL::current() ) );
 		exit();
 	}
 });
 
-Route::group(array('domain' => 'web.com'), function () {
+Route::group(array('domain' => 'www.web.com'), function () {
 	Route::get('/', array('as' => 'home', 'uses' => function () {
 		return View::make('hello');
 	}));

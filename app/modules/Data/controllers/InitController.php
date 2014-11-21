@@ -46,9 +46,15 @@ class InitController extends \Controller {
 	 *
 	 * @return Response
 	 */
-	public function store() {
-		//
-		return __METHOD__;
+	public function store($input) {
+		dd(  $input );
+		return $this->validate(function () use ( $input ) {
+			dd(  $input );
+			if ($model = $this->model()->firstOrCreate($input)) {
+				return $model;
+			}
+			return 0;
+		}, $input, 0);
 	}
 
 	/**
@@ -82,9 +88,18 @@ class InitController extends \Controller {
 	 *
 	 * @return Response
 	 */
-	public function update( $id = null ) {
-		//
-		return __METHOD__;
+	public function update( $id = null, $input = null ) {
+		return $this->validate(function () use ( $id, $input ) {
+			dd(  $input );
+			if ($model = $this->model()->find($id)) {
+				foreach($input as $field => $value){
+					$model->$field = $value;
+				}
+				$model->save();
+				return $model;
+			}
+			return 0;
+		}, $input, 0);
 	}
 
 	/**
@@ -106,7 +121,7 @@ class InitController extends \Controller {
 	 *
 	 * @return Response
 	 */
-	public function selections( $field, $pid = 0, $id = null ) {
+	public function selections( $field, $pid = 0, $id = 'id' ) {
 		return call_user_func_array( "\\" . $this->modelName() . "::selections", array( $field, $pid, $id ) );
 	}
 
