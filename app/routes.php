@@ -9,18 +9,24 @@ Route::group(array('domain' => 'http://web.com'), function () {
 });
 
 Route::group(array('domain' => 'www.web.com'), function () {
-	Route::get('/', array('as' => 'home', 'uses' => function () {
-		return View::make('hello');
-	}));
-	Route::get('/doc', array('as' => 'doc', 'uses' => function () {
-		return View::make('doc');
-	}));
+	$default_agree = array(
+		array('path' => '/', 'alias' => 'home', 'action' => function () {
+			return View::make('hello');
+		}),
+		array('path' => '/doc', 'alias' => 'doc', 'action' => function () {
+			return View::make('doc');
+		}),
+		array('path' => '/message', 'alias' => 'message', 'action' => function () {
+			return View::make('hello');
+		})
+	);
+	foreach ($default_agree as $agree) {
+		$method = isset($agree['method']) ? $agree['method'] : 'get';
+		Route::$method($agree['path'], array('as' => $agree['alias'], 'uses' => $agree['action']));
+	}
 	Route::get('/selections', array('as' => 'selections', 'uses' => 'FrontendController@selections'));
 	Route::group(array("before" => "guest"), function () {
 		$guest_agrees = array(
-			array('path' => '/message', 'alias' => 'message', 'action' => function () {
-				return View::make('hello');
-			}),
 			array('path' => '/login', 'alias' => 'login', 'action' => function () {
 				return View::make('hello');
 			}),

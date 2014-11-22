@@ -16,7 +16,7 @@ class FrontendController extends BaseController {
 				'password' => Input::get( 'password' )
 			);
 			if ( $this->validPass( $process = $this->dataApi( 'User' )->login( $posts, Input::has( 'remember' ) ) ) ) {
-				return Redirect::to( '/' );
+				return Redirect::route( 'home' );
 			}
 			if ( $process ) {
 				$process->errors()->add( 'account', $process->errors()->first( $account ) );
@@ -39,7 +39,7 @@ class FrontendController extends BaseController {
 				'password_confirm' => Input::get( 'password_confirm' )
 			);
 			if ( $this->validPass( $process = $this->dataApi( 'User' )->register( $posts ) ) ) {
-				return Redirect::to( '/' );
+				return Redirect::route( 'home' );
 			}
 			if ( $process ) {
 				$process->errors()->add( 'account', $process->errors()->first( $account ) );
@@ -61,7 +61,7 @@ class FrontendController extends BaseController {
 				'token'            => Input::get( 'token' ),
 			);
 			if ( $this->validPass( $process = $this->dataApi( 'User' )->reset( $posts ) ) ) {
-				return Redirect::to( 'message' )->with( 'message', 'Password Changed' );
+				return Redirect::route( 'message' )->with( 'message', 'Password Changed' );
 			}
 			if ( ! $process ) {
 				$process = new \Illuminate\Support\MessageBag( array( 'sys_error' => 'error' ) );
@@ -80,7 +80,7 @@ class FrontendController extends BaseController {
 				$account => Input::get( 'account' )
 			);
 			if ( $this->validPass( $process = $this->dataApi( 'User' )->reminder( $posts ) ) ) {
-				return Redirect::to( 'message' )->with( 'message', 'Login Failed' );
+				return Redirect::route( 'message' )->with( 'message', 'Login Failed' );
 			}
 			if ( $process ) {
 				$process->errors()->add( 'account', $process->errors()->first( $account ) );
@@ -106,7 +106,7 @@ class FrontendController extends BaseController {
 				'password_old'     => Input::get( 'password_old' )
 			);
 			if ( $this->validPass( $process = $this->dataApi( 'User' )->changePassword( $posts ) ) ) {
-				return Redirect::to( 'message' )->with( 'message', 'Password Changed' );
+				return Redirect::route( 'message' )->with( 'message', 'Password Changed' );
 			}
 			if ( ! $process ) {
 				$process = new \Illuminate\Support\MessageBag( array( 'sys_error' => 'error' ) );
@@ -128,7 +128,7 @@ class FrontendController extends BaseController {
 				'orgnaze_id' => Input::get( 'orgnaze_id' )
 			);
 			if ( $this->validPass( $process = $this->dataApi( 'User' )->profile( $posts ) ) ) {
-				return Redirect::to( 'message' )->with( 'message', 'profile Changed' );
+				return Redirect::route( 'message' )->with( 'message', 'profile Changed' );
 			}
 			if ( ! $process ) {
 				$process = new \Illuminate\Support\MessageBag( array( 'sys_error' => 'error' ) );

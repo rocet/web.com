@@ -13,10 +13,10 @@ class BaseController extends Controller
 		if (!is_null($this->layout)) {
 			$this->layout = View::make($this->layout);
 		}
-		View::share('_curent_action', substr(strrchr(Route::currentRouteName(), '.'), 1));
-		View::share('_curent_controller', strstr(Route::currentRouteName(), '.', true ));
-//		define( 'CURRENT_ACTION',  substr(strrchr(Route::currentRouteName(), '.'), 1) );
-//		define( 'CURRENT_CONTROLLER',  strstr(Route::currentRouteName(), '.', true ) );
+
+		View::share('_curent_action', $this->getCurrentAction());
+
+		View::share('_curent_controller', $this->getCurrentController());
 	}
 
 	protected function validPass($input)
@@ -28,5 +28,12 @@ class BaseController extends Controller
 			return substr(strrchr(get_class($input), '\\'), 1) === 'Validator' ? 0 : 1;
 		}
 		return 1;
+	}
+
+	protected function getCurrentController(){
+		return strstr(Route::currentRouteName(), '.', true );
+	}
+	protected function getCurrentAction(){
+		return substr(strrchr(Route::currentRouteName(), '.'), 1);
 	}
 }

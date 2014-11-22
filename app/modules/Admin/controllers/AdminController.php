@@ -46,8 +46,13 @@ class AdminController extends \BaseController {
 	 */
 	public function store() {
 		//
-		dd( Input::all() );
-		return View::make('forms.common.message' )->with('message', $this->dataApi()->store( Input::all() ));
+		if ( $this->validPass( $process = $this->dataApi()->store(  Input::except('_token') ) ) ) {
+			return Redirect::route( 'message' )->with( 'message', 'Store Success <a href="'.URL::route($this->getCurrentController().'.index').'">return</a> ' );
+		}
+		if ( ! $process ) {
+			$process = new \Illuminate\Support\MessageBag( array( 'sys_error' => 'error' ) );
+		}
+		return View::make( 'Admin::'.strtolower( $this->modelName()) )->withInput(Input::except('_token'))->withErrors( $process );
 	}
 
 
@@ -86,7 +91,13 @@ class AdminController extends \BaseController {
 	 */
 	public function update( $id ) {
 		//
-		return View::make('forms.common.message' )->with('message', $this->dataApi()->update($id, Input::all() ));
+		if ( $this->validPass( $process = $this->dataApi()->update( $id,  Input::except('_token', '_method') ) ) ) {
+			return Redirect::route( 'message' )->with( 'message', 'Store Success <a href="'.URL::route($this->getCurrentController().'.index').'">return</a>' );
+		}
+		if ( ! $process ) {
+			$process = new \Illuminate\Support\MessageBag( array( 'sys_error' => 'error' ) );
+		}
+		return View::make( 'Admin::'.strtolower( $this->modelName()) )->with('item', $this->dataApi()->edit($id))->with('id', $id)->withInput(Input::except('_token', '_method'))->withErrors( $process );
 	}
 
 

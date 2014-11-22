@@ -1,6 +1,6 @@
 <?php
 namespace App\Modules\Data\Controllers;
-class GroupController extends InitController
+class GroupController extends TreeController
 {
 	public function validate(\Closure $callback, $input, $exists = 1)
 	{

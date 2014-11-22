@@ -1,13 +1,13 @@
 <?php
 namespace App\Modules\Data\Controllers;
 
-class OrgnazeController extends InitController {
+class OrgnazeController extends TreeController {
 
 	public function validate( \Closure $callback, $input, $exists = 1 ) {
 		$valid = array(
-			'pid'          => 'required|numeric|exists:orgnaze,pid',
-			'orgnaze_name' => 'required|min:5|' . ( $exists ? 'exists' : 'unique' ) . ':orgnaze,orgnaze_name',
-			'region_id'    => 'required|numeric|exists:region,pid',
+			'pid'          => 'required|numeric|', //.( $exists ? 'exists:orgnaze,pid' : '' ),
+			'orgnaze_name' => 'required|min:5|', // . ( $exists ? 'exists' : 'unique' ) . ':orgnaze,orgnaze_name',
+			'region_id'    => 'required|numeric|exists:region,id',
 			'user_id'      => 'required|numeric|exists:user,id',
 			'sort'         => 'required|numeric',
 		);
@@ -24,4 +24,5 @@ class OrgnazeController extends InitController {
 
 		return $valid;
 	}
+
 }

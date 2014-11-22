@@ -88,7 +88,7 @@ class InitController extends \Controller {
 	 *
 	 * @return Response
 	 */
-	public function update( $id = null, $input = null ) {
+	public function update( $id, $input ) {
 		return $this->validate(function () use ( $id, $input ) {
 			dd(  $input );
 			if ($model = $this->model()->find($id)) {

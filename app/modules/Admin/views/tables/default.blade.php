@@ -6,7 +6,7 @@
         <tr>
             @foreach( Config::get('Admin::view/'.$_curent_controller) as $field => $config )
             @if( isset( $config['grid']['show'] ) && $config['grid']['show'] )
-            <th>{{ $field }}</th>
+            <th>{{ Lang::get($_curent_controller.'.'.$field) }}</th>
             @endif
             @endforeach
             <th><a href="{{ URL::route($_curent_controller.'.create') }}"><span class="glyphicon glyphicon-plus"></span></a></th>
