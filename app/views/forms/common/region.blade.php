@@ -13,23 +13,9 @@
         }
     }
 </script>
-<select class="region" onchange="region(this);">
-	<option>{{ Lang::get('user.select') }}</option>
-	@foreach ( Region::selections('region_name', 0) as $key => $province )
-	<option value="{{ $key }}">{{ $province }}</option>
-	@endforeach
-</select>
-<select class="region" onchange="region(this);">
-	<option value="110000">{{ Lang::get('user.select') }}</option>
-	@foreach ( Region::selections('region_name', 110000) as $key => $city)
-	<option value="{{ $key }}">{{ $city }}</option>
-	@endforeach
-</select>
-<select class="region" onchange="region(this);">
-	<option value="110100">{{ Lang::get('user.select') }}</option>
-	@foreach ( Region::selections('region_name', 110100) as $key => $town)
-	<option value="{{ $key }}">{{ $town }}</option>
-	@endforeach
-</select>
+
+{{ Form::select(null, Region::selections('region_name', 0), 0, array( 'class' => 'region', 'onchange' => 'region(this);' )) }}
+{{ Form::select(null, Region::selections('region_name', 110000), 110000, array( 'class' => 'region', 'onchange' => 'region(this);' )) }}
+{{ Form::select(null, Region::selections('region_name', 110100), 110100, array( 'class' => 'region', 'onchange' => 'region(this);' )) }}
 
 

@@ -22,7 +22,7 @@ return array(
 		),
 		'form' => array(
 			'show' => true,
-			'type' => 'select',
+			'type' => 'treeSelect',
 			'options' => array('0' => '请选择') + Group::selections('group_name'),
 		),
 	),

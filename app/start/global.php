@@ -10,7 +10,7 @@
 | your classes in the "global" namespace without Composer updating.
 |
 */
-
+include __DIR__ . '/../macro.php';
 ClassLoader::addDirectories(array(
 
 	app_path().'/commands',

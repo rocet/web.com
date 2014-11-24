@@ -29,9 +29,9 @@
                 <a class="btn btn-default btn-xs" href="{{ URL::route($_curent_controller.'.destroy', array('id'=>$row->id))  }}">
                     <span class="glyphicon glyphicon-trash"></span>
                 </a>
-                {{ Form::model($item, array('method' => 'DELETE', 'route' => array($_curent_controller.'.destroy', $row->id))); }}
-                        {{ Form::button('<span class="glyphicon glyphicon-trash"></span>', array( 'type' => 'submit', 'class' => 'btn btn-default btn-xs')) }}
-                    {{ Form::close() }}
+                {{--{{ Form::model($item, array('method' => 'DELETE', 'route' => array($_curent_controller.'.destroy', $row->id))); }}--}}
+                    {{--{{ Form::button('<span class="glyphicon glyphicon-trash"></span>', array( 'type' => 'submit', 'class' => 'btn btn-default btn-xs')) }}--}}
+                {{--{{ Form::close() }}--}}
             </td>
         </tr>
         @endforeach
