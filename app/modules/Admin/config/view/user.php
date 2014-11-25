@@ -1,7 +1,7 @@
 <?php
 
 return array(
-	'id'           => array(
+	'id'         => array(
 		'grid' => array(
 			'show' => true,
 		),
@@ -9,7 +9,7 @@ return array(
 			'show' => false,
 		),
 	),
-	'user_name'          => array(
+	'user_name'  => array(
 		'grid' => array(
 			'show' => true,
 		),
@@ -18,7 +18,7 @@ return array(
 			'type' => 'text',
 		),
 	),
-	'email' => array(
+	'email'      => array(
 		'grid' => array(
 			'show' => true,
 		),
@@ -27,7 +27,7 @@ return array(
 			'type' => 'email',
 		),
 	),
-	'mobile'        => array(
+	'mobile'     => array(
 		'grid' => array(
 			'show' => true,
 		),
@@ -36,37 +36,58 @@ return array(
 			'type' => 'text',
 		),
 	),
-	'group_id'         => array(
+	'group_id'   => array(
 		'grid' => array(
 			'show' => true,
 		),
 		'form' => array(
-			'show' => true,
-			'type' => 'treeSelect',
-			'options' => array('0' => '请选择'),
+			'show'         => true,
+			'type'         => 'treeSelect',
+			'options'      => array( '请选择' ),
+			'option_model' => array( 'model' => 'Group', 'field' => 'group_name' ),
+			'attr'         => array(
+				'data-src' => URL::route( 'selections', array(
+						'model' => 'group',
+						'field' => 'group_name'
+					) )
+			),
 		),
 	),
-	'region_id'      => array(
+	'region_id'  => array(
 		'grid' => array(
 			'show' => true,
 		),
 		'form' => array(
-			'show' => true,
-			'type' => 'regionSelect',
-			'options' => array('0' => '请选择'),
+			'show'         => true,
+			'type'         => 'regionSelect',
+			'options'      => array( '请选择' ),
+			'option_model' => array( 'model' => 'Region', 'field' => 'region_name' ),
+			'attr'         => array(
+				'data-src' => URL::route( 'selections', array(
+						'model' => 'region',
+						'field' => 'region_name'
+					) )
+			),
 		),
 	),
-	'orgnaze_id'   => array(
+	'orgnaze_id' => array(
 		'grid' => array(
 			'show' => true,
 		),
 		'form' => array(
-			'show' => true,
-			'type' => 'treeSelect',
-			'options' => array('0' => '请选择'),
+			'show'         => true,
+			'type'         => 'treeSelect',
+			'options'      => array( '请选择' ),
+			'option_model' => array( 'model' => 'Orgnaze', 'field' => 'orgnaze_name' ),
+			'attr'         => array(
+				'data-src' => URL::route( 'selections', array(
+						'model' => 'orgnaze',
+						'field' => 'orgnaze_name'
+					) )
+			),
 		),
 	),
-	'state'   => array(
+	'state'      => array(
 		'grid' => array(
 			'show' => true,
 		),
@@ -74,7 +95,7 @@ return array(
 			'show' => false,
 		),
 	),
-	'created_at'   => array(
+	'created_at' => array(
 		'grid' => array(
 			'show' => true,
 		),

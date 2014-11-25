@@ -2,6 +2,7 @@
     <div class="alert alert-warning">NO DATA <a href="{{ URL::route($_curent_controller.'.create') }}"><span class="glyphicon glyphicon-plus"></span></a> </div>
 @else
     @if( Config::get('Admin::view/'.$_curent_controller) )
+    {{ Form::treeSelect('') }}
     <table class="table table-striped">
         <tr>
             @foreach( Config::get('Admin::view/'.$_curent_controller) as $field => $config )

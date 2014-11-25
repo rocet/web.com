@@ -23,7 +23,9 @@ return array(
 		'form' => array(
 			'show' => true,
 			'type' => 'treeSelect',
-			'options' => array('0' => '请选择') + Group::selections('group_name'),
+			'options' => array('请选择'),
+			'option_model' => array('model' => 'Group', 'field' => 'group_name'),
+			'attr' => array('data-src' => URL::route('selections', array('model' => 'group', 'field' => 'group_name'))),
 		),
 	),
 	'group_name' => array(
@@ -42,7 +44,7 @@ return array(
 		'form' => array(
 			'show' => true,
 			'type' => 'select',
-			'options' => array('0' => '请选择'),
+			'options' => array('请选择'),
 		),
 	),
 	'sort'         => array(

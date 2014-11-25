@@ -22,7 +22,7 @@ return array(
 		'form' => array(
 			'show' => true,
 			'type' => 'treeSelect',
-			'options' => array('0' => '请选择'),
+			'options' => array( '请选择' ),
 			'option_model' => array('model' => 'Orgnaze', 'field' => 'orgnaze_name'),
 			'attr' => array('data-src' => URL::route('selections', array('model' => 'orgnaze', 'field' => 'orgnaze_name'))),
 		),
@@ -43,8 +43,9 @@ return array(
 		'form' => array(
 			'show' => true,
 			'type' => 'regionSelect',
-			'options' => array('0' => '请选择'),
+			'options' => array('请选择'),
 			'option_model' => array('model' => 'Region', 'field' => 'region_name'),
+			'attr' => array('data-src' => URL::route('selections', array('model' => 'region', 'field' => 'region_name'))),
 		),
 	),
 	'state'        => array(
@@ -54,7 +55,7 @@ return array(
 		'form' => array(
 			'show' => true,
 			'type' => 'select',
-			'options' => array('0' => '请选择'),
+			'options' => array('请选择'),
 		),
 	),
 	'sort'         => array(
