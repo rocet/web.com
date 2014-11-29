@@ -18,6 +18,8 @@ return array(
 	'pid'          => array(
 		'grid' => array(
 			'show' => true,
+			'empty' => '',
+			'filter' => array('model'=> 'Orgnaze', 'field' => 'orgnaze_name'),
 		),
 		'form' => array(
 			'show' => true,
@@ -39,6 +41,7 @@ return array(
 	'region_id'    => array(
 		'grid' => array(
 			'show' => true,
+			'filter' => array('model'=> 'Region', 'field' => 'region_name'),
 		),
 		'form' => array(
 			'show' => true,
@@ -71,6 +74,7 @@ return array(
 	'user_id'      => array(
 		'grid' => array(
 			'show' => true,
+			'filter' => array('model'=> 'User', 'field' => 'user_name'),
 		),
 		'form' => array(
 			'show' => true,

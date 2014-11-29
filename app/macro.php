@@ -59,3 +59,12 @@ Form::macro( 'regionSelect', function ( $name, $data = array(), $value = '', $at
 
 	return $ret;
 } );
+
+HTML::macro( 'filter', function($field, $model, $conf){
+	$relModel = strtolower($conf['model']);
+	return get_class($model) == $conf['model'] ? $model->parent()->pluck($conf['field']) : $model->$relModel->$conf['field'];
+
+//	$isParent = method_exists($model, 'getParentColumn') && $field == $model->getParentColumn();
+//	return $isParent ? $model->parent_name : $model->$conf['field'];
+
+} );

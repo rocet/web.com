@@ -10,7 +10,7 @@
 | your classes in the "global" namespace without Composer updating.
 |
 */
-include __DIR__ . '/../macro.php';
+
 ClassLoader::addDirectories(array(
 
 	app_path().'/commands',
@@ -84,3 +84,14 @@ App::down(function()
 */
 
 require app_path().'/filters.php';
+
+/*
+|--------------------------------------------------------------------------
+| Require The Macro File
+|--------------------------------------------------------------------------
+|
+| form macro
+|
+*/
+
+require app_path().'/macro.php';

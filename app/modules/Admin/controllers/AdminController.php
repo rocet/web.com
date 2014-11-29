@@ -25,6 +25,7 @@ class AdminController extends \BaseController {
 	public function index() {
 		//
         return View::make('Admin::'. strtolower( $this->modelName()) )->with('item', $this->dataApi()->index());
+		// return View::make('Admin::'. strtolower( $this->modelName()) )->with('item', $this->dataApi()->gridData( Config::get('Admin::view/'.$this->getCurrentController()) ));
 	}
 
 

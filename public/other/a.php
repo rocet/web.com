@@ -132,7 +132,7 @@ dump( $mac = BordFactory::build( array( 'brand' => 'MIS' ) ), $pc = CpuFactory::
 echo '<h2>工厂方法模式, 建造者模式</h2>';
 
 dump( $mycomputer = ComputerFactory::build( array(
-	'Bord'    => array( 'Brand' => array('sss' => 'MIS')  ),
+	'Bord'    => array( 'Brand' => array('brand' => 'MIS')  ),
 	'Cpu'     => array( 'brand' => 'Inter' ),
 	'Memory'  => array( 'brand' => 'Hynix' ),
 	'Disk'    => array( 'brand' => 'Ibm' ),

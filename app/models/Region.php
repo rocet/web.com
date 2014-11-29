@@ -3,6 +3,7 @@
 class Region extends Eloquent
 {
 	protected $table = "region";
+	protected $parentColumn = 'pid';
 	public $timestamps = false;
 
 	public function users()
@@ -22,4 +23,8 @@ class Region extends Eloquent
         }
         return static::whereRaw('pid = ?', array( intval( $pid )))->lists($field, $id);
     }
+
+	public function getParentColumn(){
+		return $this->parentColumn;
+	}
 }

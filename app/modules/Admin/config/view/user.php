@@ -39,6 +39,7 @@ return array(
 	'group_id'   => array(
 		'grid' => array(
 			'show' => true,
+			'filter' => array('model'=> 'Group', 'field' => 'group_name'),
 		),
 		'form' => array(
 			'show'         => true,
@@ -56,6 +57,7 @@ return array(
 	'region_id'  => array(
 		'grid' => array(
 			'show' => true,
+			'filter' => array('model'=> 'Region', 'field' => 'region_name'),
 		),
 		'form' => array(
 			'show'         => true,
@@ -73,6 +75,7 @@ return array(
 	'orgnaze_id' => array(
 		'grid' => array(
 			'show' => true,
+			'filter' => array('model'=> 'Orgnaze', 'field' => 'orgnaze_name'),
 		),
 		'form' => array(
 			'show'         => true,

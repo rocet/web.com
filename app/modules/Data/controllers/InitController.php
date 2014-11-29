@@ -12,12 +12,46 @@ class InitController extends \Controller {
 	}
 
 	/**
+	 * 表格数据
+	 *
+	 * @return Response
+	 */
+	public function gridData( array $config = array() ) {
+		if ( empty( $config ) ) {
+			return $this->index()->toArray();
+		}
+		$model       = $this->model();
+		$modelName   = strtolower( $this->modelName() );
+		$modelFields = array();
+		foreach ( $config as $field => $conf ) {
+			$modelFields[] = $modelName . '.' . $field;
+			if ( isset( $conf['grid']['filter']['model'] ) ) {
+				$isParent       = method_exists( $model, 'getParentColumn' ) && $field == $model->getParentColumn();
+				$fieldModelName = strtolower( $conf['grid']['filter']['model'] );
+				$modelFields[]  = ( $isParent ? 'parent' : $fieldModelName ) . '.' . $conf['grid']['filter']['field'] . ( $isParent ? ' AS parent_name ' : '' );
+				$model = $model->join(
+					$fieldModelName . ( $isParent ? ' AS ' . DB::getTablePrefix() . 'parent' : '' ),
+					$modelName . '.' . $field,
+					'=',
+					( $isParent ? 'parent' : $fieldModelName ) . '.id'
+				);
+			}
+		}
+		return $model
+			//->whereNull($modelName.'.pid')
+			->select( $modelFields )
+			->orderBy( $modelName . '.' . $this->sortColumn(), $this->sortOrder() )
+			->paginate( $this->perPageNum() );
+	}
+
+	/**
 	 * 分页数据
 	 *
 	 * @return Response
 	 */
 	public function paginate() {
-		return call_user_func( "\\" . $this->modelName() . "::paginate", $this->perPageNum() );
+		// return call_user_func( "\\" . $this->modelName() . "::paginate", $this->perPageNum() );
+		return $this->model()->orderBy( $this->sortColumn(), $this->sortOrder() )->paginate( $this->perPageNum() );
 	}
 
 	/**
@@ -29,6 +63,29 @@ class InitController extends \Controller {
 		$pageNum = Config::get( 'Data::common.per_page.' . strtolower( $this->modelName() ) );
 
 		return $pageNum ?: Config::get( 'Data::common.per_page.default' );
+	}
+
+	/**
+	 * 排序
+	 *
+	 * @return Response
+	 */
+	protected function sortOrder() {
+		$sortOrder = Config::get( 'Data::common.order.' . strtolower( $this->modelName() ) );
+
+		return $sortOrder ?: Config::get( 'Data::common.order.default' );
+	}
+
+
+	/**
+	 * 排序字段
+	 *
+	 * @return Response
+	 */
+	protected function sortColumn() {
+		$sortColumn = Config::get( 'Data::common.column.' . strtolower( $this->modelName() ) );
+
+		return $sortColumn ?: Config::get( 'Data::common.column.default' );
 	}
 
 	/**
@@ -46,15 +103,17 @@ class InitController extends \Controller {
 	 *
 	 * @return Response
 	 */
-	public function store($input) {
-		dd(  $input );
-		return $this->validate(function () use ( $input ) {
-			dd(  $input );
-			if ($model = $this->model()->firstOrCreate($input)) {
+	public function store( $input ) {
+		dd( $input );
+
+		return $this->validate( function () use ( $input ) {
+			dd( $input );
+			if ( $model = $this->model()->firstOrCreate( $input ) ) {
 				return $model;
 			}
+
 			return 0;
-		}, $input, 0);
+		}, $input, 0 );
 	}
 
 	/**
@@ -89,17 +148,19 @@ class InitController extends \Controller {
 	 * @return Response
 	 */
 	public function update( $id, $input ) {
-		return $this->validate(function () use ( $id, $input ) {
-			dd(  $input );
-			if ($model = $this->model()->find($id)) {
-				foreach($input as $field => $value){
+		return $this->validate( function () use ( $id, $input ) {
+			dd( $input );
+			if ( $model = $this->model()->find( $id ) ) {
+				foreach ( $input as $field => $value ) {
 					$model->$field = $value;
 				}
 				$model->save();
+
 				return $model;
 			}
+
 			return 0;
-		}, $input, 0);
+		}, $input, 0 );
 	}
 
 	/**

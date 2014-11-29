@@ -246,7 +246,7 @@ namespace Vendor\Core {
 						'class'     => 'View',
 						'arguments' => ''
 					),
-					'mypdo'      => array(
+					'myPdo'      => array(
 						'class'     => 'MyPDO',
 						'arguments' => ''
 					),
@@ -282,7 +282,7 @@ namespace Vendor\Core {
 			return ' Time: [' . ( round( microtime( true ) - $_SERVER['REQUEST_TIME_FLOAT'], 4 ) * 1000 ) . ' ms]';
 		}
 
-		public static function shwoLoadFiles(){
+		public static function shwoLoadFiles() {
 			return print_r( get_included_files(), true );
 		}
 
@@ -291,14 +291,22 @@ namespace Vendor\Core {
 		}
 
 		public static function showMemory() {
-			return ' Memory: [' . memory_get_usage().' byte]';
+			return ' Memory: [' . self::sizeByte( memory_get_usage() ) . ' ]';
+		}
+
+		public static function sizeByte( $size, $digits = 2 ) {
+			$unit = array( '', 'K', 'M', 'G', 'T', 'P' );
+			$base = 1024;
+			$i    = floor( log( $size, $base ) );
+
+			return round( $size / pow( $base, $i ), $digits ) . ' ' . $unit[ $i ] . 'B';
 		}
 	}
 
 	class Upload {
 		public static function show() {
-			if(!is_dir(__DIR__.'/uploads')){
-				mkdir(__DIR__.'/uploads');
+			if ( ! is_dir( __DIR__ . '/uploads' ) ) {
+				mkdir( __DIR__ . '/uploads' );
 			}
 			if ( isset( $_FILES['userfile']['error'] ) && $_FILES['userfile']['error'] == UPLOAD_ERR_OK ) {
 				$tmp_name = $_FILES["userfile"]["tmp_name"];
@@ -324,7 +332,7 @@ namespace Vendor\Core {
 		public function __construct() {
 			if ( ! static::$instance ) {
 				try {
-					parent::__construct( 'mysql:dbname=community;host=127.0.0.1;port=3306', 'root', '123456', array(
+					parent::__construct( 'mysql:dbname=web.com;host=127.0.0.1;port=3306', 'root', '123456', array(
 						\PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC,
 						\PDO::ATTR_STRINGIFY_FETCHES  => false,
 						\PDO::ATTR_EMULATE_PREPARES   => false,
@@ -356,6 +364,9 @@ namespace Vendor\Core {
 	}
 
 	class Model {
+		protected static $_tableName;
+		protected static $_pk;
+
 		public static function __callStatic( $name, $arguments ) {
 			return call_user_func_array( 'Vendor\Core\DB::' . $name, $arguments );
 		}
@@ -394,6 +405,13 @@ namespace Vendor\Core {
 
 		public static function findOne( $id ) {
 			return self::process( 'SELECT * FROM ' . static::$_tableName . ' WHERE ' . static::$_pk . '=' . $id, 'fetch' );
+		}
+
+		public static function showFields() {
+			$columns = self::process( 'SHOW COLUMNS FROM ' . static::$_tableName, 'fetchAll' );
+			foreach ( $columns as $key => $value ) {
+				echo 'public  $' . $value->Field . ';<br />';
+			}
 		}
 	}
 
@@ -445,6 +463,7 @@ namespace Vendor\Core {
 	class Cart extends Component {
 		private $user;
 		private $collectionIds;
+		private $goodsPk = 'id';
 
 		public function __construct( \App\Model\User $user = null ) {
 			$this->user = $user;
@@ -456,25 +475,25 @@ namespace Vendor\Core {
 
 		public function put( \App\Model\Goods $goods ) {
 			if ( $this->has( $goods ) ) {
-				$this->collectionIds[ $goods->id ] ++;
+				$this->collectionIds[ $goods->{$this->goodsPk} ] ++;
 			} else {
-				$this->collectionIds[ $goods->id ] = 1;
+				$this->collectionIds[ $goods->{$this->goodsPk} ] = 1;
 			}
 		}
 
 		public function has( \App\Model\Goods $goods ) {
-			return isset( $this->collectionIds[ $goods->id ] );
+			return isset( $this->collectionIds[ $goods->{$this->goodsPk} ] );
 		}
 
 		public function out( \App\Model\Goods $goods ) {
 			if ( $this->has( $goods ) ) {
-				if ( $this->collectionIds[ $goods->id ] > 1 ) {
-					$this->collectionIds[ $goods->id ] --;
+				if ( $this->collectionIds[ $goods->{$this->goodsPk} ] > 1 ) {
+					$this->collectionIds[ $goods->{$this->goodsPk} ] --;
 				} else {
-					unset( $this->collectionIds[ $goods->id ] );
+					unset( $this->collectionIds[ $goods->{$this->goodsPk} ] );
 				}
 				if ( $this->has( $goods ) ) {
-					return $this->collectionIds[ $goods->id ];
+					return $this->collectionIds[ $goods->{$this->goodsPk} ];
 				}
 			}
 
@@ -489,6 +508,8 @@ namespace Vendor\Core {
 			if ( array_key_exists( $goodsId, $this->collectionIds ) ) {
 				return \App\Model\Goods::find( $goodsId );
 			}
+
+			return 0;
 		}
 	}
 
@@ -569,12 +590,12 @@ namespace App\Model {
 	use Vendor\Core\Model;
 
 	class User extends Model {
-		protected static $_tableName = 'community_user';
+		protected static $_tableName = 'web_user';
 		protected static $_pk = 'id';
 	}
 
 	class Goods extends Model {
-		protected static $_tableName = 'community_Trade';
+		protected static $_tableName = 'web_group';
 		protected static $_pk = 'id';
 	}
 }
@@ -583,8 +604,12 @@ namespace App\Controller {
 
 	use App\Model\Goods;
 	use App\Model\User;
+	use Vendor\Core\Auth;
+	use Vendor\Core\Controller;
 	use Vendor\Core\Debug;
+	use Vendor\Core\Logged;
 	use Vendor\Core\Upload;
+	use Vendor\Core\View;
 
 
 	class Index extends Controller {
@@ -600,10 +625,8 @@ namespace App\Controller {
 			$logged->getCart()->out( Goods::find( 1 ) );
 			$logged->getCart()->out( Goods::find( 1 ) );
 
-			$columns = User::query( 'SHOW COLUMNS FROM community_user' )->fetchAll( \PDO::FETCH_COLUMN );
-			foreach ( $columns as $key => $value ) {
-				echo 'public  $' . $value . ';<br />';
-			}
+			echo $this->dump( User::findIn( '1,2,3' ) );
+			echo $this->dump( User::findOne( 1 ) );
 
 			$subject1 = new \Vendor\Core\Subject1();
 			$subject1->setChange( 100 );
@@ -612,23 +635,21 @@ namespace App\Controller {
 
 			\Vendor\Core\Subject3::change( 800 );
 
+			echo '<hr />';
 			Upload::show();
-
-			echo $this->dump( User::findOne( 1 ) );
-
 			echo '<hr />';
 
 			// \Vendor\Core\Response::json( \Vendor\Core\DB::query( 'SHOW DATABASES' )->fetchAll() );
 
-			View::make( $this->dump( $logged->getCart()->allGoods(), 1 ) . Debug::showTime() . Debug::showMemory(), 'utf8' );
+			View::make( $this->dump( $logged->getCart()->allGoods() ) . Debug::showTime() . Debug::showMemory(), 'utf8' );
 		}
 
 		public function test() {
-			if ( isset($_POST['testPhar']) && class_exists( 'Phar' ) ) {
-				$phar = new Phar( 'slim.phar', 0, 'slim.phar' );
+			if ( isset( $_POST['testPhar'] ) && class_exists( 'Phar' ) ) {
+				$phar = new \Phar( 'slim.phar', 0, 'slim.phar' );
 				$phar->buildFromDirectory( dirname( __FILE__ ) . '/Slim' );
-				$phar->setStub($phar->createDefaultStub('test.php', 'test.php'));
-				$phar->compressFiles( Phar::GZ );
+				$phar->setStub( $phar->createDefaultStub( 'test.php', 'test.php' ) );
+				$phar->compressFiles( \Phar::GZ );
 			}
 		}
 	}
@@ -644,7 +665,7 @@ namespace App\Module\A\Model {
 	}
 
 	class User extends Model {
-		protected static $_tableName = 'community_user';
+		protected static $_tableName = 'user';
 		protected static $_pk = 'id';
 	}
 }
