@@ -13,7 +13,7 @@ module.exports = function (grunt) {
                 src: [
                     './public/assets/bower/jquery/dist/jquery.js',
                     './public/assets/bower/bootstrap/dist/js/bootstrap.js',
-                    './public/assets/assets/js/base.js'
+                    './public/assets/js/base.js'
                 ],
                 //合并后放置在
                 dest: './public/assets/js/app.js'
