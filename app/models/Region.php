@@ -11,9 +11,9 @@ class Region extends Eloquent
 		return $this->hasMany('User');
 	}
 
-	public function orgnazes()
+	public function Organizations()
 	{
-		return $this->hasMany('Orgnazes');
+		return $this->hasMany('Organizations');
 	}
 
     public static function selections($field, $pid = 'root', $id = 'id')

@@ -1,8 +1,8 @@
 <?php
 
-class Orgnaze extends Tree
+class Organization extends Tree
 {
-	protected $table = "orgnaze";
+	protected $table = "organization";
 
 	public function region()
 	{

@@ -6,10 +6,12 @@ class GroupTableSeeder extends DatabaseSeeder
 	{
 		$groups = array(
 			array(
-				"group_name" => "admin"
+				"group_name" => "admin",
+				"user_id" => 1
 			),
 			array(
-				"group_name" => "newbie"
+				"group_name" => "newbie",
+				"user_id" => 1
 			)
 		);
 

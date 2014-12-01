@@ -216,4 +216,15 @@ class InitController extends \Controller {
 
 		return $serch;
 	}
+
+	/**
+	 * 批量操作
+	 *
+	 * @return Response
+	 */
+	protected function batch($reqAll) {
+		foreach($reqAll as $req){
+			call_user_func_array(array($this, $req['method']), array_except($req, 'method'));
+		}
+	}
 }

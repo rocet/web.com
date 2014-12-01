@@ -72,20 +72,20 @@ return array(
 			),
 		),
 	),
-	'orgnaze_id' => array(
+	'organization_id' => array(
 		'grid' => array(
 			'show' => true,
-			'filter' => array('model'=> 'Orgnaze', 'field' => 'orgnaze_name'),
+			'filter' => array('model'=> 'Organization', 'field' => 'organization_name'),
 		),
 		'form' => array(
 			'show'         => true,
 			'type'         => 'treeSelect',
 			'options'      => array( '请选择' ),
-			'option_model' => array( 'model' => 'Orgnaze', 'field' => 'orgnaze_name' ),
+			'option_model' => array( 'model' => 'Organization', 'field' => 'organization_name' ),
 			'attr'         => array(
 				'data-src' => URL::route( 'selections', array(
-						'model' => 'orgnaze',
-						'field' => 'orgnaze_name'
+						'model' => 'organization',
+						'field' => 'organization_name'
 					) )
 			),
 		),

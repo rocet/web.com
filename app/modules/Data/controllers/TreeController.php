@@ -40,7 +40,9 @@ class TreeController extends InitController {
 		return $this->validate( function () use ( $id, $input ) {
 			$parentColumnName = $this->model()->getParentColumn();
 			if ( $model = $this->model()->find( $id ) ) {
+				$changed = 0;
 				if( $model->$parentColumnName != $input[$parentColumnName] ){
+					$changed = 1;
 					if( !$input[$parentColumnName] ){
 						$model->makeRoot();
 					} else if( $input[$parentColumnName] ){

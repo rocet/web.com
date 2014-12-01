@@ -10,7 +10,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface
 	use UserTrait, RemindableTrait;
 	protected $table = 'user';
 	protected $hidden = array('password');
-	protected $fillable = array('user_name', 'password', 'email', 'mobile', 'region_id', 'orgnaze_id', 'state', 'remember_token');
+	protected $fillable = array('user_name', 'password', 'email', 'mobile', 'region_id', 'organization_id', 'state', 'remember_token');
 
 	public function region()
 	{
@@ -27,14 +27,24 @@ class User extends Eloquent implements UserInterface, RemindableInterface
 		return $this->belongsToMany('Group')->withTimestamps();
 	}
 
-	public function orgnaze()
+	public function resource()
 	{
-		return $this->belongsTo('Orgnaze');
+		return $this->belongsTo('Resource');
 	}
 
-	public function orgnazes()
+	public function resources()
 	{
-		return $this->belongsToMany('Orgnaze')->withTimestamps();
+		return $this->belongsToMany('Resource')->withTimestamps();
+	}
+
+	public function organization()
+	{
+		return $this->belongsTo('Organization');
+	}
+
+	public function Organizations()
+	{
+		return $this->belongsToMany('Organization')->withTimestamps();
 	}
 
 	public function getAuthIdentifier()

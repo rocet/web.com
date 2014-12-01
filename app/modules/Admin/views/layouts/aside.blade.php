@@ -6,7 +6,7 @@
             <a href="{{ URL::route('admin') }}">admin</a>
         </li>
         <li>
-            <a href="{{ URL::action('App\\Modules\\Admin\\Controllers\\OrgnazeController@index') }}">orgnaze</a>
+            <a href="{{ URL::action('App\\Modules\\Admin\\Controllers\\OrganizationController@index') }}">organization</a>
         </li>
         <li>
             <a href="{{ URL::action('App\\Modules\\Admin\\Controllers\\GroupController@index') }}">group</a>

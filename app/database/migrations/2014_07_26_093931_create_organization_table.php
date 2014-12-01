@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOrgnazeTable extends Migration {
+class CreateOrganizationTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,7 +12,7 @@ class CreateOrgnazeTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('orgnaze', function(Blueprint $table)
+		Schema::create('organization', function(Blueprint $table)
 		{
 			$table
 				->increments("id");
@@ -42,7 +42,7 @@ class CreateOrgnazeTable extends Migration {
 				->default(0);
 				
 			$table
-				->string("orgnaze_name", 100)
+				->string("organization_name", 100)
 				->nullable()
 				->default(null);
 
@@ -86,7 +86,7 @@ class CreateOrgnazeTable extends Migration {
 				->default(0);
 
 			$table
-				->unique('orgnaze_name');
+				->unique('organization_name');
 		});
 	}
 
@@ -97,9 +97,9 @@ class CreateOrgnazeTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('orgnaze', function(Blueprint $table)
+		Schema::table('organization', function(Blueprint $table)
 		{
-			Schema::drop('orgnaze');
+			Schema::drop('organization');
 		});
 	}
 

@@ -12,8 +12,8 @@
         {{ Form::regionSelect('region_id', array('请选择'), Auth::user()->region_id ,  array('data-src' => URL::route('selections', array('model' => 'region', 'field' => 'region_name')))  ) }}
         @elseif ($field == 'group_id')
         {{ Form::select('group_id', Group::selections('group_name')) }}
-        @elseif ($field == 'orgnaze_id')
-        {{ Form::select('orgnaze_id', Orgnaze::selections('orgnaze_name')) }}
+        @elseif ($field == 'organization_id')
+        {{ Form::select('organization_id', Organization::selections('organization_name')) }}
         @else
         {{ Form::text($field, $value, array(
             'placeholder' => Lang::get('user.'.$field)

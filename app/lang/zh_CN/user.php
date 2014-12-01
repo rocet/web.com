@@ -2,11 +2,8 @@
 
 return array(
 
-
 	'hello' => '欢迎回来',
-
     'register' => '注册',
-    'reset' => '设置密码',
     'changePassword' => '修改密码',
     'reminder' => '找回密码',
     'remember_me' => '下次自动登录',
@@ -18,13 +15,9 @@ return array(
 	'login' => '登录',
 	'regist' => '注册',
 	'request' => '忘记密码',
-	'reset' => '设置密码',
 	'logout' => '退出',
-	'profile' => '我的主页',
 	'repassword' => '修改密码',
 	'user_group' => '用户组',
-
-
 
 	'add' => '添加',
 	'save' => '保存',
@@ -36,12 +29,11 @@ return array(
 	'reset' => '重置',
     'cancel' => '取消',
 
-
 	'delete_group_confirm' => '确认删除这个用户组',
 	'no_groups' => '还没有用户组',
 
 	'profile' => '个人信息',
-	'orgnaze_id' => '组织',
+	'organization_id' => '组织',
 	'region_id' => '地区',
 	'user_name' => '账号',
 	'nikename' => '昵称',
@@ -60,7 +52,6 @@ return array(
 	'check_email_to_get_password' => '密码已发送到邮箱!',
 
 	'empty_content' => '还没有内容,请添加!',
-
 
 	'th_id' => '#',
 	'th_pid' => '上层',

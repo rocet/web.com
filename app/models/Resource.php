@@ -1,13 +1,18 @@
 <?php
 
-class Resource extends Eloquent
+class Resource extends Tree
 {
 	protected $table = 'resource';
 
-	protected $guarded = array('resource_name', 'target', 'pattern', 'validate', 'secure', 'state');
+//	protected $guarded = array('resource_name', 'target', 'pattern', 'validate', 'secure', 'state');
 
 	public function groups()
 	{
 		return $this->belongsToMany("Group")->withTimestamps();
+	}
+
+	public function users()
+	{
+		return $this->belongsToMany("User")->withTimestamps();
 	}
 }

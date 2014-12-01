@@ -51,7 +51,7 @@ class CreateUserTable extends Migration {
 				->default(null);
 
 			$table
-				->integer("orgnaze_id")
+				->integer("organization_id")
 				->nullable()
 				->unsigned()
 				->default(null);

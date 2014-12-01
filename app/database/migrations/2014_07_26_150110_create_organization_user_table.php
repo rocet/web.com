@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOrgnazeUserTable extends Migration {
+class CreateOrganizationUserTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,13 +12,13 @@ class CreateOrgnazeUserTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('orgnaze_user', function(Blueprint $table)
+		Schema::create('organization_user', function(Blueprint $table)
 		{
 			$table
 				->increments('id');
 
 			$table
-                ->integer("orgnaze_id")
+                ->integer("organization_id")
                 ->nullable()
                 ->default(null);
 
@@ -43,7 +43,7 @@ class CreateOrgnazeUserTable extends Migration {
                 ->default(null);
                  
             $table
-            	->index('orgnaze_id');
+            	->index('organization_id');
             	
             $table
             	->index('user_id');
@@ -57,7 +57,7 @@ class CreateOrgnazeUserTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('orgnaze_user');
+		Schema::drop('organization_user');
 	}
 
 }

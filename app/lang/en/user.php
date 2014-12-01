@@ -5,7 +5,6 @@ return array(
 	'hello' => 'Hello',
 
     'register' => 'register',
-    'reset' => 'forget password',
     'changePassword' => 'change password',
     'reminder' => 'reminder password',
     'remember_me' => 'remember me',
@@ -17,7 +16,6 @@ return array(
 	'login' => 'Login',
 	'regist' => 'Regist',
 	'request' => 'Request',
-	'reset' => 'Reset Password',
 	'logout' => 'Logout',
 	'profile' => 'Profile',
 	'repassword' => 'Reset Password',
@@ -52,7 +50,6 @@ return array(
 	'check_email_to_get_password' => 'Check your Email and get the password!',
 
 	'empty_content' => 'Empty Contents, Plaease add some first!',
-
 
 	'th_id' => '#',
 	'th_pid' => 'Parent',

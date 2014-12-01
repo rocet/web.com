@@ -2,7 +2,7 @@
 
 Route::group(array('domain' => 'api.web.com', 'prefix' => 'v1'), function () {
 	// 控制器集合
-	$resources = array('user', 'resource', 'group', 'orgnaze', 'region');
+	$resources = array('user', 'resource', 'group', 'organization', 'region');
 	// 公共附加集合
 	$additionals = array('selections' => array('method' => 'get', 'param' => 'pid', 'rule' => '[0-9]+'), 'paginate' => 'get');
 

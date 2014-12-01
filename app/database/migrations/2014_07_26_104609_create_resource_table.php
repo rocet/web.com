@@ -40,7 +40,13 @@ class CreateResourceTable extends Migration {
 			$table
 				->boolean("secure")
 				->nullable()
-				->default(null); 
+				->default(null);
+
+			$table
+				->integer("user_id")
+				->nullable()
+				->unsigned()
+				->default(0);
 
 			$table
 				->tinyInteger('state')

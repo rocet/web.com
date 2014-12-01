@@ -36,7 +36,7 @@ class HomeApiController extends ApiController
 				'email' => 'rocetk@qq.com',
 				'mobile' => '13558616654',
 				'region_id' => 410302,
-				'orgnaze_id' => 1,
+				'organization_id' => 1,
 				'state' => 1,
 			);
 
@@ -48,7 +48,7 @@ class HomeApiController extends ApiController
 			// $user->email       = 'rocetk@qq.com';
 			// $user->mobile      = '13558616654';
 			// $user->region_id   = '410302';
-			// $user->orgnaze_id  = '1';
+			// $user->organization_id  = '1';
 			// $user->state       = '1';
 			// var_dump( $user->save(), \User::all()->toArray() );
 			// \User::all()->last()->delete();

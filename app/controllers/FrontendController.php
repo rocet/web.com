@@ -125,7 +125,7 @@ class FrontendController extends BaseController {
 				'email'      => Input::get( 'email' ),
 				'mobile'     => Input::get( 'mobile' ),
 				'region_id'  => Input::get( 'region_id' ),
-				'orgnaze_id' => Input::get( 'orgnaze_id' )
+				'organization_id' => Input::get( 'organization_id' )
 			);
 			if ( $this->validPass( $process = $this->dataApi( 'User' )->profile( $posts ) ) ) {
 				return Redirect::route( 'message' )->with( 'message', 'profile Changed' );
