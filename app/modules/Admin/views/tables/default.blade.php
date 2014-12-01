@@ -1,3 +1,4 @@
+<h3>admin {{ Lang::get('Admin::'.$_curent_controller.'.index')  }} </h3>
 @if( $item->isEmpty() )
     <div class="alert alert-warning">NO DATA <a href="{{ URL::route($_curent_controller.'.create') }}"><span class="glyphicon glyphicon-plus"></span></a> </div>
 @else
@@ -12,7 +13,7 @@
         <tr>
             @foreach( Config::get('Admin::view/'.$_curent_controller) as $field => $config )
             @if( isset( $config['grid']['show'] ) && $config['grid']['show'] )
-            <th>{{ Lang::get($_curent_controller.'.'.$field) }}</th>
+            <th>{{ Lang::get('Admin::'.$_curent_controller.'.'.$field) }}</th>
             @endif
             @endforeach
             <th><a href="{{ URL::route($_curent_controller.'.create') }}"><span class="glyphicon glyphicon-plus"></span></a></th>

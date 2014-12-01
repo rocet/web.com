@@ -11,8 +11,9 @@ module.exports = function (grunt) {
             app: {
                 //将进行的合并项
                 src: [
-                    './public/assets/bower/jquery/dist/jquery.js',
+                    './public/assets/bower/jquery/jquery.min.js',
                     './public/assets/bower/bootstrap/dist/js/bootstrap.js',
+                    './public/assets/bower/bootstrap-treeview/dist/bootstrap-treeview.min.js',
                     './public/assets/js/base.js'
                 ],
                 //合并后放置在
@@ -59,12 +60,15 @@ module.exports = function (grunt) {
         watch: {
             app: {
                 files: [
-                    './public/assets/bower/jquery/dist/jquery.js',
+                    './public/assets/bower/jquery/jquery.min.js',
                     './public/assets/bower/bootstrap/dist/js/bootstrap.js',
-                    './public/assets/bower/bootstrap/dist/css/bootstrap.css'
+                    './public/assets/bower/bootstrap-treeview/dist/bootstrap-treeview.min.js',
+                    './public/assets/js/base.js',
+                    './public/assets/bower/bootstrap/dist/css/bootstrap.css',
+                    './public/assets/css/base.css'
                 ],
                 //文件变化后执行哪些任务
-                tasks: ['concat:app', 'uglify:app', 'cssmin:app', 'copy:app'],
+                tasks: ['concat:app', 'uglify:app', 'cssmin:app'],
                 options: {
                     livereload: true
                 }

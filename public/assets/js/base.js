@@ -46,4 +46,8 @@ window.onload = function(){
             }
         });
     });
-}
+    $.each($('.tree[data-init]'), function(i, n) {
+        var that = $(n);
+        that.treeview({data: eval("("+that.attr('data-init')+")") });
+    });
+};
