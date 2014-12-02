@@ -34,9 +34,9 @@ return array(
     "digits"           => ":attribute 必须是 :digits 位的数字。",
     "digits_between"   => ":attribute 必须是介于 :min 和 :max 位的数字。",
     "email"            => ":attribute 电邮格式非法。",
-    "exists"           => "已选的属性 :attribute 非法。",
+    "exists"           => ":attribute 非法。",
     "image"            => ":attribute 必须是一张图片。",
-    "in"               => "已选的属性 :attribute 非法。",
+    "in"               => ":attribute 非法。",
     "integer"          => ":attribute 必须是一个整数。",
     "ip"               => ":attribute 必须是一个有效的IP地址。",
     "max"              => array(
@@ -52,7 +52,7 @@ return array(
         "string"  => ":attribute 必须大于 :min 个字符。",
         "array"   => "The :attribute must have at least :min items."
     ),
-    "not_in"           => "已选的属性 :attribute 非法。",
+    "not_in"           => ":attribute 非法。",
     "numeric"          => ":attribute 必须是一个数字。",
     "regex"            => ":attribute 需要填写。",
     "required"         => ":attribute 需要填写。",

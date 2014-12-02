@@ -3,3 +3,8 @@
     @include('Admin::layouts.restful')
     organization pages
 @stop
+
+@section('footer')
+@parent
+<script type="text/javascript" src="/assets/js/base.js"></script>
+@stop

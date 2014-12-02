@@ -11,6 +11,11 @@ class Resource extends Tree
 		return $this->belongsToMany("Group")->withTimestamps();
 	}
 
+	public function user()
+	{
+		return $this->belongsTo("User");
+	}
+
 	public function users()
 	{
 		return $this->belongsToMany("User")->withTimestamps();

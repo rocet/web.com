@@ -18,7 +18,7 @@ class InitController extends \Controller {
 	 */
 	public function gridData( array $config = array() ) {
 		if ( empty( $config ) ) {
-			return $this->index()->toArray();
+			return $this->index();
 		}
 		$model       = $this->model();
 		$modelName   = strtolower( $this->modelName() );
@@ -29,7 +29,7 @@ class InitController extends \Controller {
 				$isParent       = method_exists( $model, 'getParentColumn' ) && $field == $model->getParentColumn();
 				$fieldModelName = strtolower( $conf['grid']['filter']['model'] );
 				$modelFields[]  = ( $isParent ? 'parent' : $fieldModelName ) . '.' . $conf['grid']['filter']['field'] . ( $isParent ? ' AS parent_name ' : '' );
-				$model = $model->join(
+				$model          = $model->join(
 					$fieldModelName . ( $isParent ? ' AS ' . DB::getTablePrefix() . 'parent' : '' ),
 					$modelName . '.' . $field,
 					'=',
@@ -37,6 +37,7 @@ class InitController extends \Controller {
 				);
 			}
 		}
+
 		return $model
 			//->whereNull($modelName.'.pid')
 			->select( $modelFields )
@@ -104,16 +105,13 @@ class InitController extends \Controller {
 	 * @return Response
 	 */
 	public function store( $input ) {
-		dd( $input );
-
 		return $this->validate( function () use ( $input ) {
-			dd( $input );
 			if ( $model = $this->model()->firstOrCreate( $input ) ) {
 				return $model;
 			}
 
 			return 0;
-		}, $input, 0 );
+		}, $input );
 	}
 
 	/**
@@ -149,18 +147,21 @@ class InitController extends \Controller {
 	 */
 	public function update( $id, $input ) {
 		return $this->validate( function () use ( $id, $input ) {
-			dd( $input );
 			if ( $model = $this->model()->find( $id ) ) {
+				$changed = 0;
 				foreach ( $input as $field => $value ) {
-					$model->$field = $value;
+					if ( $model->$field != $value ) {
+						$changed       = 1;
+						$model->$field = $value;
+					}
 				}
-				$model->save();
+				$changed && $model->save();
 
 				return $model;
 			}
 
 			return 0;
-		}, $input, 0 );
+		}, $input, $id );
 	}
 
 	/**
@@ -211,7 +212,7 @@ class InitController extends \Controller {
 	 *
 	 * @return Response
 	 */
-	protected function serch() {
+	public function serch() {
 		$serch = Input::request( 'serch' );
 
 		return $serch;
@@ -222,9 +223,9 @@ class InitController extends \Controller {
 	 *
 	 * @return Response
 	 */
-	protected function batch($reqAll) {
-		foreach($reqAll as $req){
-			call_user_func_array(array($this, $req['method']), array_except($req, 'method'));
+	public function batch( $reqAll ) {
+		foreach ( $reqAll as $req ) {
+			call_user_func_array( array( $this, $req['method'] ), array_except( $req, 'method' ) );
 		}
 	}
 }

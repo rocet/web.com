@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateResourceTable extends Migration {
+class CreateComponentTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,10 +12,10 @@ class CreateResourceTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('resource', function(Blueprint $table)
+		Schema::create('component', function(Blueprint $table)
 		{
 			$table
-				->increments("id");
+				->increments('id');
 
 			$table
 				->integer('pid')
@@ -42,27 +42,7 @@ class CreateResourceTable extends Migration {
 				->default(0);
 
 			$table
-				->string("resource_name", 100)
-				->nullable()
-				->default(null);
-
-			$table
-				->string("target")
-				->nullable()
-				->default(null);
-
-			$table
-				->string("pattern")
-				->nullable()
-				->default(null);
-
-			$table
-				->string("validate")
-				->nullable()
-				->default(null); 
-
-			$table
-				->boolean("secure")
+				->string("component_name", 100)
 				->nullable()
 				->default(null);
 
@@ -77,7 +57,7 @@ class CreateResourceTable extends Migration {
 				->nullable()
 				->unsigned()
 				->default(false);
-				
+
 			$table
 				->timestamp("created_at")
 				->nullable()
@@ -87,14 +67,20 @@ class CreateResourceTable extends Migration {
 				->dateTime("updated_at")
 				->nullable()
 				->default(null);
-				
+
 			$table
 				->dateTime("deleted_at")
 				->nullable()
 				->default(null);
-				
+
 			$table
-				->unique('resource_name');
+				->integer('sort')
+				->nullable()
+				->unsigned()
+				->default(0);
+
+			$table
+				->unique('component_name');
 		});
 	}
 
@@ -105,10 +91,7 @@ class CreateResourceTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('resource', function(Blueprint $table)
-		{
-			Schema::drop('resource');
-		});
+		Schema::drop('component');
 	}
 
 }

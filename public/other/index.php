@@ -9,14 +9,17 @@ namespace Vendor\Rocet {
 	}
 
 	class Access {
-		public function can() {
+		public static function can() {
 			$count  = intval( 2147483649 ) > 0 ? 64 : 32;
 			$rules  = range( 1, $count );
+			array_walk( $rules, function(&$v, $k){ $v = 'a'.$v; });
 			$allows = array_rand( $rules, rand( 2, $count ) );
+			array_walk( $allows, function(&$v, $k){ $v = 'a'.$v; });
 			$access = 0;
 			foreach ( $allows as $value ) {
 				$access |= 1 << array_search( $value, $rules );
 			}
+			echo ' [access:' . $access . '] ';
 			foreach ( $rules as $key => $value ) {
 				echo ' [' . $value . ':' . ( ( $access & ( 1 << $key ) ) ? 'Y' : 'N' ) . '] ';
 			}
@@ -639,6 +642,7 @@ namespace App\Controller {
 			Upload::show();
 			echo '<hr />';
 
+			\Vendor\Rocet\Access::can();
 			// \Vendor\Core\Response::json( \Vendor\Core\DB::query( 'SHOW DATABASES' )->fetchAll() );
 
 			View::make( $this->dump( $logged->getCart()->allGoods() ) . Debug::showTime() . Debug::showMemory(), 'utf8' );

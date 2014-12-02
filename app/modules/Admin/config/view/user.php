@@ -44,7 +44,7 @@ return array(
 		'form' => array(
 			'show'         => true,
 			'type'         => 'treeSelect',
-			'options'      => array( '请选择' ),
+			'options'      => array( Lang::get('Admin::common.select') ),
 			'option_model' => array( 'model' => 'Group', 'field' => 'group_name' ),
 			'attr'         => array(
 				'data-src' => URL::route( 'selections', array(
@@ -62,7 +62,7 @@ return array(
 		'form' => array(
 			'show'         => true,
 			'type'         => 'regionSelect',
-			'options'      => array( '请选择' ),
+			'options'      => array( Lang::get('Admin::common.select') ),
 			'option_model' => array( 'model' => 'Region', 'field' => 'region_name' ),
 			'attr'         => array(
 				'data-src' => URL::route( 'selections', array(
@@ -80,7 +80,7 @@ return array(
 		'form' => array(
 			'show'         => true,
 			'type'         => 'treeSelect',
-			'options'      => array( '请选择' ),
+			'options'      => array( Lang::get('Admin::common.select') ),
 			'option_model' => array( 'model' => 'Organization', 'field' => 'organization_name' ),
 			'attr'         => array(
 				'data-src' => URL::route( 'selections', array(

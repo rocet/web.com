@@ -127,7 +127,7 @@ class FrontendController extends BaseController {
 				'region_id'  => Input::get( 'region_id' ),
 				'organization_id' => Input::get( 'organization_id' )
 			);
-			if ( $this->validPass( $process = $this->dataApi( 'User' )->profile( $posts ) ) ) {
+			if ( $this->validPass( $process = $this->dataApi( 'User' )->profile( Auth::user()->id, $posts ) ) ) {
 				return Redirect::route( 'message' )->with( 'message', 'profile Changed' );
 			}
 			if ( ! $process ) {

@@ -120,7 +120,7 @@ class AdminController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	protected function batch($reqAll) {
+	public function batch($reqAll) {
 		foreach($reqAll as $index => $req){
 			if ( $this->validPass( $process[$index] = call_user_func_array(array($this->dataApi(), $req['method']), array_except($req, 'method')) ) ) {
 

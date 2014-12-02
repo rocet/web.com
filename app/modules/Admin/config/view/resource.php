@@ -8,6 +8,19 @@ return array(
 			'show' => false,
 		),
 	),
+	'pid'          => array(
+		'grid' => array(
+			'show' => true,
+			'filter' => array('model'=> 'Resource', 'field' => 'resource_name'),
+		),
+		'form' => array(
+			'show' => true,
+			'type' => 'treeSelect',
+			'options' => array(Lang::get('Admin::common.select')),
+			'option_model' => array('model' => 'Resource', 'field' => 'resource_name'),
+			'attr' => array('data-src' => URL::route('selections', array('model' => 'Resource', 'field' => 'resource_name'))),
+		),
+	),
 	'resource_name' => array(
 		'grid' => array(
 			'show' => true,

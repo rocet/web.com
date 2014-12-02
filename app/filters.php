@@ -11,20 +11,18 @@
 |
 */
 
-App::before(function($request)
-{
+App::before( function ( $request ) {
 	//
-	header('Access-Control-Allow-Origin: *');
-	header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
-	header('Access-Control-Allow-Headers: Origin, Content-Type, Accept, Authorization, X-Request-With');
-	header('Access-Control-Allow-Credentials: true');
-});
+	header( 'Access-Control-Allow-Origin: *' );
+	header( 'Access-Control-Allow-Methods: GET, POST, OPTIONS' );
+	header( 'Access-Control-Allow-Headers: Origin, Content-Type, Accept, Authorization, X-Request-With' );
+	header( 'Access-Control-Allow-Credentials: true' );
+} );
 
 
-App::after(function($request, $response)
-{
+App::after( function ( $request, $response ) {
 	//
-});
+} );
 
 /*
 |--------------------------------------------------------------------------
@@ -37,27 +35,30 @@ App::after(function($request, $response)
 |
 */
 
-Route::filter('auth', function()
-{
-	if (Auth::guest())
-	{
-		if (Request::ajax())
-		{
-			return Response::make('Unauthorized', 401);
-		}
-		else
-		{
+Route::filter( 'auth', function () {
+	if ( Auth::guest() ) {
+		if ( Request::ajax() ) {
+			return Response::make( 'Unauthorized', 401 );
+		} else {
 			//return Redirect::guest('login');
-			return Response::view('unauthorized', array(), 401);
+			return Response::view( 'unauthorized', array(), 401 );
 		}
+	} else {
+//		foreach ( Auth::user()->groups as $group ) {
+//			foreach ( $group->resources as $resource ) {
+//				if ( str_replace( '?}', '}', $resource->pattern ) == Route::getCurrentRoute()->getPath() ) {
+//					return;
+//				}
+//			}
+//		}
+//		return Redirect::route('message')->withInput()->with('authError', Lang::get('user.unauthorized'));
 	}
-});
+} );
 
 
-Route::filter('auth.basic', function()
-{
+Route::filter( 'auth.basic', function () {
 	return Auth::basic();
-});
+} );
 
 /*
 |--------------------------------------------------------------------------
@@ -70,10 +71,11 @@ Route::filter('auth.basic', function()
 |
 */
 
-Route::filter('guest', function()
-{
-	if (Auth::check()) return Redirect::to('/');
-});
+Route::filter( 'guest', function () {
+	if ( Auth::check() ) {
+		return Redirect::to( '/' );
+	}
+} );
 
 /*
 |--------------------------------------------------------------------------
@@ -86,10 +88,8 @@ Route::filter('guest', function()
 |
 */
 
-Route::filter('csrf', function()
-{
-	if (Session::token() !== Input::get('_token'))
-	{
+Route::filter( 'csrf', function () {
+	if ( Session::token() !== Input::get( '_token' ) ) {
 		throw new Illuminate\Session\TokenMismatchException;
 	}
-});
+} );

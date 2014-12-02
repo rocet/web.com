@@ -24,7 +24,7 @@ return array(
 		'form' => array(
 			'show' => true,
 			'type' => 'treeSelect',
-			'options' => array('请选择'),
+			'options' => array(Lang::get('Admin::common.select')),
 			'option_model' => array('model' => 'Group', 'field' => 'group_name'),
 			'attr' => array('data-src' => URL::route('selections', array('model' => 'group', 'field' => 'group_name'))),
 		),
@@ -45,7 +45,7 @@ return array(
 		'form' => array(
 			'show' => true,
 			'type' => 'select',
-			'options' => array('请选择'),
+			'options' => array(Lang::get('Admin::common.select')),
 		),
 	),
 	'sort'         => array(
