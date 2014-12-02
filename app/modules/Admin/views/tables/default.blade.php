@@ -1,12 +1,19 @@
-<h3>admin {{ Lang::get('Admin::'.$_curent_controller.'.index')  }} </h3>
+<div class="panel-heading">
+    admin {{ Lang::get('Admin::'.$_curent_controller.'.index')  }}
+</div>
+
 @if( $item->isEmpty() )
+<div class="panel-body">
     <div class="alert alert-warning">NO DATA <a href="{{ URL::route($_curent_controller.'.create') }}"><span class="glyphicon glyphicon-plus"></span></a> </div>
+</div>
 @else
     @if( Config::get('Admin::view/'.$_curent_controller) )
     @if( Config::get('Admin::view/'.$_curent_controller.'.pid') )
-    {{ Form::open( array('route' => Route::currentRouteName()) ) }}
-    {{ Form::treeSelect('pid', Config::get('Admin::view/'.$_curent_controller.'.pid.form.options')+array(), Input::get('pid'), Config::get('Admin::view/'.$_curent_controller.'.pid.form.attr'), Config::get('Admin::view/'.$_curent_controller.'.pid.form.option_model')) }}
-    {{ Form::close() }}
+    <div class="panel-body">
+        {{ Form::open( array('class' => 'form-inline', 'route' => Route::currentRouteName()) ) }}
+        {{ Form::treeSelect('pid', Config::get('Admin::view/'.$_curent_controller.'.pid.form.options')+array(), Input::get('pid'), Config::get('Admin::view/'.$_curent_controller.'.pid.form.attr'), Config::get('Admin::view/'.$_curent_controller.'.pid.form.option_model')) }}
+        {{ Form::close() }}
+    </div>
     @endif
 
     <table class="table table-striped">

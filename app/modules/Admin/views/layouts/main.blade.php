@@ -14,14 +14,20 @@
         <header class="row">
             @include('Admin::layouts.header')
         </header>
-        <nav class="row">
-            @include('Admin::layouts.nav')
+        <nav class="navbar navbar-inverse row" role="navigation">
+            <div class="container">
+                <div class="collapse navbar-collapse">
+                    @include('Admin::layouts.nav')
+                </div>
+            </div>
         </nav>
         <main class="row">
             <aside>
                 @include('Admin::layouts.aside')
             </aside>
-            @yield('main')
+            <div class="panel panel-default">
+                @yield('main')
+            </div>
         </main>
         <footer class="row">
             @include('Admin::layouts.footer')

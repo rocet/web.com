@@ -1,4 +1,8 @@
-<h3>admin {{ Lang::get('Admin::'.$_curent_controller.'.create')  }} </h3>
+<div class="panel-heading">
+    admin {{ Lang::get('Admin::'.$_curent_controller.'.create')  }}
+</div>
+<div class="panel-body">
+
 @if( Config::get('Admin::view/'.$_curent_controller) )
 {{ Form::open(array( 'route' => $_curent_controller.'.store', 'autocomplete' => 'off' )) }}
 @foreach( Config::get('Admin::view/'.$_curent_controller) as $field => $config )
@@ -21,9 +25,11 @@
     @endif
 @endif
 @endforeach
-    {{ Form::submit(Lang::get('Admin::'.$_curent_controller.'.create')) }}
+    {{ Form::submit(Lang::get('Admin::'.$_curent_controller.'.create'), array('class' => 'btn btn-primary')) }}
 {{ Form::close() }}
 @else
 <div class="alert alert-warning">NO CONFIG </div>
 @endif
+
+</div>
 

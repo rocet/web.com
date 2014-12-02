@@ -6,15 +6,15 @@
  * Time: 9:09
  */
 return array(
-//	'id' => '',
-//	'pid' => '',
-//	'user_id' => '',
-//	'group_name' => '',
-//	'state' => '',
-//	'sort' => '',
-//	'created_at' => '',
-//
-//	'create' => '',
-//	'index' => '',
-//	'edit' => '',
+    'id' => 'Id',
+    'pid' => 'Pid',
+	'user_id' => 'User_id',
+	'group_name' => 'Group_name',
+	'state' => 'State',
+    'sort' => 'Sort',
+    'created_at' => 'Created_at',
+
+    'create' => 'Create',
+    'index' => 'Index',
+    'edit' => 'Edit',
 );

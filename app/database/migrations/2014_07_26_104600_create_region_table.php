@@ -29,6 +29,24 @@ class CreateRegionTable extends Migration {
 				->unsigned()
 				->default(null);
 
+            $table
+                ->integer('depth')
+                ->nullable()
+                ->unsigned()
+                ->default(0);
+
+            $table
+                ->integer('lft')
+                ->nullable()
+                ->unsigned()
+                ->default(0);
+
+            $table
+                ->integer('rgt')
+                ->nullable()
+                ->unsigned()
+                ->default(0);
+
 			$table
 				->integer("sort")
 				->nullable()

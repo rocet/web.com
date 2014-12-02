@@ -6,5 +6,5 @@
  * Time: 9:20
  */
 return array(
-//	'select' => 'Select',
+	'select' => 'Select',
 );

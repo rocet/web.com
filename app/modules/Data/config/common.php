@@ -4,7 +4,7 @@ return array(
 	// 分页数据 每页条数
 	'per_page' => array(
 		// 默认条数
-		'default' => 10,
+		'default' => 5,
 		// 自定义条数
 		'user' => 10,
 		'group' => 10

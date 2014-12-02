@@ -6,17 +6,18 @@
  * Time: 9:09
  */
 return array(
-//	'id' => '',
-//	'pid' => '',
-//	'resource_name' => '',
-//	'target' => '',
-//	'pattern' => '',
-//	'validate' => '',
-//	'secure' => '',
-//	'state' => '',
-//	'created_at' => '',
-//
-//	'create' => '',
-//	'index' => '',
-//	'edit' => '',
+    'id' => 'Id',
+    'pid' => 'Pid',
+	'resource_name' => 'Resource_name',
+    'user_id' => 'User_id',
+	'target' => 'Target',
+	'pattern' => 'Pattern',
+	'validate' => 'Validate',
+	'secure' => 'Secure',
+	'state' => 'State',
+    'created_at' => 'Created_at',
+
+    'create' => 'Create',
+    'index' => 'Index',
+    'edit' => 'Edit',
 );

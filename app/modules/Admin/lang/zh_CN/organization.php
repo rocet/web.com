@@ -6,16 +6,16 @@
  * Time: 9:08
  */
 return array(
-//	'id' => '',
-//	'pid' => '',
-//	'user_id' => '',
-//	'organization_name' => '',
-//	'region_id' => '',
-//	'state' => '',
-//	'sort' => '',
-//	'created_at' => '',
-//
-//	'create' => '',
-//	'index' => '',
-//	'edit' => '',
+    'id' => 'Id',
+    'pid' => 'Pid',
+	'user_id' => 'User_id',
+	'organization_name' => 'Organization_name',
+	'region_id' => 'Region_id',
+	'state' => 'State',
+    'sort' => 'Sort',
+    'created_at' => 'Created_at',
+
+    'create' => 'Create',
+    'index' => 'Index',
+    'edit' => 'Edit',
 );

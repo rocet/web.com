@@ -1,6 +1,6 @@
 <?php
 
-class Region extends Eloquent
+class Region extends Tree
 {
 	protected $table = "region";
 	protected $parentColumn = 'pid';

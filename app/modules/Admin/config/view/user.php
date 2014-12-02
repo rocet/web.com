@@ -16,6 +16,7 @@ return array(
 		'form' => array(
 			'show' => true,
 			'type' => 'text',
+            'attr' => array('class' => 'form-control')
 		),
 	),
 	'email'      => array(
@@ -25,6 +26,7 @@ return array(
 		'form' => array(
 			'show' => true,
 			'type' => 'email',
+            'attr' => array('class' => 'form-control')
 		),
 	),
 	'mobile'     => array(
@@ -34,6 +36,7 @@ return array(
 		'form' => array(
 			'show' => true,
 			'type' => 'text',
+            'attr' => array('class' => 'form-control')
 		),
 	),
 	'group_id'   => array(
@@ -61,7 +64,7 @@ return array(
 		),
 		'form' => array(
 			'show'         => true,
-			'type'         => 'regionSelect',
+			'type'         => 'treeSelect',
 			'options'      => array( Lang::get('Admin::common.select') ),
 			'option_model' => array( 'model' => 'Region', 'field' => 'region_name' ),
 			'attr'         => array(

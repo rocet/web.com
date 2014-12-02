@@ -8,7 +8,14 @@
         @include('Admin::forms.' . $_curent_action )
         @endif
     @elseif( $_curent_action == 'show' )
-        {{ print_r($item->toArray()) }}
+        <ul class="list-group">
+            @foreach( $item->toArray() as $key => $val )
+            <li class="list-group-item">
+            {{ $key }} : {{ $val }}
+            </li>
+            @endforeach
+        </ul>
+
     @elseif( $_curent_action == 'index' )
         @include('Admin::tables.default' )
     @endif

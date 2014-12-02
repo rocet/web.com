@@ -46,6 +46,11 @@ class CreateComponentTable extends Migration {
 				->nullable()
 				->default(null);
 
+            $table
+                ->string("flag", 100)
+                ->nullable()
+                ->default(null);
+
 			$table
 				->integer("user_id")
 				->nullable()

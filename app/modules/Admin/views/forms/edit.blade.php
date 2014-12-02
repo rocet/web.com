@@ -1,4 +1,8 @@
-<h3>admin {{ Lang::get('Admin::'.$_curent_controller.'.edit')  }} </h3>
+<div class="panel-heading">
+    admin {{ Lang::get('Admin::'.$_curent_controller.'.edit')  }}
+</div>
+<div class="panel-body">
+
 @if( isset($item) )
 @if( Config::get('Admin::view/'.$_curent_controller) )
 {{ Form::model($item, array('method' => 'PUT', 'route' => array($_curent_controller.'.update', $item->id))); }}
@@ -24,9 +28,10 @@
 
 @endif
 @endforeach
-{{ Form::submit('Submit') }}
+{{ Form::submit(Lang::get('Admin::'.$_curent_controller.'.edit'), array('class' => 'btn btn-primary')) }}
 {{ Form::close() }}
 @else
 <div class="alert alert-warning">NO CONFIG </div>
 @endif
 @endif
+</div>

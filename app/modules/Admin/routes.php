@@ -10,5 +10,6 @@ Route::group( array( 'domain' => 'admin.web.com' ), function () {
 		Route::resource( 'region', 'App\Modules\Admin\Controllers\RegionController' );
 		Route::resource( 'user', 'App\Modules\Admin\Controllers\UserController' );
 		Route::resource( 'resource', 'App\Modules\Admin\Controllers\ResourceController' );
+        Route::resource( 'component', 'App\Modules\Admin\Controllers\ComponentController' );
 	} );
 } );
