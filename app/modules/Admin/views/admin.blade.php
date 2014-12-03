@@ -4,14 +4,17 @@
         <ul class="list-group">
         @if( $type == 'func' )
             @foreach( $item() as $key => $value )
-            <li class="list-group-item">{{ $key }} => {{ $value }}</li>
+            <li class="list-group-item"><p> {{ $key }} => {{ $value }} </p></li>
             @endforeach
         @elseif( $type == 'var' )
             @foreach( $item as $key => $value )
-            <li class="list-group-item">{{ $key }} => {{ $value }}</li>
+            <li class="list-group-item"><p> {{ $key }} => {{ $value }} </p></li>
             @endforeach
         @endif
         </ul>
     @endforeach
+    <div class="panel-body">
     admin index
+    </div>
+
 @stop

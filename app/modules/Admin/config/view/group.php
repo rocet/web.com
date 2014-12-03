@@ -66,6 +66,7 @@ return array(
 		'grid' => array(
 			'show' => true,
 			'filter' => array('model'=> 'User', 'field' => 'user_name'),
+			'links' => array( 'model' => 'user', 'icon' => 'glyphicon glyphicon-user' ),
 		),
 		'form' => array(
 			'show' => true,

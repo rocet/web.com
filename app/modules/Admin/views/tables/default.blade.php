@@ -56,6 +56,14 @@
                 {{--{{ Form::model($item, array('method' => 'DELETE', 'route' => array($_curent_controller.'.destroy', $row->id))); }}--}}
                     {{--{{ Form::button('<span class="glyphicon glyphicon-trash"></span>', array( 'type' => 'submit', 'class' => 'btn btn-default btn-xs')) }}--}}
                 {{--{{ Form::close() }}--}}
+
+                @foreach( Config::get('Admin::view/'.$_curent_controller) as $field =>  $config )
+                @if( isset( $config['grid']['links'] ) )
+                <a class="btn btn-default btn-xs" href="{{ URL::route($_curent_controller.'.'.$config['grid']['links']['model'].'.index', array('id'=>$row->id))  }}">
+                    <span class="{{ $config['grid']['links']['icon'] }}"></span>
+                </a>
+                @endif
+                @endforeach
             </td>
         </tr>
         @endforeach

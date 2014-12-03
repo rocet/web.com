@@ -9,5 +9,11 @@ aside .panel.panel-default {
 aside .panel.panel-default:hover {
     left: 0px;
 }
+p{
+    word-wrap: break-word;
+}
+.form-inline select.form-control {
+    margin-right: 10px;
+}
 </style>
 @show

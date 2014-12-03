@@ -8,6 +8,27 @@
         {{--<base href="http://web.com" />--}}
         {{--<base target="_blank" />--}}
         <link rel="stylesheet" type="text/css" href="/assets/css/app.css" />
+
+        @if( Config::get('app.debug') )
+            <script type="text/javascript">
+            var dumpScripts = {
+                init: function(){
+                    for(var item in dumpScripts ){
+                        if( 'init' != item )
+                        eval('dumpScripts.'+item+'();');
+                    }
+                }
+            };
+            window.onload = function(){
+                dumpScripts.init();
+            };
+            dumpScripts.s1 = function(){
+                $( document ).ajaxComplete(function( event,request, settings ) {
+                    console.log( request.responseText );
+                });
+            };
+            </script>
+        @endif
     </head>
     <body class="container">
         <a class="sr-only" href="#content">Skip to main content</a>

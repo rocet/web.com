@@ -2,9 +2,7 @@
 
 @section('main')
     @include('Admin::layouts.restful')
-@stop
+    <div class="panel-body">
 
-@section('footer')
-@parent
-<script type="text/javascript" src="/assets/js/base.js"></script>
+    </div>
 @stop

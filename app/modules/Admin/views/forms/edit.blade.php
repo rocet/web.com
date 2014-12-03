@@ -5,7 +5,7 @@
 
 @if( isset($item) )
 @if( Config::get('Admin::view/'.$_curent_controller) )
-{{ Form::model($item, array('method' => 'PUT', 'route' => array($_curent_controller.'.update', $item->id))); }}
+{{ Form::model($item, array('class' => 'form-inline', 'method' => 'PUT', 'route' => array($_curent_controller.'.update', $item->id))); }}
 @foreach( Config::get('Admin::view/'.$_curent_controller) as $field => $config )
 @if( isset( $config['form']['show'] ) && $config['form']['show'] )
 

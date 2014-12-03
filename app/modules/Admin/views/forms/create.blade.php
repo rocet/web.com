@@ -4,7 +4,7 @@
 <div class="panel-body">
 
 @if( Config::get('Admin::view/'.$_curent_controller) )
-{{ Form::open(array( 'route' => $_curent_controller.'.store', 'autocomplete' => 'off' )) }}
+{{ Form::open(array('class' => 'form-inline', 'route' => $_curent_controller.'.store', 'autocomplete' => 'off' )) }}
 @foreach( Config::get('Admin::view/'.$_curent_controller) as $field => $config )
 @if( isset( $config['form']['show'] ) && $config['form']['show'] )
     @if( $config['form']['type'] != 'hidden' )
