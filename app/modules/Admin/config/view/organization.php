@@ -49,7 +49,7 @@ return array(
 			'type' => 'treeSelect',
 			'options' => array(Lang::get('Admin::common.select')),
 			'option_model' => array('model' => 'Region', 'field' => 'region_name'),
-			'attr' => array('data-src' => URL::route('selections', array('model' => 'region', 'field' => 'region_name'))),
+			'attr' => array('class' => 'form-control', 'data-src' => URL::route('selections', array('model' => 'region', 'field' => 'region_name'))),
 		),
 	),
 	'state'        => array(
@@ -78,6 +78,7 @@ return array(
 		'grid' => array(
 			'show' => true,
 			'filter' => array('model'=> 'User', 'field' => 'user_name'),
+            'links' => array( 'model' => 'user', 'icon' => 'fa fa-group' ),
 		),
 		'form' => array(
 			'show' => true,

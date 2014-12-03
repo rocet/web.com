@@ -25,7 +25,7 @@
     @endif
 @endif
 @endforeach
-    {{ Form::submit(Lang::get('Admin::'.$_curent_controller.'.create'), array('class' => 'btn btn-primary')) }}
+    {{ Form::submit(Lang::get('Admin::'.$_curent_controller.'.create'), array('class' => 'btn btn-primary pull-right')) }}
 {{ Form::close() }}
 @else
 <div class="alert alert-warning">NO CONFIG </div>

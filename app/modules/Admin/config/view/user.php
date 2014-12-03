@@ -49,7 +49,7 @@ return array(
 			'type'         => 'treeSelect',
 			'options'      => array( Lang::get('Admin::common.select') ),
 			'option_model' => array( 'model' => 'Group', 'field' => 'group_name' ),
-			'attr'         => array(
+			'attr'         => array( 'class' => 'form-control',
 				'data-src' => URL::route( 'selections', array(
 						'model' => 'group',
 						'field' => 'group_name'
@@ -67,7 +67,7 @@ return array(
 			'type'         => 'treeSelect',
 			'options'      => array( Lang::get('Admin::common.select') ),
 			'option_model' => array( 'model' => 'Region', 'field' => 'region_name' ),
-			'attr'         => array(
+			'attr'         => array( 'class' => 'form-control',
 				'data-src' => URL::route( 'selections', array(
 						'model' => 'region',
 						'field' => 'region_name'
@@ -85,7 +85,7 @@ return array(
 			'type'         => 'treeSelect',
 			'options'      => array( Lang::get('Admin::common.select') ),
 			'option_model' => array( 'model' => 'Organization', 'field' => 'organization_name' ),
-			'attr'         => array(
+			'attr'         => array( 'class' => 'form-control',
 				'data-src' => URL::route( 'selections', array(
 						'model' => 'organization',
 						'field' => 'organization_name'

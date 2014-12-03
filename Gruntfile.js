@@ -26,6 +26,7 @@ module.exports = function (grunt) {
             app: {
                 src: [
                     './public/assets/bower/bootstrap/dist/css/bootstrap.css',
+                    './public/assets/css/font-awesome.min.css',
                     './public/assets/css/base.css'
                 ],
                 dest: './public/assets/css/app.css'

@@ -12,5 +12,14 @@
 @section('main')
     @if(Request::segment(1))
     @include('forms.common.' . strtolower(Request::segment(1)) )
+    @else
+    <pre>
+    var str = '';
+    $.each($('.bs-glyphicons span.glyphicon'), function(i, n){
+    	str += '\'' + n.className.replace('glyphicon glyphicon-', '') + '\',';
+    });
+    console.log(str);
+    </pre>
+    @include('icon')
     @endif
 @stop
