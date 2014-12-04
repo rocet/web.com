@@ -15,7 +15,7 @@
         {{ Form::close() }}
     </div>
     @endif
-
+    <div class="overflow-x-scroll">
     <table class="table table-striped">
         <tr>
             @foreach( Config::get('Admin::view/'.$_curent_controller) as $field => $config )
@@ -23,7 +23,7 @@
             <th>{{ Lang::get('Admin::'.$_curent_controller.'.'.$field) }}</th>
             @endif
             @endforeach
-            <th><a href="{{ URL::route($_curent_controller.'.create') }}"><span class="glyphicon glyphicon-plus"></span></a></th>
+            <th><a href="{{ URL::route($_curent_controller.'.create', isset($_reId) ? array('reId' => $_reId) : array() ) }}"><span class="glyphicon glyphicon-plus"></span></a></th>
         </tr>
         @foreach( $item as $row )
         <tr>
@@ -44,13 +44,13 @@
             @endif
             @endforeach
             <td>
-                <a class="btn btn-default btn-xs" href="{{ URL::route($_curent_controller.'.show', array('id'=>$row->id))  }}">
+                <a class="btn btn-default btn-xs" href="{{ URL::route($_curent_controller.'.show', (isset($_reId) ? array('reId' => $_reId) : array()) + array('id'=>$row->id))  }}">
                     <span class="glyphicon glyphicon-eye-open"></span>
                 </a>
-                <a class="btn btn-default btn-xs" href="{{ URL::route($_curent_controller.'.edit', array('id'=>$row->id))  }}">
+                <a class="btn btn-default btn-xs" href="{{ URL::route($_curent_controller.'.edit', (isset($_reId) ? array('reId' => $_reId) : array()) + array('id'=>$row->id))  }}">
                     <span class="glyphicon glyphicon-edit"></span>
                 </a>
-                <a class="btn btn-default btn-xs" href="{{ URL::route($_curent_controller.'.destroy', array('id'=>$row->id))  }}">
+                <a class="btn btn-default btn-xs" href="{{ URL::route($_curent_controller.'.destroy', (isset($_reId) ? array('reId' => $_reId) : array()) + array('id'=>$row->id))  }}">
                     <span class="glyphicon glyphicon-trash"></span>
                 </a>
                 {{--{{ Form::model($item, array('method' => 'DELETE', 'route' => array($_curent_controller.'.destroy', $row->id))); }}--}}
@@ -59,7 +59,7 @@
 
                 @foreach( Config::get('Admin::view/'.$_curent_controller) as $field =>  $config )
                 @if( isset( $config['grid']['links'] ) )
-                <a class="btn btn-default btn-xs" href="{{ URL::route($_curent_controller.'.'.$config['grid']['links']['model'].'.index', array('id'=>$row->id))  }}">
+                <a class="btn btn-default btn-xs" href="{{ URL::route($_curent_controller.'.'.$config['grid']['links']['model'].'.index', (isset($_reId) ? array('reId' => $_reId) : array()) + array('id'=>$row->id))  }}">
                     <span class="{{ $config['grid']['links']['icon'] }}"></span>
                 </a>
                 @endif
@@ -68,6 +68,7 @@
         </tr>
         @endforeach
     </table>
+    </div>
     <div class="panel-body">
         <ul class="pagination pull-right">
         {{ $item->links() }}

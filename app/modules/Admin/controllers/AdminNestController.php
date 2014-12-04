@@ -37,7 +37,14 @@ class AdminNestController extends \BaseController {
 	 */
 	public function store( $reId ) {
 		//
-	}
+        if ( $this->validPass( $process = $this->dataApi()->store(  \Input::except('_token') ) ) ) {
+            return \Redirect::route( 'message' )->with( 'message', 'Store Success <a href="'.\URL::route($this->getCurrentController().'.index').'">return</a> <a href="'.\URL::route($this->getCurrentController().'.create').'">create new</a>' );
+        }
+        if ( ! $process ) {
+            $process = new \Illuminate\Support\MessageBag( array( 'sys_error' => 'error' ) );
+        }
+        return \View::make( 'Admin::'.strtolower( $this->modelName()) )->withInput(\Input::except('_token'))->withErrors( $process );
+    }
 
 	/**
 	 * Display the specified resource.
@@ -48,6 +55,7 @@ class AdminNestController extends \BaseController {
 	 */
 	public function show( $reId, $id ) {
 		//
+        return \View::make('Admin::'.strtolower( $this->modelName()) )->with('item', $this->dataApi()->show($id))->with('id', $id);
 	}
 
 	/**
@@ -59,6 +67,7 @@ class AdminNestController extends \BaseController {
 	 */
 	public function edit( $reId, $id ) {
 		//
+        return \View::make('Admin::'.strtolower( $this->modelName()) )->with('item', $this->dataApi()->show($id))->with('id', $id);
 	}
 
 	/**
@@ -70,7 +79,14 @@ class AdminNestController extends \BaseController {
 	 */
 	public function update( $reId, $id ) {
 		//
-	}
+        if ( $this->validPass( $process = $this->dataApi()->store(  \Input::except('_token') ) ) ) {
+            return \Redirect::route( 'message' )->with( 'message', 'Store Success <a href="'.\URL::route($this->getCurrentController().'.index').'">return</a> <a href="'.\URL::route($this->getCurrentController().'.create').'">create new</a>' );
+        }
+        if ( ! $process ) {
+            $process = new \Illuminate\Support\MessageBag( array( 'sys_error' => 'error' ) );
+        }
+        return \View::make( 'Admin::'.strtolower( $this->modelName()) )->withInput(\Input::except('_token'))->withErrors( $process );
+    }
 
 	/**
 	 * Remove the specified resource from storage.
@@ -81,6 +97,7 @@ class AdminNestController extends \BaseController {
 	 */
 	public function destroy( $reId, $id ) {
 		//
+        var_dump( 'destroy' . $id );
 	}
 
 	/**
@@ -89,7 +106,14 @@ class AdminNestController extends \BaseController {
 	 * @return Response
 	 */
 	public function batch( $reId, $reqAll ) {
+        foreach($reqAll as $index => $req){
+            if ( $this->validPass( $process[$index] = call_user_func_array(array($this->dataApi(), $req['method']), array_except($req, 'method')) ) ) {
 
+            }
+            if ( ! $process[$index] ) {
+                $process[$index] = new \Illuminate\Support\MessageBag( array( 'sys_error' => 'error' ) );
+            }
+        }
 	}
 
 	protected function modelName() {
@@ -107,7 +131,13 @@ class AdminNestController extends \BaseController {
 	}
 
 	protected function getCurrentAction() {
-		return substr( strrchr( Route::currentRouteName(), '.' ), 1 );
+		return substr( strrchr( \Route::currentRouteName(), '.' ), 1 );
 	}
 
+    protected function setupLayout()
+    {
+        parent::setupLayout();
+        $args = \Request::segments();
+        \View::share('_reId', (isset($args[1]) and is_numeric($args[1])) ? $args[1] : null);
+    }
 }

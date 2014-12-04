@@ -14,5 +14,6 @@ Route::group( array( 'domain' => 'admin.web.com' ), function () {
         Route::resource( 'component', 'App\Modules\Admin\Controllers\ComponentController' );
 		Route::resource( 'group.user', 'App\Modules\Admin\Controllers\GroupUserController' );
         Route::resource( 'group.resource', 'App\Modules\Admin\Controllers\GroupResourceController' );
+        Route::resource( 'organization.user.group.resource', 'App\Modules\Admin\Controllers\ResourceController' );
 	} );
 } );
