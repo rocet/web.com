@@ -17,6 +17,7 @@ $('select[data-src]').on('change', function(){
                 removeOldSelect( $(el) );
                 if( $(el).next().is('select') ){
                     $('option[value != "0"]' ,$(el).next()).remove();
+                    $('option[value = "0"]', $(el).next()).val(el.value);
                     $.each(r, function(i, n){
                         $(el).next().append('<option value="'+i+'">'+n+'</option>');
                     });
@@ -24,6 +25,7 @@ $('select[data-src]').on('change', function(){
                     $(el).after($(el).clone(true));
                     $(el).attr( {'id':null, 'name':null} );
                     $('option[value != "0"]', $(el).next()).remove();
+                    $('option[value = "0"]', $(el).next()).val(el.value);
                     $.each(r, function(i, n){
                         $(el).next().append('<option value="'+i+'">'+n+'</option>');
                     });
@@ -33,6 +35,7 @@ $('select[data-src]').on('change', function(){
                 $(el).after($(el).clone(true));
                 $(el).attr( {'id':null, 'name':null} );
                 $('option[value != "0"]', $(el).next()).remove();
+                $('option[value = "0"]', $(el).next()).val(el.value);
                 $.each(r, function(i, n){
                     $(el).next().append('<option value="'+i+'">'+n+'</option>');
                 });

@@ -68,12 +68,14 @@
         </tr>
         @endforeach
     </table>
-
-    <ul class="pagination pull-right">
-    {{ $item->links() }}
-    </ul>
-
+    <div class="panel-body">
+        <ul class="pagination pull-right">
+        {{ $item->links() }}
+        </ul>
+    </div>
     @else
+    <div class="panel-body">
         <div class="alert alert-warning">NO CONFIG </div>
+    </div>
     @endif
 @endif

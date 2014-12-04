@@ -11,7 +11,9 @@ Form::macro( 'treeSelect', function ( $name, $data = array(), $value = 0, $attr 
 	if ( ! empty( $model ) ) {
 		$modelObj = new $model['model'];
 		if ( $value ) {
-			$ancestors = $modelObj->find( $value )->getAncestorsAndSelf( array( 'id', $modelObj->getParentColumn() ) );
+			$current      = $modelObj->find( $value );
+			$parentColumn = $modelObj->getParentColumn();
+			$ancestors    = $current->getAncestorsAndSelf( array( 'id', $parentColumn ) );
 
 //			$parentRoots = array();
 //			foreach ( $ancestors as $k => $lvlRoot ) {
@@ -22,10 +24,11 @@ Form::macro( 'treeSelect', function ( $name, $data = array(), $value = 0, $attr 
 //			var_dump($parentRoots, $modelObj::whereIn($lvlRoot->getParentColumn(), $parentRoots)->select($model['field'], $modelObj->getParentColumn(), 'id')->get()->toArray() );
 //			echo '</pre>';
 
-			$end       = $ancestors->count() - 1;
+			$end = $ancestors->count() - 1;
 			foreach ( $ancestors as $k => $lvlRoot ) {
 				$ret .= Form::select( $k == $end ? $name : null, $data + $modelObj->selections( $model['field'], $lvlRoot->{$lvlRoot->getParentColumn()} ?: 'root' ), $lvlRoot->id, $attr );
 			}
+
 		} else {
 			$ret = Form::select( $name, $data + $modelObj->selections( $model['field'] ), $value, $attr );
 		}
@@ -36,17 +39,17 @@ Form::macro( 'treeSelect', function ( $name, $data = array(), $value = 0, $attr 
 	return $ret;
 } );
 
-Form::macro( 'regionSelect', function ( $name, $data = array(), $value = '', $attr = array()) {
-	$ret       = '';
-	if( !$value ){
+Form::macro( 'regionSelect', function ( $name, $data = array(), $value = '', $attr = array() ) {
+	$ret = '';
+	if ( ! $value ) {
 		$ret .= Form::select( $name, $data + Region::selections( 'region_name', 0 ), 0, $attr );
 	} else {
-		$province  = substr( $value, 0, 2 );
-		$city      = substr( $value, 2, 2 ) > 0 ? substr( $value, 2, 2 ) : '01';
-		$town      = substr( $value, 4, 2 ) > 0 ? substr( $value, 4, 2 ) : '01';
-		$town      = $province.$city.$town ;
-		$city      = $province.$city.'00';
-		$province  = $province.'0000';
+		$province = substr( $value, 0, 2 );
+		$city     = substr( $value, 2, 2 ) > 0 ? substr( $value, 2, 2 ) : '01';
+		$town     = substr( $value, 4, 2 ) > 0 ? substr( $value, 4, 2 ) : '01';
+		$town     = $province . $city . $town;
+		$city     = $province . $city . '00';
+		$province = $province . '0000';
 
 
 //		$ancestors = $value ? array(
@@ -69,13 +72,23 @@ Form::macro( 'regionSelect', function ( $name, $data = array(), $value = '', $at
 	return $ret;
 } );
 
-HTML::macro('tree', function(){
-    return '<div class="tree" data-init=""></div>';
-});
+HTML::macro( 'tree', function () {
+	return '<div class="tree" data-init=""></div>';
+} );
 
-HTML::macro( 'filter', function($field, $model, $conf){
-	$relModel = strtolower($conf['model']);
-	return get_class($model) == $conf['model'] ? $model->parent()->pluck($conf['field']) : $model->$relModel->$conf['field'];
+HTML::macro( 'filter', function ( $field, $model, $conf ) {
+	$relModel = strtolower( $conf['model'] );
+	if ( new $relModel instanceof Tree ) {
+		$ancestorFunc = $field == call_user_func( array(
+			new $relModel,
+			'getParentColumn'
+		) ) ? 'getAncestors' : 'getAncestorsAndSelf';
+
+		return implode( '-', get_class( $model ) == $conf['model'] ? $model->$ancestorFunc()->lists( $conf['field'] ) : $model->$relModel->$ancestorFunc()->lists( $conf['field'] ) );
+	} else {
+		return get_class( $model ) == $conf['model'] ? $model->parent()->pluck( $conf['field'] ) : $model->$relModel->$conf['field'];
+	}
+
 
 //
 //	        header('Content-Type:text/html;charset=utf-8');

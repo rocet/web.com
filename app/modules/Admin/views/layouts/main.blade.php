@@ -27,6 +27,14 @@
                     console.log( request.responseText );
                 });
             };
+
+            dumpScripts.s2 = function(){
+                $.each( $('select[data-src]'), function(i, n){
+                    if(n.value !== "0"){
+                        $(n).trigger('change');
+                    }
+                });
+            }
             </script>
         @endif
     </head>

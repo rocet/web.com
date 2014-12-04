@@ -78,7 +78,6 @@ return array(
 		'grid' => array(
 			'show' => true,
 			'filter' => array('model'=> 'User', 'field' => 'user_name'),
-            'links' => array( 'model' => 'user', 'icon' => 'fa fa-group' ),
 		),
 		'form' => array(
 			'show' => true,
@@ -95,5 +94,12 @@ return array(
 			'show' => false,
 		),
 	),
+	'_nested_user' => array(
+		'grid' => array(
+			'show' => false,
+			'links' => array( 'model' => 'user', 'icon' => 'fa fa-group' ),
+		),
+	),
+	'user' => require 'user.php',
 
 );

@@ -66,7 +66,6 @@ return array(
 		'grid' => array(
 			'show' => true,
 			'filter' => array('model'=> 'User', 'field' => 'user_name'),
-			'links' => array( 'model' => 'user', 'icon' => 'fa fa-group' ),
 		),
 		'form' => array(
 			'show' => true,
@@ -83,11 +82,19 @@ return array(
 			'show' => false,
 		),
 	),
-    'resource' => array(
-        'grid' => array(
-            'show' => false,
-            'links' => array( 'model' => 'resource', 'icon' => 'glyphicon glyphicon-compressed' ),
-        ),
-    )
+	'_nested_user' => array(
+		'grid' => array(
+			'show' => false,
+			'links' => array( 'model' => 'user', 'icon' => 'fa fa-group' ),
+		),
+	),
+	'_nested_resource' => array(
+		'grid' => array(
+			'show' => false,
+			'links' => array( 'model' => 'resource', 'icon' => 'glyphicon glyphicon-compressed' ),
+		),
+	),
+    'resource' => require 'resource.php',
+    'user' => require 'user.php',
 
 );
