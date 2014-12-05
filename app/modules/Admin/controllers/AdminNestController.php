@@ -38,7 +38,7 @@ class AdminNestController extends \BaseController {
 	public function store( $reId ) {
 		//
         if ( $this->validPass( $process = $this->dataApi()->store(  \Input::except('_token') ) ) ) {
-            return \Redirect::route( 'message' )->with( 'message', 'Store Success <a href="'.\URL::route($this->getCurrentController().'.index').'">return</a> <a href="'.\URL::route($this->getCurrentController().'.create').'">create new</a>' );
+            return \Redirect::route( 'message' )->with( 'message', 'Store Success <a href="'.\URL::route($this->getCurrentController().'.index', $this->getCurrentRelation()).'">return</a> <a href="'.\URL::route($this->getCurrentController().'.create', $this->getCurrentRelation() ).'">create new</a>' );
         }
         if ( ! $process ) {
             $process = new \Illuminate\Support\MessageBag( array( 'sys_error' => 'error' ) );
@@ -79,14 +79,15 @@ class AdminNestController extends \BaseController {
 	 */
 	public function update( $reId, $id ) {
 		//
-        if ( $this->validPass( $process = $this->dataApi()->store(  \Input::except('_token') ) ) ) {
-            return \Redirect::route( 'message' )->with( 'message', 'Store Success <a href="'.\URL::route($this->getCurrentController().'.index').'">return</a> <a href="'.\URL::route($this->getCurrentController().'.create').'">create new</a>' );
-        }
-        if ( ! $process ) {
-            $process = new \Illuminate\Support\MessageBag( array( 'sys_error' => 'error' ) );
-        }
-        return \View::make( 'Admin::'.strtolower( $this->modelName()) )->withInput(\Input::except('_token'))->withErrors( $process );
-    }
+		if ( $this->validPass( $process = $this->dataApi()->update( $id, \Input::except( '_token', '_method' ) ) ) ) {
+			return \Redirect::route( 'message' )->with( 'message', 'Store Success <a href="' . \URL::route( $this->getCurrentController() . '.index', $this->getCurrentRelation() ) . '">return</a> <a href="' . \URL::route( $this->getCurrentController() . '.edit', $this->getCurrentRelation() + array( 'id' => $id ) ) . '">edit again</a>' );
+		}
+		if ( ! $process ) {
+			$process = new \Illuminate\Support\MessageBag( array( 'sys_error' => 'error' ) );
+		}
+
+		return \View::make( 'Admin::' . strtolower( $this->modelName() ) )->with( 'item', $this->dataApi()->edit( $id ) )->with( 'id', $id )->withInput( \Input::except( '_token', '_method' ) )->withErrors( $process );
+	}
 
 	/**
 	 * Remove the specified resource from storage.
@@ -123,7 +124,7 @@ class AdminNestController extends \BaseController {
 	protected function dataApi( $model = null ) {
 		$controller = 'App\Modules\Data\Controllers\\' . ( $model ?: $this->modelName() ) . 'Controller';
 
-		return class_exists( $controller ) ? \App::make( $controller ) : false;
+		return class_exists( $controller ) ? \App::make( $controller )->initRelation( $this->getCurrentRelation() ) : false;
 	}
 
 	protected function getCurrentController() {
@@ -133,11 +134,4 @@ class AdminNestController extends \BaseController {
 	protected function getCurrentAction() {
 		return substr( strrchr( \Route::currentRouteName(), '.' ), 1 );
 	}
-
-    protected function setupLayout()
-    {
-        parent::setupLayout();
-        $args = \Request::segments();
-        \View::share('_reId', (isset($args[1]) and is_numeric($args[1])) ? $args[1] : null);
-    }
 }

@@ -14,9 +14,11 @@ class BaseController extends Controller
 			$this->layout = View::make($this->layout);
 		}
 
-		View::share('_curent_action', $this->getCurrentAction());
+		View::share('_current_action', $this->getCurrentAction());
 
-		View::share('_curent_controller', $this->getCurrentController());
+		View::share('_current_controller', $this->getCurrentController());
+
+		View::share( '_current_relations', $this->getCurrentRelation() );
 	}
 
 	protected function validPass($input)
@@ -31,9 +33,19 @@ class BaseController extends Controller
 	}
 
 	protected function getCurrentController(){
-		return strstr(Route::currentRouteName(), '.', true );
+		return str_replace( '.' . $this->getCurrentAction(), '', Route::currentRouteName() ); // strstr(Route::currentRouteName(), '.', true );
 	}
 	protected function getCurrentAction(){
 		return substr(strrchr(Route::currentRouteName(), '.'), 1);
+	}
+	protected function getCurrentRelation(){
+		if(method_exists($this, 'modelName')){
+			$segments = \Request::segments();
+			$routes = explode('.', \Route::currentRouteName());
+			$_relationPaths = array_slice($segments, 0, array_search(strtolower( $this->modelName()), $segments));
+			$_relationRoute = array_slice( $routes, 0, array_search(strtolower( $this->modelName()), $routes));
+			return array_combine($_relationRoute, array_diff($_relationPaths, array_intersect($_relationRoute, $_relationPaths)) );
+		}
+		return array();
 	}
 }

@@ -15,8 +15,8 @@ p{
 .form-inline select.form-control {
     margin-right: 10px;
 }
-.overflow-x-scroll{
-    overflow-x: scroll;
+.overflow-x-auto {
+    overflow-y: hidden;
 }
 </style>
 @show

@@ -1,9 +1,9 @@
 @section('aside')
 <ol class="breadcrumb">
   <li><a href="{{ URl::route('home') }}">{{ Lang::get('Admin::common.home') }}</a></li>
-  @if( isset($_curent_controller) )
+  @if( isset($_current_controller) )
   <li><a href="{{ URl::route('admin') }}">{{ Lang::get('Admin::common.admin') }}</a></li>
-  <li><a href="{{ URl::route($_curent_controller.'.index') }}">{{ Lang::get('Admin::common.' . $_curent_controller)  }}</a></li>
+  <li><a href="{{ URl::route($_current_controller.'.index', $_current_relations) }}">{{ Lang::get('Admin::common.' . $_current_controller)  }}</a></li>
   @endif
   <li class="active">{{ Lang::get('Admin::' . Route::currentRouteName()) }}</li>
 </ol>
@@ -15,19 +15,19 @@
                 <a href="{{ URL::route('admin') }}">admin</a>
             </li>
             <li class="list-group-item">
-                <a href="{{ URL::action('App\\Modules\\Admin\\Controllers\\OrganizationController@index') }}">organization</a>
+                <a href="{{ URL::route('organization.index') }}">organization</a>
             </li>
             <li class="list-group-item">
-                <a href="{{ URL::action('App\\Modules\\Admin\\Controllers\\GroupController@index') }}">group</a>
+                <a href="{{ URL::route('group.index') }}">group</a>
             </li>
             <li class="list-group-item">
-                <a href="{{ URL::action('App\\Modules\\Admin\\Controllers\\UserController@index') }}">user</a>
+                <a href="{{ URL::route('user.index') }}">user</a>
             </li>
             <li class="list-group-item">
-                <a href="{{ URL::action('App\\Modules\\Admin\\Controllers\\ResourceController@index') }}">resource</a>
+                <a href="{{ URL::route('resource.index') }}">resource</a>
             </li>
             <li class="list-group-item">
-                <a href="{{ URL::action('App\\Modules\\Admin\\Controllers\\ComponentController@index') }}">component</a>
+                <a href="{{ URL::route('component.index') }}">component</a>
             </li>
         </ul>
     @endif

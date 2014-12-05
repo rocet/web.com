@@ -29,7 +29,7 @@
             };
 
             dumpScripts.s2 = function(){
-                $.each( $('select[data-src]'), function(i, n){
+                $.each( $('select[data-src][name]'), function(i, n){
                     if(n.value !== "0"){
                         $(n).trigger('change');
                     }

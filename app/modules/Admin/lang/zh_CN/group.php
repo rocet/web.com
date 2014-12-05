@@ -17,4 +17,6 @@ return array(
     'create' => 'Create',
     'index' => 'Index',
     'edit' => 'Edit',
+	'user' => require 'user.php',
+	'resource' => require 'resource.php',
 );

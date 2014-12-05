@@ -2,6 +2,14 @@
 namespace App\Modules\Data\Controllers;
 
 class InitController extends \Controller {
+	protected $initRelation = array();
+
+	public function initRelation( $initRelation = array() ) {
+		$this->initRelation = $initRelation;
+
+		return $this;
+	}
+
 	/**
 	 * 首页
 	 *
@@ -193,9 +201,18 @@ class InitController extends \Controller {
 	 * @return Response
 	 */
 	protected function model() {
-		$modelName = $this->modelName();
 
-		return new $modelName();
+		$modelName = $this->modelName();
+		if ( ! empty( $this->initRelation ) ) {
+			$relateId = end($this->initRelation);
+			$relate = ucfirst(key($this->initRelation));
+			$model = strtolower( $modelName . 's');
+			$model = $relate::find($relateId)->$model();
+		} else {
+			$model = new $modelName();
+		}
+
+		return $model;
 	}
 
 	/**
