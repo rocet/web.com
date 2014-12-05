@@ -18,4 +18,9 @@ class Group extends Tree
 	{
 		return $this->belongsToMany("Resource")->withTimestamps();
 	}
+
+    public function rules()
+    {
+        return $this->hasMany("Rule");
+    }
 }

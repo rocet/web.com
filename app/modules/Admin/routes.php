@@ -5,6 +5,8 @@ Route::group( array( 'domain' => 'admin.web.com' ), function () {
         Route::get( '/', array( 'as' => 'admin', 'use' => function(){
 	         return View::make('Admin::admin' );
         } ) );
+        Route::resource( 'rule', 'App\Modules\Admin\Controllers\RuleController' );
+        Route::resource( 'group.rule', 'App\Modules\Admin\Controllers\RuleController' );
 		Route::resource( 'group', 'App\Modules\Admin\Controllers\GroupController' );
 		Route::resource( 'organization', 'App\Modules\Admin\Controllers\OrganizationController' );
         Route::resource( 'organization.user', 'App\Modules\Admin\Controllers\UserController' );

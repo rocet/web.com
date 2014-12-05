@@ -88,13 +88,13 @@ return array(
 			'links' => array( 'model' => 'user', 'icon' => 'fa fa-group' ),
 		),
 	),
-	'_nested_resource' => array(
+	'_nested_rule' => array(
 		'grid' => array(
 			'show' => false,
-			'links' => array( 'model' => 'resource', 'icon' => 'glyphicon glyphicon-compressed' ),
+			'links' => array( 'model' => 'rule', 'icon' => 'glyphicon glyphicon-compressed' ),
 		),
 	),
-    'resource' => require 'resource.php',
+    'rule' => require 'rule.php',
     'user' => require 'user.php',
 
 );

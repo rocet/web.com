@@ -18,5 +18,5 @@ return array(
     'index' => 'Index',
     'edit' => 'Edit',
 	'user' => require 'user.php',
-	'resource' => require 'resource.php',
+	'rule' => require 'rule.php',
 );
