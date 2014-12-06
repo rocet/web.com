@@ -11,6 +11,7 @@
 
         @if( Config::get('app.debug') )
             <script type="text/javascript">
+
             var dumpScripts = {
                 init: function(){
                     for(var item in dumpScripts ){
@@ -19,9 +20,11 @@
                     }
                 }
             };
+
             window.onload = function(){
                 dumpScripts.init();
             };
+
             dumpScripts.s1 = function(){
                 $( document ).ajaxComplete(function( event,request, settings ) {
                     console.log( request.responseText );
@@ -34,7 +37,28 @@
                         $(n).trigger('change');
                     }
                 });
-            }
+            };
+
+            dumpScripts.s3 = function(){
+                var buildCheckBox = function(select, prevText, prevValue){
+                    prevText = prevText == '' ? '' : prevText + ' - ';
+                    prevValue = prevValue == '' ? '' : prevValue + ' - ';
+                    $.each($('option[value != 0]', $(select)), function(i, option){
+                        $('.ruleCheckBoxPanel').append('<label class="form-inline">'+prevText+option.text+'<input type="checkbox" value="'+prevValue+option.value+'"></label>');
+                        if($(select).next().next().is('select[multiple]')){
+                            buildCheckBox($(select).next().next(), prevText+option.text, prevValue+option.value);
+                        }
+                    });
+
+                };
+                $('select[multiple]').change(function(){
+                    var el = this;
+                    $.each( $('select[multiple]:first'), function(i, select){
+                        buildCheckBox(select, '', '');
+                    });
+                });
+            };
+
             </script>
         @endif
     </head>

@@ -13,7 +13,7 @@
     {{ Form::label($field, Lang::get('Admin::'.$_current_controller.'.'.$field)) }}
     @endif
 
-    @if( in_array( $config['form']['type'], array('select', 'treeSelect','regionSelect') ) )
+    @if( in_array( $config['form']['type'], array('select', 'treeSelect','regionSelect', 'ruleSelect') ) )
     {{ Form::$config['form']['type']($field, isset($config['form']['options']) ? $config['form']['options'] : array(), Input::get($field) ?: $item->$field ?: (isset($config['form']['value']) ? $config['form']['value'] : '') , array( 'placeholder' => Lang::get('Admin::'.$_current_controller.'.'.$field) ) + (isset($config['form']['attr']) ? $config['form']['attr'] : array()), isset($config['form']['option_model']) ? $config['form']['option_model'] : array()  ) }}
 
     @else

@@ -3,7 +3,7 @@
 abstract class Tree extends Nested
 {
 	protected $parentColumn = 'pid';
-	protected $guarded = array('lft', 'rgt', 'depth');
+	protected $guarded = array('lft', 'rgt', 'depth', 'created_at', 'updated_at', 'deleted_at');
 
 	public static function selections($field, $pid = 'root', $id = 'id')
 	{

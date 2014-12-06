@@ -14,8 +14,10 @@ return array(
         ),
         'form' => array(
             'show' => true,
-            'type' => 'text',
-            'attr' => array('class' => 'form-control')
+            'type' => 'ruleSelect',
+            'options' => array(Lang::get('Admin::common.select')),
+            'option_model' => array( 'model' => 'Resource', 'field' => 'resource_name' ),
+            'attr'         => array('multiple', 'class' => 'form-control multiple', ),
         ),
     ),
     'group_id'   => array(
