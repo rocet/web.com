@@ -1,6 +1,11 @@
 @section('footer')
 <p>Rocet 2014</p>
 <style>
+form>label{
+    clear: left;
+    display: block;
+    margin: 10px 0;
+    }
 aside .panel.panel-default {
     position: fixed;
     left: -80px;
@@ -41,11 +46,11 @@ option:hover {
     /*background: #1273ff;*/
 }
 
-.ruleCheckBoxPanel label.form-inline {
-    display: inline-block;
-    width: 30%;
-    height: 30px;
-}
+/*.ruleCheckBoxPanel label.form-inline {*/
+    /*display: inline-block;*/
+    /*width: 30%;*/
+    /*height: 30px;*/
+/*}*/
 
 ::-webkit-scrollbar {
 width:6px;
@@ -87,6 +92,68 @@ background-color:rgba(229,229,229,.4);
 ::-webkit-resizer {}
 ::-webkit-scrollbar-track {}
 ::-webkit-scrollbar-track-piece {}
+
+
+
+
+
+
+
+
+.tree li {
+	list-style-type:none;
+	margin:0;
+	padding:10px 5px 0 9px;
+	position:relative
+}
+.tree li::before, .tree li::after {
+	content:'';
+	left:-20px;
+	position:absolute;
+	right:auto
+}
+.tree li::before {
+	border-left:1px solid #999;
+	bottom:50px;
+	height:100%;
+	top:0;
+	width:1px
+}
+.tree li::after {
+	border-top:1px solid #999;
+	height:20px;
+	top:25px;
+	width:25px
+}
+.tree>li::before, .tree>li::after {
+    border: 0;
+}
+.tree li span {
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border:1px solid #999;
+	border-radius:5px;
+	display:inline-block;
+	padding:3px 8px;
+	text-decoration:none
+}
+.tree li.parent_li>span {
+	cursor:pointer
+}
+.tree>ul>li::before, .tree>ul>li::after {
+	border:0
+}
+.tree li:last-child::before {
+	height:30px
+}
+.tree li.parent_li>span:hover, .tree li.parent_li>span:hover+ul li span {
+	background:#eee;
+	border:1px solid #94a0b4;
+	color:#000
+}
+.ruleCheckBoxPanel > .btn-group{
+    padding: 15px 49px;
+}
 
 </style>
 @show

@@ -27,6 +27,9 @@
                 <a href="{{ URL::route('resource.index') }}">resource</a>
             </li>
             <li class="list-group-item">
+                <a href="{{ URL::route('rule.index') }}">rule</a>
+            </li>
+            <li class="list-group-item">
                 <a href="{{ URL::route('component.index') }}">component</a>
             </li>
         </ul>
