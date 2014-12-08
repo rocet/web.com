@@ -18,22 +18,22 @@ class CreateOrganizationUserTable extends Migration {
 				->increments('id');
 
 			$table
-                ->integer("organization_id")
+                ->integer('organization_id')
                 ->nullable()
                 ->default(null);
 
             $table
-                ->integer("user_id")
+                ->integer('user_id')
                 ->nullable()
                 ->default(null);
 
             $table
-                ->timestamp("created_at")
+                ->timestamp('created_at')
                 ->nullable()
                 ->default(null);
 
             $table
-                ->dateTime("updated_at")
+                ->dateTime('updated_at')
                 ->nullable()
                 ->default(null);
 

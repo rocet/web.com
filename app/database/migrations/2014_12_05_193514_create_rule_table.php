@@ -16,15 +16,21 @@ class CreateRuleTable extends Migration {
         Schema::create('rule', function(Blueprint $table)
         {
             $table
-                ->increments("id");
+                ->increments('id');
 
             $table
-                ->string("rule", 100)
+                ->text('rule')
                 ->nullable()
                 ->default(null);
 
             $table
-                ->integer("group_id")
+                ->integer('group_id')
+                ->nullable()
+                ->unsigned()
+                ->default(0);
+
+            $table
+                ->integer('user_id')
                 ->nullable()
                 ->unsigned()
                 ->default(0);
@@ -36,22 +42,22 @@ class CreateRuleTable extends Migration {
                 ->default(false);
 
             $table
-                ->timestamp("created_at")
+                ->timestamp('created_at')
                 ->nullable()
                 ->default(null);
 
             $table
-                ->dateTime("updated_at")
+                ->dateTime('updated_at')
                 ->nullable()
                 ->default(null);
 
             $table
-                ->dateTime("deleted_at")
+                ->dateTime('deleted_at')
                 ->nullable()
                 ->default(null);
 
             $table
-                ->unique('rule');
+                ->unique('group_id');
         });
 	}
 

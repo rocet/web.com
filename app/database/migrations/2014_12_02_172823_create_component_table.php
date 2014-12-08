@@ -42,17 +42,17 @@ class CreateComponentTable extends Migration {
 				->default(0);
 
 			$table
-				->string("component_name", 100)
+				->string('component_name', 100)
 				->nullable()
 				->default(null);
 
             $table
-                ->string("flag", 100)
+                ->string('flag', 100)
                 ->nullable()
                 ->default(null);
 
 			$table
-				->integer("user_id")
+				->integer('user_id')
 				->nullable()
 				->unsigned()
 				->default(0);
@@ -64,17 +64,17 @@ class CreateComponentTable extends Migration {
 				->default(false);
 
 			$table
-				->timestamp("created_at")
+				->timestamp('created_at')
 				->nullable()
 				->default(null);
 
 			$table
-				->dateTime("updated_at")
+				->dateTime('updated_at')
 				->nullable()
 				->default(null);
 
 			$table
-				->dateTime("deleted_at")
+				->dateTime('deleted_at')
 				->nullable()
 				->default(null);
 

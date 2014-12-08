@@ -73,7 +73,7 @@
                         e.stopPropagation();
                     });
                     e.stopPropagation();
-                    $('.tree input[type="checkbox"]').on('click', function (e) {
+                    $('.tree input[type="checkbox"]').on('click', function () {
                         if($(this).prop('checked')){
                             $.each($(this).parentsUntil('.tree'), function(i,n){
                                 if($(n).is('li.parent_li')){
@@ -82,20 +82,22 @@
                             });
                         }
                     });
-                    $('button', $('.ruleCheckBoxPanel > .btn-group')).on('click', function (e) {
+                    $('button', $('.ruleCheckBoxPanel > .btn-group')).on('click', function () {
                         var cv = {add:true, remove:false, toggle:function(i, v){return !v;}};
                         $('.tree input[type="checkbox"]').prop('checked', cv[$(this).attr('data-action')]);
                     });
                     $('button[data-action="build-rule"]').on('click', function() {
-                        var ruleArr = eval("("+$('#rule').val()+")");
+                        var rule = $('#rule');
+                        var ruleArr = $.parseJSON(rule.val());
                         $.each($('.tree input[type="checkbox"]'), function(i, n){
-                            if(n.checked && -1 === $.inArray(n.value, ruleArr)){
-                                ruleArr.push(n.value);
-                            } else if(!n.checked && -1 !== $.inArray(n.value, ruleArr)) {
-                                ruleArr.prototype.remove(n.value);
-                          }
+                            var val = parseInt(n.value);
+                            if(n.checked && -1 === $.inArray(val, ruleArr)){
+                                ruleArr.push(val);
+                            } else if(!n.checked && -1 !== $.inArray(val, ruleArr)) {
+                                ruleArr.remove(val);
+                            }
                         });
-                        $('#rule').val('['+ruleArr+']');
+                        rule.val('['+ruleArr+']');
                     });
                 });
             };

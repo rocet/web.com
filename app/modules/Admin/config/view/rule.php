@@ -38,6 +38,18 @@ return array(
             ),
         ),
     ),
+    'user_id'      => array(
+        'grid' => array(
+            'show' => true,
+            'filter' => array('model'=> 'User', 'field' => 'user_name'),
+        ),
+        'form' => array(
+            'show' => true,
+            'type' => 'hidden',
+            'value' => '1',
+            'attr' => array('class' => 'form-control')
+        ),
+    ),
     'state'        => array(
         'grid' => array(
             'show' => true,

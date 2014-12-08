@@ -9,4 +9,9 @@ class Rule extends Eloquent
     {
         return $this->belongsTo("Group");
     }
+
+    public function user()
+    {
+        return $this->belongsTo("User");
+    }
 }

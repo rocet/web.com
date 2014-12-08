@@ -15,7 +15,7 @@ class CreateGroupTable extends Migration {
 		Schema::create('group', function(Blueprint $table)
 		{
 			$table
-				->increments("id");
+				->increments('id');
 
 			$table
 				->integer('pid')
@@ -42,12 +42,12 @@ class CreateGroupTable extends Migration {
 				->default(0);
 
 			$table
-				->string("group_name", 100)
+				->string('group_name', 100)
 				->nullable()
 				->default(null);
 
 			$table
-				->integer("user_id")
+				->integer('user_id')
 				->nullable()
 				->unsigned()
 				->default(0);
@@ -59,17 +59,17 @@ class CreateGroupTable extends Migration {
 				->default(false);
 
 			$table
-				->timestamp("created_at")
+				->timestamp('created_at')
 				->nullable()
 				->default(null);
 
 			$table
-				->dateTime("updated_at")
+				->dateTime('updated_at')
 				->nullable()
 				->default(null);
 
 			$table
-				->dateTime("deleted_at")
+				->dateTime('deleted_at')
 				->nullable()
 				->default(null);
 

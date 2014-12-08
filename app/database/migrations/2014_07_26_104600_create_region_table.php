@@ -16,15 +16,15 @@ class CreateRegionTable extends Migration {
 		{
 			//
 			$table
-				->increments("id");
+				->increments('id');
 
 			$table
-				->string("region_name")
+				->string('region_name')
 				->nullable()
 				->default(null);
 
 			$table
-				->integer("pid")
+				->integer('pid')
 				->nullable()
 				->unsigned()
 				->default(null);
@@ -48,18 +48,18 @@ class CreateRegionTable extends Migration {
                 ->default(0);
 
 			$table
-				->integer("sort")
+				->integer('sort')
 				->nullable()
 				->unsigned()
 				->default(null);
 
 			$table
-				->dateTime("created_at")
+				->dateTime('created_at')
 				->nullable()
 				->default(null);
 
 			$table
-				->dateTime("updated_at")
+				->dateTime('updated_at')
 				->nullable()
 				->default(null);
 
@@ -80,7 +80,7 @@ class CreateRegionTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::dropIfExists("region");
+		Schema::dropIfExists('region');
 	}
 
 }

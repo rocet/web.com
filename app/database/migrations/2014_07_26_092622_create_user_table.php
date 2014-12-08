@@ -15,43 +15,43 @@ class CreateUserTable extends Migration {
 		Schema::create('user', function(Blueprint $table)
 		{
 			$table
-				->increments("id");
+				->increments('id');
 
 			$table
-				->string("user_name", 100)
+				->string('user_name', 100)
 				->nullable()
 				->default(null);
 
 			$table
-				->string("password")
+				->string('password')
 				->nullable()
 				->default(null);
 
 			$table
-				->string("email")
+				->string('email')
 				->nullable()
 				->default(null);
 
 			$table
-				->bigInteger("mobile")
-				->nullable()
-				->unsigned()
-				->default(null);
-
-			$table
-				->integer("group_id")
+				->bigInteger('mobile')
 				->nullable()
 				->unsigned()
 				->default(null);
 
 			$table
-				->integer("region_id")
+				->integer('group_id')
 				->nullable()
 				->unsigned()
 				->default(null);
 
 			$table
-				->integer("organization_id")
+				->integer('region_id')
+				->nullable()
+				->unsigned()
+				->default(null);
+
+			$table
+				->integer('organization_id')
 				->nullable()
 				->unsigned()
 				->default(null);
@@ -68,17 +68,17 @@ class CreateUserTable extends Migration {
 				->default(false);
 				
 			$table
-				->timestamp("created_at")
+				->timestamp('created_at')
 				->nullable()
 				->default(null);
 
 			$table
-				->dateTime("updated_at")
+				->dateTime('updated_at')
 				->nullable()
 				->default(null);
 
 			$table
-				->dateTime("deleted_at")
+				->dateTime('deleted_at')
 				->nullable()
 				->default(null);
 

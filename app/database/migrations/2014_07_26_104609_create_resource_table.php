@@ -15,7 +15,7 @@ class CreateResourceTable extends Migration {
 		Schema::create('resource', function(Blueprint $table)
 		{
 			$table
-				->increments("id");
+				->increments('id');
 
 			$table
 				->integer('pid')
@@ -42,32 +42,32 @@ class CreateResourceTable extends Migration {
 				->default(0);
 
 			$table
-				->string("resource_name", 100)
+				->string('resource_name', 100)
 				->nullable()
 				->default(null);
 
 			$table
-				->string("target")
+				->string('target')
 				->nullable()
 				->default(null);
 
 			$table
-				->string("pattern")
+				->string('pattern')
 				->nullable()
 				->default(null);
 
 			$table
-				->string("validate")
+				->string('validate')
 				->nullable()
 				->default(null); 
 
 			$table
-				->boolean("secure")
+				->boolean('secure')
 				->nullable()
 				->default(null);
 
 			$table
-				->integer("user_id")
+				->integer('user_id')
 				->nullable()
 				->unsigned()
 				->default(0);
@@ -79,17 +79,17 @@ class CreateResourceTable extends Migration {
 				->default(false);
 				
 			$table
-				->timestamp("created_at")
+				->timestamp('created_at')
 				->nullable()
 				->default(null);
 
 			$table
-				->dateTime("updated_at")
+				->dateTime('updated_at')
 				->nullable()
 				->default(null);
 				
 			$table
-				->dateTime("deleted_at")
+				->dateTime('deleted_at')
 				->nullable()
 				->default(null);
 				

@@ -19,6 +19,8 @@ class BaseController extends Controller
 		View::share('_current_controller', $this->getCurrentController());
 
 		View::share( '_current_relations', $this->getCurrentRelation() );
+
+        View::share( '_current_host', $this->getCurrentHOST() );
 	}
 
 	protected function validPass($input)
@@ -38,6 +40,9 @@ class BaseController extends Controller
 	protected function getCurrentAction(){
 		return substr(strrchr(Route::currentRouteName(), '.'), 1);
 	}
+    protected function getCurrentHost(){
+        return parse_url($_SERVER['REQUEST_URI'], PHP_URL_HOST);
+    }
 	protected function getCurrentRelation(){
 		if(method_exists($this, 'modelName')){
 			$segments = \Request::segments();

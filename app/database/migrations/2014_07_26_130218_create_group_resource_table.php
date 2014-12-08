@@ -15,25 +15,25 @@ class CreateGroupResourceTable extends Migration {
 		Schema::create('group_resource', function(Blueprint $table)
 		{
 			$table
-                ->increments("id");
+                ->increments('id');
 
             $table
-                ->integer("group_id")
+                ->integer('group_id')
                 ->nullable()
                 ->default(null);
 
             $table
-                ->integer("resource_id")
+                ->integer('resource_id')
                 ->nullable()
                 ->default(null);
 
             $table
-                ->timestamp("created_at")
+                ->timestamp('created_at')
                 ->nullable()
                 ->default(null);
 
             $table
-                ->dateTime("updated_at")
+                ->dateTime('updated_at')
                 ->nullable()
                 ->default(null);
 
