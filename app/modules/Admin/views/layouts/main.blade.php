@@ -12,6 +12,12 @@
         @if( Config::get('app.debug') )
             <script type="text/javascript">
 
+            Array.prototype.remove = function(val) {
+                var index = $.inArray(val, this);
+                if (index > -1) {
+                    this.splice(index, 1);
+                }
+            };
             var dumpScripts = {
                 init: function(){
                     for(var item in dumpScripts ){
@@ -47,7 +53,8 @@
                     var index = 0;
                     $.each($('option[value != 0]', $(select)), function(i, option){
                         if(option.selected){
-                            parent.children('ul').append('<li><span>'+option.text+pv+option.value+'</span><label class="form-inline"><input type="checkbox" value="'+pv+option.value+'"></label></li>');
+                            parent.children('ul').append('<li><span>'+option.text+'</span><label class="form-inline"><input type="checkbox" name="rule" value="'+pv+option.value+'"></label></li>');
+                            $('label>input[type="checkbox"]', parent.children('ul').children().eq(index)).prop('checked', (-1 === $.parseJSON($('#rule').val()).indexOf( parseInt( pv+option.value) ) ? false : true) );
                             index ++;
                             if($(select).next().next().is('select[multiple]')){
                                 buildCheckBox(parent.children('ul').children().eq(index-1), $(select).next().next(), option.text, pv+option.value);
@@ -55,12 +62,10 @@
                         }
                     });
                 };
-                var ruleArr = [];
                 $('select[multiple]').change(function(e){
                     var rcp = $('.ruleCheckBoxPanel');
-                    rcp.html('<div class="btn-group" role="group"><button type="button" class="btn btn-default" data-action="add">add</button><button type="button" class="btn btn-default" data-action="remove">remove</button><button type="button" class="btn btn-default" data-action="toggle">toggle</button></div>');
+                    rcp.html('<div class="btn-group" role="group"><button type="button" class="btn btn-default" data-action="add">add</button><button type="button" class="btn btn-default" data-action="remove">remove</button><button type="button" class="btn btn-default" data-action="toggle">toggle</button></div><button type="button" class="btn btn-default" data-action="build-rule">build-rule</button>');
                     buildCheckBox(rcp, $('select[multiple]:first').get(0), '', '');
-                    rcp.append('<button type="button" class="btn btn-default" data-action="build-rule">build-rule</button>');
                     $('.ruleCheckBoxPanel>ul').addClass('tree');
                     $('.tree li:has(ul)').addClass('parent_li').find(' > span');
                     $('.tree li.parent_li > span').on('click', function (e) {
@@ -82,16 +87,33 @@
                         $('.tree input[type="checkbox"]').prop('checked', cv[$(this).attr('data-action')]);
                     });
                     $('button[data-action="build-rule"]').on('click', function() {
+                        var ruleArr = eval("("+$('#rule').val()+")");
                         $.each($('.tree input[type="checkbox"]'), function(i, n){
-                            if(-1 === $.inArray(n.value, ruleArr)){
+                            if(n.checked && -1 === $.inArray(n.value, ruleArr)){
                                 ruleArr.push(n.value);
-                            }
+                            } else if(!n.checked && -1 !== $.inArray(n.value, ruleArr)) {
+                                ruleArr.prototype.remove(n.value);
+                          }
                         });
-                        console.log(ruleArr)
+                        $('#rule').val('['+ruleArr+']');
                     });
                 });
             };
 
+            dumpScripts.s4 = function(){
+                $('body').append('<div id="back-to-top"><i class="fa fa-rocket"></i></div>');
+                $(window).scroll(function(){
+                    if ($(window).scrollTop()>500){
+                        $("#back-to-top").fadeIn(1000);
+                    } else {
+                        $("#back-to-top").fadeOut(1000);
+                    }
+                });
+                $("#back-to-top").click(function(){
+                    $('body,html').animate({scrollTop:0},1000);
+                    return false;
+                });
+            }
             </script>
         @endif
     </head>

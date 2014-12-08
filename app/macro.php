@@ -91,7 +91,7 @@ Form::macro('ruleSelect', function($name, $data = array(), $value = '', $attr = 
 		}
 	}
 	$ret .= '<div class="ruleCheckBoxPanel"></div>';
-	$ret .= Form::hidden($name, $value, $attr);
+	$ret .= Form::hidden($name, $value ?: '[]', $attr);
 	return $ret;
 });
 

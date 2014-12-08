@@ -155,5 +155,20 @@ background-color:rgba(229,229,229,.4);
     padding: 15px 49px;
 }
 
+
+
+#back-to-top{
+    position: fixed;
+    right: 0;
+    top: 80%;
+    display: block;
+}
+#back-to-top i{
+    font-size: 30px;
+    transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+}
 </style>
 @show
