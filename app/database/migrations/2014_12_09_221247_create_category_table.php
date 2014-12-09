@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateArticleTable extends Migration {
+class CreateCategoryTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,45 +12,43 @@ class CreateArticleTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('article', function(Blueprint $table)
-		{
-			//
+		//
+        Schema::create('category', function(Blueprint $table)
+        {
             $table
                 ->increments("id");
 
             $table
-                ->string("title", 100)
+                ->integer('pid')
                 ->nullable()
+                ->unsigned()
                 ->default(null);
 
             $table
-                ->text("content")
-                ->nullable()
-                ->default(null);
-
-            $table
-                ->string("keyword", 100)
-                ->nullable()
-                ->default(null);
-
-            $table
-                ->string("description")
-                ->nullable()
-                ->default(null);
-
-            $table
-                ->string("image", 100)
-                ->nullable()
-                ->default(null);
-
-            $table
-                ->integer('user_id')
+                ->integer('depth')
                 ->nullable()
                 ->unsigned()
                 ->default(0);
 
             $table
-                ->integer('category_id')
+                ->integer('lft')
+                ->nullable()
+                ->unsigned()
+                ->default(0);
+
+            $table
+                ->integer('rgt')
+                ->nullable()
+                ->unsigned()
+                ->default(0);
+
+            $table
+                ->string("category_name", 100)
+                ->nullable()
+                ->default(null);
+
+            $table
+                ->integer('component_id')
                 ->nullable()
                 ->unsigned()
                 ->default(0);
@@ -91,7 +89,8 @@ class CreateArticleTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('article');
+		//
+        Schema::drop('category');
 	}
 
 }

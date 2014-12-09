@@ -1,4 +1,4 @@
 @extends('Admin::layouts.main')
 @section('main')
-    admin article index
+admin category index
 @stop

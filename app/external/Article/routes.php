@@ -13,5 +13,6 @@ Route::group(array('domain' => 'www.web.com'), function () {
 Route::group( array( 'domain' => 'admin.web.com' ), function () {
 	Route::group( array( "before" => "auth" ), function () {
 		Route::resource( 'article', 'App\External\Article\Controllers\Admin\ArticleController' );
+        Route::resource( 'category', 'App\External\Article\Controllers\Admin\CategoryController' );
 	} );
 } );

@@ -9,14 +9,11 @@ class DatabaseSeeder extends Seeder {
 	 */
 	public function run() {
 		Eloquent::unguard();
-
 		$this->call( 'UserTableSeeder' );
-		// $this->call( 'RegionTableSeeder' );
 		$this->call( 'GroupTableSeeder' );
 		$this->call( 'ResourceTableSeeder' );
         $this->call( 'ComponentTableSeeder' );
-        // $this->call( 'GroupUserTableSeeder' );
-		// $this->call('GroupResourceTableSeeder');
+        // $this->call( 'RegionTableSeeder' );
 	}
 
 }

@@ -4,4 +4,10 @@
  * User: Administrator
  * Date: 2014/12/9
  * Time: 16:55
- */ 
+ */
+
+class Article extends Eloquent
+{
+    protected $table = "article";
+    protected $fillable = array();
+}
