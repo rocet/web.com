@@ -161,7 +161,7 @@ background-color:rgba(229,229,229,.4);
     position: fixed;
     right: 0;
     top: 80%;
-    display: block;
+    display: none;
 }
 #back-to-top i{
     font-size: 30px;

@@ -6,14 +6,14 @@ class RuleTableSeeder extends DatabaseSeeder
 	{
 		$rules = array(
 			array(
-				"rule" => "[]",
-				"group_id" => 1,
-                "user_id" => 1
+				'rule' => '[]',
+				'group_id' => 1,
+                'user_id' => 1
 			),
 			array(
-				"rule" => "[]",
-				"group_id" => 2,
-                "user_id" => 1
+				'rule' => '[]',
+				'group_id' => 2,
+                'user_id' => 1
 			)
 		);
 

@@ -16,6 +16,7 @@ Route::group(array('domain' => 'www.web.com'), function () {
 		array('path' => '/doc', 'alias' => 'doc', 'action' => function () {
 			return View::make('doc');
 		}),
+		array('path' => '/selections', 'alias' => 'selections', 'action' => 'FrontendController@selections'),
 		array('path' => '/message', 'alias' => 'message', 'action' => function () {
 			return View::make('hello');
 		})
@@ -24,7 +25,6 @@ Route::group(array('domain' => 'www.web.com'), function () {
 		$method = isset($agree['method']) ? $agree['method'] : 'get';
 		Route::$method($agree['path'], array('as' => $agree['alias'], 'uses' => $agree['action']));
 	}
-	Route::get('/selections', array('as' => 'selections', 'uses' => 'FrontendController@selections'));
 	Route::group(array("before" => "guest"), function () {
 		$guest_agrees = array(
 			array('path' => '/login', 'alias' => 'login', 'action' => function () {
