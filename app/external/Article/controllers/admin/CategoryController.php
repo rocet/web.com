@@ -8,9 +8,6 @@
 
 namespace App\External\Article\Controllers\Admin;
 
-class CategoryController extends \BaseController {
+class CategoryController extends InitController {
 
-	public function index(){
-		return \View::make('Article::admin.category');
-	}
 }

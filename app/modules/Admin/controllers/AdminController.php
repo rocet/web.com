@@ -2,9 +2,17 @@
 namespace App\Modules\Admin\Controllers;
 
 class AdminController extends \BaseController {
-
+	
+	protected function getCurrentComponent(){
+		return 'Admin';
+	}
+	
 	protected function modelName() {
 		return substr( strrchr( get_class( $this ), '\\' ), 1, - 10 );
+	}
+
+	protected function tpl(){
+		return $this->getCurrentComponent() . '::' . strtolower( $this->modelName() );
 	}
 
 	protected function error( array $error = array() ) {
@@ -17,7 +25,7 @@ class AdminController extends \BaseController {
 		return class_exists( $controller ) ? \App::make( $controller, $this->getCurrentRelation() )->initRelation( $this->getCurrentRelation() ) : false;
 	}
 
-	protected function realId( $id, $args = array() ){
+	protected function realId( $id, $args = array() ) {
 		$_currentRelation = $this->getCurrentRelation();
 
 		return !empty( $_currentRelation ) ? end($args) : $id;
@@ -29,8 +37,8 @@ class AdminController extends \BaseController {
 	 */
 	public function index() {
 		//
-		return \View::make( 'Admin::' . strtolower( $this->modelName() ) )->with( 'item', $this->dataApi()->index() );
-		// return View::make('Admin::'. strtolower( $this->modelName()) )->with('item', $this->dataApi()->gridData( Config::get('Admin::view/'.$this->getCurrentController()) ));
+		return \View::make( $this->tpl() )->with( 'item', $this->dataApi()->index() );
+		// return View::make( $this->tpl() )->with('item', $this->dataApi()->gridData( Config::get('Admin::view/'.$this->getCurrentController()) ));
 	}
 
 
@@ -41,7 +49,7 @@ class AdminController extends \BaseController {
 	 */
 	public function create() {
 		//
-		return \View::make( 'Admin::' . strtolower( $this->modelName() ) );
+		return \View::make( $this->tpl() );
 	}
 
 
@@ -59,7 +67,7 @@ class AdminController extends \BaseController {
 			$process = new \Illuminate\Support\MessageBag( array( 'sys_error' => 'error' ) );
 		}
 
-		return \View::make( 'Admin::' . strtolower( $this->modelName() ) )->withInput( \Input::except( '_token' ) )->withErrors( $process );
+		return \View::make( $this->tpl() )->withInput( \Input::except( '_token' ) )->withErrors( $process );
 	}
 
 
@@ -73,7 +81,7 @@ class AdminController extends \BaseController {
 	public function show( $id ) {
 		//
 		$id = $this->realId($id, func_get_args());
-		return \View::make( 'Admin::' . strtolower( $this->modelName() ) )->with( 'item', $this->dataApi()->show( $id ) )->with( 'id', $id );
+		return \View::make( $this->tpl() )->with( 'item', $this->dataApi()->show( $id ) )->with( 'id', $id );
 	}
 
 
@@ -87,7 +95,7 @@ class AdminController extends \BaseController {
 	public function edit( $id ) {
 		//
 		$id = $this->realId($id, func_get_args());
-		return \View::make( 'Admin::' . strtolower( $this->modelName() ) )->with( 'item', $this->dataApi()->edit( $id ) )->with( 'id', $id );
+		return \View::make( $this->tpl() )->with( 'item', $this->dataApi()->edit( $id ) )->with( 'id', $id );
 	}
 
 
@@ -108,7 +116,7 @@ class AdminController extends \BaseController {
 			$process = new \Illuminate\Support\MessageBag( array( 'sys_error' => 'error' ) );
 		}
 
-		return \View::make( 'Admin::' . strtolower( $this->modelName() ) )->with( 'item', $this->dataApi()->edit( $id ) )->with( 'id', $id )->withInput( \Input::except( '_token', '_method' ) )->withErrors( $process );
+		return \View::make( $this->tpl() )->with( 'item', $this->dataApi()->edit( $id ) )->with( 'id', $id )->withInput( \Input::except( '_token', '_method' ) )->withErrors( $process );
 	}
 
 

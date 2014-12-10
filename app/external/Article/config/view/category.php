@@ -2,12 +2,12 @@
 /**
  * Created by PhpStorm.
  * User: Administrator
- * Date: 2014/12/9
- * Time: 15:20
+ * Date: 2014/11/22
+ * Time: 16:24
  */
 
-return array(
 
+return array(
 	'id'           => array(
 		'grid' => array(
 			'show' => true,
@@ -16,31 +16,34 @@ return array(
 			'show' => false,
 		),
 	),
-	'pid'          => array(
+	'component_id'      => array(
 		'grid' => array(
 			'show' => true,
-			'empty' => '',
-			'filter' => array('model'=> 'Menu', 'relate' => 'parent', 'field' => 'menu_name'),
+			'filter' => array('model'=> 'Component', 'relate' => 'component', 'field' => 'component_name'),
 		),
 		'form' => array(
 			'show' => true,
 			'type' => 'treeSelect',
 			'options' => array(Lang::get('Admin::common.select')),
-			'option_model' => array('model' => 'Menu', 'field' => 'menu_name'),
-			'attr' => array('class' => 'form-control', 'data-src' => URL::route('selections', array('model' => 'menu', 'field' => 'menu_name'))),
+			'option_model' => array('model' => 'Component', 'field' => 'component_name'),
+			'attr' => array('class' => 'form-control', 'data-src' => URL::route('selections', array('model' => 'component', 'field' => 'component_name'))),
 		),
 	),
-	'menu_name' => array(
+	'pid'          => array(
 		'grid' => array(
 			'show' => true,
+			'empty' => '',
+			'filter' => array('model'=> 'Category', 'relate' => 'parent', 'field' => 'category_name'),
 		),
 		'form' => array(
 			'show' => true,
-			'type' => 'text',
-			'attr' => array('class' => 'form-control')
+			'type' => 'treeSelect',
+			'options' => array(Lang::get('Admin::common.select')),
+			'option_model' => array('model' => 'Category', 'field' => 'category_name'),
+			'attr' => array('class' => 'form-control', 'data-src' => URL::route('selections', array('model' => 'category', 'field' => 'category_name'))),
 		),
 	),
-	'link' => array(
+	'category_name' => array(
 		'grid' => array(
 			'show' => true,
 		),
@@ -79,5 +82,6 @@ return array(
 		'form' => array(
 			'show' => false,
 		),
-	),
+	)
+
 );

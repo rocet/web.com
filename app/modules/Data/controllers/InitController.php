@@ -64,9 +64,29 @@ class InitController extends \Controller
      */
     public function paginate()
     {
-        // return call_user_func( "\\" . $this->modelName() . "::paginate", $this->perPageNum() );
-        return $this->model()->orderBy($this->sortColumn(), $this->sortOrder())->paginate($this->perPageNum());
+	    $model = $this->model()->orderBy($this->sortColumn(), $this->sortOrder());
+	    foreach( $this->fieldFilter() as $filter ){
+		    $model = $model->with($filter);
+	    }
+        return $model->paginate($this->perPageNum());
     }
+
+	/**
+	 * 关联字段
+	 *
+	 * @return Response
+	 */
+	protected function fieldFilter()
+	{
+		$allFieldFilter = array();
+		$fields = \Config::get('Admin::view.'. strtolower( $this->modelName() ) );
+		foreach($fields as $field){
+			if( isset($field['grid']['filter']) ){
+				$allFieldFilter[] = $field['grid']['filter']['relate'];
+			}
+		}
+		return $allFieldFilter;
+	}
 
     /**
      * 分页条数

@@ -100,16 +100,15 @@ HTML::macro( 'tree', function () {
 } );
 
 HTML::macro( 'filter', function ( $field, $model, $conf ) {
-	$relModel = strtolower( $conf['model'] );
-	if ( new $relModel instanceof Tree ) {
+	if ( new $conf['model'] instanceof Tree ) {
 		$ancestorFunc = $field == call_user_func( array(
-			new $relModel,
+			new $conf['model'],
 			'getParentColumn'
 		) ) ? 'getAncestors' : 'getAncestorsAndSelf';
-
+		$relModel = strtolower( $conf['model'] );
 		return implode( '-', get_class( $model ) == $conf['model'] ? $model->$ancestorFunc()->lists( $conf['field'] ) : $model->$relModel->$ancestorFunc()->lists( $conf['field'] ) );
 	} else {
-		return get_class( $model ) == $conf['model'] ? $model->parent()->pluck( $conf['field'] ) : $model->$relModel->$conf['field'];
+		return $model->$conf['relate']->$conf['field'];
 	}
 
 

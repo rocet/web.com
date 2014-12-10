@@ -1,4 +1,4 @@
 @extends('Admin::layouts.main')
 @section('main')
-    admin article index
+    @include('Admin::layouts.restful')
 @stop

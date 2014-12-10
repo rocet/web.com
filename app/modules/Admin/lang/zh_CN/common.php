@@ -7,4 +7,12 @@
  */
 return array(
 	'select' => 'Select',
+	'admin' => 'Admin',
+	'home' => 'Home',
+	'component' => 'Component',
+	'group' => 'Group',
+	'organization' => 'Organization',
+	'resource' => 'Resource',
+	'rule' => 'Rule',
+	'user' => 'User',
 );

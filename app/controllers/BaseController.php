@@ -14,9 +14,11 @@ class BaseController extends Controller
 			$this->layout = View::make($this->layout);
 		}
 
-		View::share('_current_action', $this->getCurrentAction());
+		View::share('_current_component', $this->getCurrentComponent());
 
 		View::share('_current_controller', $this->getCurrentController());
+
+		View::share('_current_action', $this->getCurrentAction());
 
 		View::share( '_current_relations', $this->getCurrentRelation() );
 
@@ -52,5 +54,9 @@ class BaseController extends Controller
 			return array_combine($_relationRoute, array_diff($_relationPaths, array_intersect($_relationRoute, $_relationPaths)) );
 		}
 		return array();
+	}
+
+	protected function getCurrentComponent(){
+		return '';
 	}
 }

@@ -42,7 +42,7 @@ return array(
 	'group_id'   => array(
 		'grid' => array(
 			'show' => true,
-			'filter' => array('model'=> 'Group', 'field' => 'group_name'),
+			'filter' => array('model'=> 'Group', 'relate' => 'group', 'field' => 'group_name'),
 		),
 		'form' => array(
 			'show'         => true,
@@ -60,7 +60,7 @@ return array(
 	'region_id'  => array(
 		'grid' => array(
 			'show' => true,
-			'filter' => array('model'=> 'Region', 'field' => 'region_name'),
+			'filter' => array('model'=> 'Region', 'relate' => 'region', 'field' => 'region_name'),
 		),
 		'form' => array(
 			'show'         => true,
@@ -78,7 +78,7 @@ return array(
 	'organization_id' => array(
 		'grid' => array(
 			'show' => true,
-			'filter' => array('model'=> 'Organization', 'field' => 'organization_name'),
+			'filter' => array('model'=> 'Organization', 'relate' => 'organization', 'field' => 'organization_name'),
 		),
 		'form' => array(
 			'show'         => true,

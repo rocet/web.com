@@ -1,5 +1,5 @@
 <div class="panel-heading">
-    admin {{ Lang::get('Admin::'.$_current_controller.'.index')  }}
+    admin {{ Lang::get($_current_component . '::'.$_current_controller.'.index')  }}
 </div>
 
 @if( $item->isEmpty() )
@@ -7,18 +7,18 @@
     <div class="alert alert-warning">NO DATA <a href="{{ URL::route($_current_controller.'.create', $_current_relations) }}"><span class="glyphicon glyphicon-plus"></span></a> </div>
 </div>
 @else
-    @if( Config::get('Admin::view/'.$_current_controller) )
+    @if( Config::get('Admin::view.'.$_current_controller) )
     <div class="panel-body">
-    @if( Config::get('Admin::view/'.$_current_controller.'.pid') )
+    @if( Config::get('Admin::view.'.$_current_controller.'.pid') )
         {{ Form::open( array('class' => 'form-inline', 'route' => Route::currentRouteName()) ) }}
-        {{ Form::treeSelect('pid', Config::get('Admin::view/'.$_current_controller.'.pid.form.options')+array(), Input::get('pid'), Config::get('Admin::view/'.$_current_controller.'.pid.form.attr'), Config::get('Admin::view/'.$_current_controller.'.pid.form.option_model')) }}
+        {{ Form::treeSelect('pid', Config::get('Admin::view.'.$_current_controller.'.pid.form.options')+array(), Input::get('pid'), Config::get('Admin::view.'.$_current_controller.'.pid.form.attr'), Config::get('Admin::view.'.$_current_controller.'.pid.form.option_model')) }}
         {{ Form::close() }}
     @endif
     </div>
     <div class="overflow-x-auto">
     <table class="table table-striped table-hover">
         <tr>
-            @foreach( Config::get('Admin::view/'.$_current_controller) as $field => $config )
+            @foreach( Config::get($_current_component . '::view.'.$_current_controller) as $field => $config )
             @if( isset( $config['grid']['show'] ) && $config['grid']['show'] )
             <th>{{ Lang::get('Admin::'.$_current_controller.'.'.$field) }}</th>
             @endif
@@ -28,7 +28,7 @@
         @foreach( $item as $row )
         <tr>
 
-            @foreach( Config::get('Admin::view/'.$_current_controller) as $field =>  $config )
+            @foreach( Config::get('Admin::view.'.$_current_controller) as $field =>  $config )
             @if( isset( $config['grid']['show'] ) && $config['grid']['show'] )
             <td>
                 @if( isset($config['grid']['filter']) )
@@ -57,7 +57,7 @@
                     {{--{{ Form::button('<span class="glyphicon glyphicon-trash"></span>', array( 'type' => 'submit', 'class' => 'btn btn-default btn-xs')) }}--}}
                 {{--{{ Form::close() }}--}}
 
-                @foreach( Config::get('Admin::view/'.$_current_controller) as $field =>  $config )
+                @foreach( Config::get('Admin::view.'.$_current_controller) as $field =>  $config )
                 @if( isset( $config['grid']['links'] ) )
                 <a class="btn btn-default btn-xs" href="{{ URL::route($_current_controller.'.'.$config['grid']['links']['model'].'.index', $_current_relations + array('id'=>$row->id))  }}">
                     <span class="{{ $config['grid']['links']['icon'] }}"></span>

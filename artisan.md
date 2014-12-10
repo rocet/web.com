@@ -1,0 +1,1 @@
+php artisan migrate --path="path/to/database/migrations"

@@ -13,4 +13,5 @@ class Component extends Tree
 	{
 		return $this->belongsToMany("User")->withTimestamps();
 	}
+
 }

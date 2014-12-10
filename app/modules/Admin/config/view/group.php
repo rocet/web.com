@@ -20,7 +20,7 @@ return array(
 		'grid' => array(
 			'show' => true,
             'empty' => '',
-			'filter' => array('model'=> 'Group', 'field' => 'group_name'),
+			'filter' => array('model'=> 'Group', 'relate' => 'parent', 'field' => 'group_name'),
 		),
 		'form' => array(
 			'show' => true,
@@ -65,7 +65,7 @@ return array(
 	'user_id'      => array(
 		'grid' => array(
 			'show' => true,
-			'filter' => array('model'=> 'User', 'field' => 'user_name'),
+			'filter' => array('model'=> 'User', 'relate' => 'user', 'field' => 'user_name'),
 		),
 		'form' => array(
 			'show' => true,
