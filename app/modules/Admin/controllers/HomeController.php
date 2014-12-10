@@ -1,11 +1,12 @@
 <?php
 namespace App\Modules\Admin\Controllers;
-class HomesController extends AdminController
+class HomeController extends AdminController
 {
-	public function showWelcome()
+	public function index()
 	{
-		dd(Config::get('Admin::view'), /*\User::all()->toArray(),*/
-			$this->dataApi('UserGroup')->index());
-		return View::make('Admin::admin');
+        return \View::make('Admin::admin' )->with(array(
+            '_current_component' => 'Admin',
+            '_current_controller' => 'admin'
+        ));
 	}
 }

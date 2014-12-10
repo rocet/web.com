@@ -115,6 +115,16 @@
                     $('body,html').animate({scrollTop:0},1000);
                     return false;
                 });
+            };
+
+            dumpScripts.s5 = function(){
+                $('aside .panel.panel-default div.panel-heading').on('click', function(){
+                    $('aside .panel.panel-default ul.list-group').not($(this).next('ul')).height(0);
+                    $(this).next('ul').height(function(n,c){
+                        return c == '0' ? 'auto' : '0';
+                    });
+                });
+
             }
             </script>
         @endif

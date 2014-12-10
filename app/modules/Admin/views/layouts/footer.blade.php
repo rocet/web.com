@@ -9,7 +9,14 @@ form>label{
 aside .panel.panel-default {
     position: fixed;
     left: -80px;
-    top: 30%;
+    top: 10%;
+}
+aside .panel.panel-default ul.list-group {
+    height: 0;
+    overflow: hidden;
+}
+aside .panel.panel-default ul.list-group.current {
+    height: auto;
 }
 aside .panel.panel-default:hover {
     left: 0px;
@@ -34,14 +41,14 @@ p{
     /*overflow-y: hidden;*/
     margin: 0;
 }
-option {
+.form-inline option {
     /*color: brown;*/
     padding: 8px;
     margin: 2px;
     /*border: 1px solid rgb(18, 2, 2);*/
     /*background: goldenrod;*/
 }
-option:hover {
+.form-inline option:hover {
     /*color: #ffffff;*/
     /*background: #1273ff;*/
 }

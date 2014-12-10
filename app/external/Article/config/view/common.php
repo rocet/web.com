@@ -7,8 +7,9 @@
  */
 return array(
 	'menus' => array(
-		'articleManager' => array(
-
+		'article' => array(
+            array('flag' => 'category',  'title' => Lang::get( 'Article::common.category' ), 'link' => URL::route( 'category.index' ) ),
+            array('flag' => 'article',  'title' => Lang::get( 'Article::common.article' ), 'link' => URL::route( 'article.index' ) ),
 		),
 	),
 );

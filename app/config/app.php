@@ -131,6 +131,7 @@ return array(
 		'App\Modules\Data\DataServiceProvider',
 
 		'App\External\Article\ArticleServiceProvider',
+        'App\External\Media\MediaServiceProvider',
 		'App\External\Member\MemberServiceProvider',
 		'App\External\Shop\ShopServiceProvider',
 	),

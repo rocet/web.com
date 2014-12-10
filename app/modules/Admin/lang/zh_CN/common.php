@@ -15,4 +15,5 @@ return array(
 	'resource' => 'Resource',
 	'rule' => 'Rule',
 	'user' => 'User',
+    'menu' => 'Menu',
 );
