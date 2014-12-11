@@ -58,7 +58,7 @@ return array(
 		),
 		'form' => array(
 			'show' => true,
-			'type' => 'text',
+			'type' => 'editor',
 			'attr' => array('class' => 'form-control')
 		),
 	),

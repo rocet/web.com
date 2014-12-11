@@ -95,6 +95,10 @@ Form::macro('ruleSelect', function($name, $data = array(), $value = '', $attr = 
 	return $ret;
 });
 
+Form::macro('editor', function($name = '', $value = '', $attr = array()){
+	return \App::make('App\External\Media\Controllers\MediaController')->show($name, $value, $attr);
+});
+
 HTML::macro( 'tree', function () {
 	return '<div class="tree" data-init=""></div>';
 } );

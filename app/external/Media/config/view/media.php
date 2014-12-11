@@ -36,6 +36,7 @@ return array(
         'form' => array(
             'show' => true,
             'type' => 'text',
+            'attr' => array('class' => 'form-control')
         ),
     ),
     'user_id'      => array(

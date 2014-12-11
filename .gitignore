@@ -2,6 +2,8 @@
 /app/config/database.php
 /vendor
 /public/assets/bower
+/public/upload
+/public/ueditor
 /node_modules
 composer.phar
 composer.lock
