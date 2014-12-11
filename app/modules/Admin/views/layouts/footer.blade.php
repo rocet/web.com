@@ -10,6 +10,7 @@ aside .panel.panel-default {
     position: fixed;
     left: -80px;
     top: 10%;
+    z-index: 99999;
 }
 aside .panel.panel-default ul.list-group {
     height: 0;

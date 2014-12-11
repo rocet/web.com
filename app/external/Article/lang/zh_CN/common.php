@@ -7,5 +7,6 @@
  */
 return array(
 	'article' => 'Article',
-	'category' => 'ArticleCategory'
+	'category' => 'ArticleCategory',
+    'media' => 'ArticleMedia'
 );

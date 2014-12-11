@@ -287,4 +287,23 @@ class InitController extends \Controller
             call_user_func_array(array($this, $req['method']), array_except($req, 'method'));
         }
     }
+
+    /**
+     * 验证字段
+     *
+     * @return Response
+     */
+    public function validate( \Closure $callback, $input, $id = 0 ) {
+        $valid = array(
+
+        );
+        $valid = \Validator::make( $input, array_intersect_key( $valid, $input ), array(), array(
+
+        ) );
+        if ( $valid->passes() ) {
+            return $callback();
+        }
+
+        return $valid;
+    }
 }

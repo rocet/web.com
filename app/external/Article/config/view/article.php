@@ -78,7 +78,7 @@ return array(
 		),
 		'form' => array(
 			'show' => true,
-			'type' => 'text',
+			'type' => 'textArea',
 			'attr' => array('class' => 'form-control')
 		),
 	),

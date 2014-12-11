@@ -9,45 +9,46 @@
 	}
 </style>
 <div id="ue-editor">
-	<script id="editor" type="text/plain" name="<?php echo $name; ?>" style="width:100%;height:500px;">
-		<?php echo $content; ?>
+	<script id="editor" type="text/plain" name="{{ $name }}" style="width:100%;height:500px;">
+		{{ $content }}
 	</script>
 </div>
-<div id="ue-editor-btns" class="btn-toolbar" role="toolbar">
-<div id="btns" class="btn-group btn-group-sm" role="group">
-		<div class="btn btn-default" onclick="getAllHtml()">获得整个html的内容</div>
-		<div class="btn btn-default" onclick="getContent()">获得内容</div>
-		<div class="btn btn-default" onclick="setContent()">写入内容</div>
-		<div class="btn btn-default" onclick="setContent(true)">追加内容</div>
-		<div class="btn btn-default" onclick="getContentTxt()">获得纯文本</div>
-		<div class="btn btn-default" onclick="getPlainTxt()">获得带格式的纯文本</div>
-		<div class="btn btn-default" onclick="hasContent()">判断是否有内容</div>
-		<div class="btn btn-default" onclick="setFocus()">使编辑器获得焦点</div>
-		<div class="btn btn-default" onmousedown="isFocus(event)">编辑器是否获得焦点</div>
-		<div class="btn btn-default" onmousedown="setblur(event)" >编辑器失去焦点</div>
-</div>
-<div class="btn-group btn-group-sm" role="group">
-	<div class="btn btn-default" onclick="getText()">获得当前选中的文本</div>
-	<div class="btn btn-default" onclick="insertHtml()">插入给定的内容</div>
-	<div class="btn btn-default" id="enable" onclick="setEnabled()">可以编辑</div>
-	<div class="btn btn-default" onclick="setDisabled()">不可编辑</div>
-	<div class="btn btn-default" onclick=" UE.getEditor('editor').setHide()">隐藏编辑器</div>
-	<div class="btn btn-default" onclick=" UE.getEditor('editor').setShow()">显示编辑器</div>
-</div>
-<div class="btn-group btn-group-sm" role="group">
-	<div class="btn btn-default" onclick="createEditor()"> 创建编辑器</div>
-	<div class="btn btn-default" onclick="deleteEditor()"> 删除编辑器</div>
-</div>
-</div>
+
+{{--<div id="ue-editor-btns" class="btn-toolbar" role="toolbar">--}}
+{{--<div id="btns" class="btn-group btn-group-sm" role="group">--}}
+		{{--<div class="btn btn-default" onclick="getAllHtml()">获得整个html的内容</div>--}}
+		{{--<div class="btn btn-default" onclick="getContent()">获得内容</div>--}}
+		{{--<div class="btn btn-default" onclick="setContent()">写入内容</div>--}}
+		{{--<div class="btn btn-default" onclick="setContent(true)">追加内容</div>--}}
+		{{--<div class="btn btn-default" onclick="getContentTxt()">获得纯文本</div>--}}
+		{{--<div class="btn btn-default" onclick="getPlainTxt()">获得带格式的纯文本</div>--}}
+		{{--<div class="btn btn-default" onclick="hasContent()">判断是否有内容</div>--}}
+		{{--<div class="btn btn-default" onclick="setFocus()">使编辑器获得焦点</div>--}}
+		{{--<div class="btn btn-default" onmousedown="isFocus(event)">编辑器是否获得焦点</div>--}}
+		{{--<div class="btn btn-default" onmousedown="setblur(event)" >编辑器失去焦点</div>--}}
+{{--</div>--}}
+{{--<div class="btn-group btn-group-sm" role="group">--}}
+	{{--<div class="btn btn-default" onclick="getText()">获得当前选中的文本</div>--}}
+	{{--<div class="btn btn-default" onclick="insertHtml()">插入给定的内容</div>--}}
+	{{--<div class="btn btn-default" id="enable" onclick="setEnabled()">可以编辑</div>--}}
+	{{--<div class="btn btn-default" onclick="setDisabled()">不可编辑</div>--}}
+	{{--<div class="btn btn-default" onclick=" UE.getEditor('editor').setHide()">隐藏编辑器</div>--}}
+	{{--<div class="btn btn-default" onclick=" UE.getEditor('editor').setShow()">显示编辑器</div>--}}
+{{--</div>--}}
+{{--<div class="btn-group btn-group-sm" role="group">--}}
+	{{--<div class="btn btn-default" onclick="createEditor()"> 创建编辑器</div>--}}
+	{{--<div class="btn btn-default" onclick="deleteEditor()"> 删除编辑器</div>--}}
+{{--</div>--}}
+{{--</div>--}}
 <script type="text/javascript">
 
-	dumpScripts.s5 = function() {
+	dumpScripts.s6 = function() {
 		//实例化编辑器
 		//建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
 		var ue = UE.getEditor('editor');
 		ue.ready(function() {
 			ue.execCommand('serverparam', {
-				'item_id': '<?php echo \Input::get('id') ? \Input::get('id') : '0'; ?>'
+				'item_id': '{{ \Input::get('id') ? \Input::get('id') : '0' }}'
 			});
 		});
 	};

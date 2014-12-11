@@ -9,9 +9,9 @@ class Component extends Tree
 		return $this->belongsTo("User");
 	}
 
-	public function users()
-	{
-		return $this->belongsToMany("User")->withTimestamps();
-	}
+    public function categorys()
+    {
+        return $this->hasMany("Category");
+    }
 
 }

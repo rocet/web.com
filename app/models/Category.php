@@ -9,4 +9,9 @@
 class Category extends Tree
 {
 	protected $table = "category";
+
+    public function component()
+    {
+        return $this->belongsTo("Component");
+    }
 }

@@ -18,9 +18,9 @@
     <div class="overflow-x-auto">
     <table class="table table-striped table-hover">
         <tr>
-            @foreach( Config::get($_current_component . '::view.'.$_current_controller) as $field => $config )
+            @foreach( Config::get('Admin::view.'.$_current_controller) as $field => $config )
             @if( isset( $config['grid']['show'] ) && $config['grid']['show'] )
-            <th>{{ Lang::get('Admin::'.$_current_controller.'.'.$field) }}</th>
+            <th>{{ Lang::get($_current_component . '::'.$_current_controller.'.'.$field) }}</th>
             @endif
             @endforeach
             <th><a href="{{ URL::route($_current_controller.'.create', $_current_relations ) }}"><span class="glyphicon glyphicon-plus"></span></a></th>
