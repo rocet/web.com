@@ -110,6 +110,6 @@ return array(
         'form' => array(
             'show' => false,
         ),
-    )
+    ),
 
 );

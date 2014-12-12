@@ -14,4 +14,9 @@ class Component extends Tree
         return $this->hasMany("Category");
     }
 
+	public function medias()
+	{
+		return $this->hasMany("Media");
+	}
+
 }

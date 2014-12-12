@@ -9,7 +9,7 @@
 @else
     @if( Config::get('Admin::view.'.$_current_controller) )
     <div class="panel-body">
-    @if( Config::get('Admin::view.'.$_current_controller.'.pid') )
+    @if( Config::get('Admin::view.'.$_current_controller.'.pid') && $item->getTotal() > 20 )
         {{ Form::open( array('class' => 'form-inline', 'route' => Route::currentRouteName()) ) }}
         {{ Form::treeSelect('pid', Config::get('Admin::view.'.$_current_controller.'.pid.form.options')+array(), Input::get('pid'), Config::get('Admin::view.'.$_current_controller.'.pid.form.attr'), Config::get('Admin::view.'.$_current_controller.'.pid.form.option_model')) }}
         {{ Form::close() }}
@@ -20,7 +20,11 @@
         <tr>
             @foreach( Config::get('Admin::view.'.$_current_controller) as $field => $config )
             @if( isset( $config['grid']['show'] ) && $config['grid']['show'] )
-            <th>{{ Lang::get($_current_component . '::'.$_current_controller.'.'.$field) }}</th>
+
+                @if(isset($config['form']['option_model']) && isset($_current_relations[ strtolower($config['form']['option_model']['model']) ]))
+                @else
+                <th>{{ Lang::get($_current_component . '::'.$_current_controller.'.'.$field) }}</th>
+                @endif
             @endif
             @endforeach
             <th><a href="{{ URL::route($_current_controller.'.create', $_current_relations ) }}"><span class="glyphicon glyphicon-plus"></span></a></th>
@@ -30,17 +34,20 @@
 
             @foreach( Config::get('Admin::view.'.$_current_controller) as $field =>  $config )
             @if( isset( $config['grid']['show'] ) && $config['grid']['show'] )
-            <td>
-                @if( isset($config['grid']['filter']) )
-                @if( $row->$field )
-                {{ HTML::filter($field, $row, $config['grid']['filter']) }}
+                @if(isset($config['form']['option_model']) && isset($_current_relations[ strtolower($config['form']['option_model']['model']) ]))
                 @else
-                {{ $config['grid']['empty'] or 'null' }}
+                <td>
+                    @if( isset($config['grid']['filter']) )
+                    @if( $row->$field )
+                    {{ HTML::filter($field, $row, $config['grid']['filter']) }}
+                    @else
+                    {{ $config['grid']['empty'] or 'null' }}
+                    @endif
+                    @else
+                    {{ $row->$field or 'null' }}
+                    @endif
+                </td>
                 @endif
-                @else
-                {{ $row->$field or 'null' }}
-                @endif
-            </td>
             @endif
             @endforeach
             <td>

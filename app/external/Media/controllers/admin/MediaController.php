@@ -10,4 +10,9 @@ namespace App\External\Media\Controllers\Admin;
 
 class MediaController extends InitController {
 
+	protected function dataApi( $model = null ) {
+		$controller = 'App\External\Media\Controllers\Data\\' . ( $model ?: $this->modelName() ) . 'Controller';
+
+		return class_exists( $controller ) ? \App::make( $controller, $this->getCurrentRelation() )->initRelation( $this->getCurrentRelation() ) : false;
+	}
 }

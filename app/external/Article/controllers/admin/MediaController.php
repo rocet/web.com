@@ -8,6 +8,6 @@
 
 namespace App\External\Article\Controllers\Admin;
 
-class MediaController extends \App\External\Media\Controllers\Admin\MediaController {
+class MediaController extends InitController {
 
 }

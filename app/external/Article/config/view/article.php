@@ -121,6 +121,13 @@ return array(
 		'form' => array(
 			'show' => false,
 		),
-	)
+	),
+	'_nested_media' => array(
+		'grid' => array(
+			'show' => false,
+			'links' => array( 'model' => 'media', 'icon' => 'fa fa-group' ),
+		),
+	),
+	'media' => require 'media.php',
 
 );

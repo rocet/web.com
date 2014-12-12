@@ -19,9 +19,4 @@ class InitController extends AdminController {
 		return $this->getCurrentComponent() . '::admin.' . strtolower( $this->modelName() );
 	}
 
-	protected function dataApi( $model = null ) {
-		$controller = 'App\External\Article\Controllers\Data\\' . ( $model ?: $this->modelName() ) . 'Controller';
-
-		return class_exists( $controller ) ? \App::make( $controller, $this->getCurrentRelation() )->initRelation( $this->getCurrentRelation() ) : false;
-	}
 }

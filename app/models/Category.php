@@ -14,4 +14,9 @@ class Category extends Tree
     {
         return $this->belongsTo("Component");
     }
+
+	public function articles()
+	{
+		return $this->hasMany("Article");
+	}
 }
