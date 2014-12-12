@@ -82,5 +82,12 @@ return array(
 			'show' => false,
 		),
 	),
+    '_nested_article' => array(
+        'grid' => array(
+            'show' => false,
+            'links' => array( 'model' => 'article', 'icon' => 'fa fa-group' ),
+        ),
+    ),
+    'article' => require 'article.php',
 
 );

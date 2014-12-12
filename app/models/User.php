@@ -12,34 +12,29 @@ class User extends Eloquent implements UserInterface, RemindableInterface
 	protected $hidden = array('password');
 	protected $fillable = array('user_name', 'password', 'email', 'mobile', 'region_id', 'organization_id', 'state', 'remember_token');
 
+    public function group()
+    {
+        return $this->belongsTo('Group');
+    }
+
 	public function region()
 	{
 		return $this->belongsTo('Region');
 	}
 
-	public function group()
-	{
-		return $this->belongsTo('Group');
-	}
+    public function organization()
+    {
+        return $this->belongsTo('Organization');
+    }
 
 	public function groups()
 	{
 		return $this->belongsToMany('Group')->withTimestamps();
 	}
 
-	public function resource()
-	{
-		return $this->belongsTo('Resource');
-	}
-
 	public function resources()
 	{
 		return $this->belongsToMany('Resource')->withTimestamps();
-	}
-
-	public function organization()
-	{
-		return $this->belongsTo('Organization');
 	}
 
 	public function Organizations()

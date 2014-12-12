@@ -11,6 +11,11 @@ class Article extends Eloquent
     protected $table = "article";
     protected $fillable = array('category_id','user_id','title','content','keyword','description','image','sort','state');
 
+    public function user()
+    {
+        return $this->belongsTo("User");
+    }
+
 	public function category()
 	{
 		return $this->belongsTo("Category");

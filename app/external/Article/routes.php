@@ -15,5 +15,8 @@ Route::group( array( 'domain' => 'admin.web.com' ), function () {
 		Route::resource( 'article', 'App\External\Article\Controllers\Admin\ArticleController' );
         Route::resource( 'component.category', 'App\External\Article\Controllers\Admin\CategoryController' );
         Route::resource( 'component.media', 'App\External\Article\Controllers\Admin\MediaController' );
+        Route::resource( 'article.media', 'App\External\Article\Controllers\Admin\MediaController' );
+        Route::resource( 'component.category.article', 'App\External\Article\Controllers\Admin\ArticleController' );
+        Route::resource( 'component.category.article.media', 'App\External\Article\Controllers\Admin\MediaController' );
 	} );
 } );
