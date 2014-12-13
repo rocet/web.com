@@ -21,4 +21,12 @@ return array(
 		),
 	),
 	'media' => require 'media.php',
+
+	'_nested_comment' => array(
+		'grid' => array(
+			'show' => false,
+			'links' => array( 'model' => 'comment', 'icon' => 'fa fa-group' ),
+		),
+	),
+	'comment' => require 'comment.php',
 );

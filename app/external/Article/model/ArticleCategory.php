@@ -6,14 +6,14 @@
  * Time: 15:18
  */
 
-class Category extends Tree
+class ArticleCategory extends Tree
 {
 	protected $table = 'category';
 
-	public function component()
-	{
-		return $this->belongsTo('Component');
-	}
+    public function component()
+    {
+        return $this->belongsTo('Component');
+    }
 
 	public function articles()
 	{

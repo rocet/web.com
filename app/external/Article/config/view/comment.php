@@ -2,10 +2,9 @@
 /**
  * Created by PhpStorm.
  * User: Administrator
- * Date: 2014/11/22
- * Time: 16:24
+ * Date: 2014/12/13
+ * Time: 15:32
  */
-
 
 return array(
 	'id'           => array(
@@ -16,18 +15,28 @@ return array(
 			'show' => false,
 		),
 	),
-	'category_id'          => array(
+	'component_id'      => array(
 		'grid' => array(
 			'show' => true,
-			'empty' => '',
-			'filter' => array('model'=> 'Category', 'relate' => 'category', 'field' => 'category_name'),
+			'filter' => array('model'=> 'Component', 'relate' => 'component', 'field' => 'component_name'),
 		),
 		'form' => array(
 			'show' => true,
 			'type' => 'treeSelect',
 			'options' => array(Lang::get('Admin::common.select')),
-			'option_model' => array('model' => 'Category', 'field' => 'category_name'),
-			'attr' => array('class' => 'form-control', 'data-src' => URL::route('selections', array('model' => 'category', 'field' => 'category_name'))),
+			'option_model' => array('model' => 'Component', 'field' => 'component_name'),
+			'attr' => array('class' => 'form-control', 'data-src' => URL::route('selections', array('model' => 'component', 'field' => 'component_name'))),
+		),
+	),
+	'item_id'          => array(
+		'grid' => array(
+			'show' => true,
+			'empty' => '',
+		),
+		'form' => array(
+			'show' => true,
+			'type' => 'text',
+			'attr' => array('class' => 'form-control')
 		),
 	),
 	'user_id'      => array(
@@ -53,36 +62,6 @@ return array(
 		),
 	),
 	'content' => array(
-		'grid' => array(
-			'show' => true,
-		),
-		'form' => array(
-			'show' => true,
-			'type' => 'editor',
-			'attr' => array('class' => 'form-control')
-		),
-	),
-	'keyword' => array(
-		'grid' => array(
-			'show' => true,
-		),
-		'form' => array(
-			'show' => true,
-			'type' => 'text',
-			'attr' => array('class' => 'form-control')
-		),
-	),
-	'description' => array(
-		'grid' => array(
-			'show' => true,
-		),
-		'form' => array(
-			'show' => true,
-			'type' => 'textArea',
-			'attr' => array('class' => 'form-control')
-		),
-	),
-	'image' => array(
 		'grid' => array(
 			'show' => true,
 		),
@@ -121,21 +100,6 @@ return array(
 		'form' => array(
 			'show' => false,
 		),
-	),
-	'_nested_media' => array(
-		'grid' => array(
-			'show' => false,
-			'links' => array( 'model' => 'media', 'icon' => 'fa fa-group' ),
-		),
-	),
-	'media' => require 'media.php',
+	)
 
-
-	'_nested_comment' => array(
-		'grid' => array(
-			'show' => false,
-			'links' => array( 'model' => 'comment', 'icon' => 'fa fa-group' ),
-		),
-	),
-	'comment' => require 'comment.php',
 );

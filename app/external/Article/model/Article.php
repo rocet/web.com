@@ -8,21 +8,26 @@
 
 class Article extends Eloquent
 {
-    protected $table = "article";
+    protected $table = 'article';
     protected $fillable = array('category_id','user_id','title','content','keyword','description','image','sort','state');
 
     public function user()
     {
-        return $this->belongsTo("User");
+        return $this->belongsTo('User');
     }
 
 	public function category()
 	{
-		return $this->belongsTo("Category");
+		return $this->belongsTo('Category');
 	}
 
 	public function medias()
 	{
-		return $this->hasMany("Media");
+		return $this->hasMany('Media', 'item_id');
+	}
+
+	public function comments()
+	{
+		return $this->hasMany('Comment', 'item_id');
 	}
 }

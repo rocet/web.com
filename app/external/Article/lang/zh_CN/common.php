@@ -8,5 +8,11 @@
 return array(
 	'article' => 'Article',
 	'category' => 'ArticleCategory',
-    'media' => 'ArticleMedia'
+    'media' => 'ArticleMedia',
+    'comment' => 'ArticleComment',
+	'component' => array(
+		'media' => 'ArticleMedia',
+		'category' => 'ArticleCategory',
+		'comment' => 'ArticleComment',
+	),
 );

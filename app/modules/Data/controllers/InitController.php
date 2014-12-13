@@ -165,6 +165,25 @@ class InitController extends \Controller
         return call_user_func("\\" . $this->modelName() . "::find", $id);
     }
 
+	/**
+	 * 单条记录带关系
+	 *
+	 * @param  int $id
+	 *
+	 * @return Response
+	 */
+	public function showWithRelate($id = null, $relates = array())
+	{
+		//
+		$model = $this->model();
+		if(!empty($relates)){
+			foreach($relates as $relate){
+				$model = $model->with($relate);
+			}
+		}
+		return $model->find($id);
+	}
+
     /**
      * 修改界面
      *

@@ -2,5 +2,5 @@
 
 class GroupUser extends Eloquent
 {
-	protected $table = "group_user";
+	protected $table = 'group_user';
 }

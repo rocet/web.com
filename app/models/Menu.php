@@ -8,5 +8,5 @@
 
 class Menu extends Tree
 {
-	protected $table = "menu";
+	protected $table = 'menu';
 }

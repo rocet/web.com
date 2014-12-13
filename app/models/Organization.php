@@ -2,7 +2,7 @@
 
 class Organization extends Tree
 {
-	protected $table = "organization";
+	protected $table = 'organization';
 
 	public function region()
 	{

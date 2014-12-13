@@ -16,7 +16,7 @@ class CreateMediaTable extends Migration {
         Schema::create('media', function(Blueprint $table)
         {
             $table
-                ->increments("id");
+                ->increments('id');
 
             $table
                 ->integer('item_id')
@@ -37,17 +37,17 @@ class CreateMediaTable extends Migration {
                 ->default(0);
 
             $table
-                ->string("title", 100)
+                ->string('title', 100)
                 ->nullable()
                 ->default(null);
 
             $table
-                ->string("description", 100)
+                ->string('description', 100)
                 ->nullable()
                 ->default(null);
 
             $table
-                ->string("path", 100)
+                ->string('path', 100)
                 ->nullable()
                 ->default(null);
 
@@ -64,17 +64,17 @@ class CreateMediaTable extends Migration {
                 ->default(0);
 
             $table
-                ->timestamp("created_at")
+                ->timestamp('created_at')
                 ->nullable()
                 ->default(null);
 
             $table
-                ->dateTime("updated_at")
+                ->dateTime('updated_at')
                 ->nullable()
                 ->default(null);
 
             $table
-                ->dateTime("deleted_at")
+                ->dateTime('deleted_at')
                 ->nullable()
                 ->default(null);
         });

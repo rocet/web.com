@@ -2,25 +2,25 @@
 
 class Group extends Tree
 {
-	protected $table = "group";
+	protected $table = 'group';
 
 	public function user()
 	{
-		return $this->belongsTo("User");
+		return $this->belongsTo('User');
 	}
 
 	public function users()
 	{
-		return $this->belongsToMany("User")->withTimestamps();
+		return $this->belongsToMany('User')->withTimestamps();
 	}
 
 	public function resources()
 	{
-		return $this->belongsToMany("Resource")->withTimestamps();
+		return $this->belongsToMany('Resource')->withTimestamps();
 	}
 
     public function rules()
     {
-        return $this->hasMany("Rule");
+        return $this->hasMany('Rule');
     }
 }

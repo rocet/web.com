@@ -2,7 +2,7 @@
 
 class Region extends Tree
 {
-	protected $table = "region";
+	protected $table = 'region';
 	protected $parentColumn = 'pid';
 	public $timestamps = false;
 

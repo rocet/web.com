@@ -8,16 +8,16 @@ class Resource extends Tree
 
 	public function groups()
 	{
-		return $this->belongsToMany("Group")->withTimestamps();
+		return $this->belongsToMany('Group')->withTimestamps();
 	}
 
 	public function user()
 	{
-		return $this->belongsTo("User");
+		return $this->belongsTo('User');
 	}
 
 	public function users()
 	{
-		return $this->belongsToMany("User")->withTimestamps();
+		return $this->belongsToMany('User')->withTimestamps();
 	}
 }

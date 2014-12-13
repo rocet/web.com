@@ -21,4 +21,7 @@ return array(
 	'create' => 'Create',
 	'index' => 'Index',
 	'edit' => 'Edit',
+
+	'media' => \Lang::get('Media::media'),
+	'comment' => \Lang::get('Comment::comment'),
 );

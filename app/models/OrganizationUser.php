@@ -2,5 +2,5 @@
 
 class OrganizationUser extends Eloquent
 {
-	protected $table = "organization_user";
+	protected $table = 'organization_user';
 }

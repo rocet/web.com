@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMenuTable extends Migration {
+class CreateCommentTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -13,42 +13,36 @@ class CreateMenuTable extends Migration {
 	public function up()
 	{
 		//
-		Schema::create('menu', function(Blueprint $table)
+		Schema::create('comment', function(Blueprint $table)
 		{
 			$table
 				->increments('id');
 
 			$table
-				->integer('pid')
-				->nullable()
-				->unsigned()
-				->default(null);
-
-			$table
-				->integer('depth')
+				->integer('item_id')
 				->nullable()
 				->unsigned()
 				->default(0);
 
 			$table
-				->integer('lft')
+				->integer('user_id')
 				->nullable()
 				->unsigned()
 				->default(0);
 
 			$table
-				->integer('rgt')
+				->integer('component_id')
 				->nullable()
 				->unsigned()
 				->default(0);
 
 			$table
-				->string('menu_name', 100)
+				->string('title', 100)
 				->nullable()
 				->default(null);
 
 			$table
-				->string('link', 100)
+				->string('content', 100)
 				->nullable()
 				->default(null);
 
@@ -89,7 +83,7 @@ class CreateMenuTable extends Migration {
 	public function down()
 	{
 		//
-		Schema::drop('menu');
+		Schema::drop('comment');
 	}
 
 }

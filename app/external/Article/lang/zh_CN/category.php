@@ -17,4 +17,6 @@ return array(
 	'create' => 'Create',
 	'index' => 'Index',
 	'edit' => 'Edit',
+
+	'article' => \Lang::get('Article::article'),
 );

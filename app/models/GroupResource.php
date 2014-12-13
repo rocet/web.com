@@ -2,5 +2,5 @@
 
 class GroupResource extends Eloquent
 {
-	protected $table = "group_resource";
+	protected $table = 'group_resource';
 }

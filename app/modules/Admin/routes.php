@@ -3,7 +3,7 @@
 Route::group( array( 'domain' => 'admin.web.com' ), function () {
 	Route::group( array( "before" => "auth" ), function () {
         Route::get( '/', array( 'as' => 'admin', 'use' => function(){
-	         return App::make('App\Modules\Admin\Controllers\HomeController')->index();
+	        return App::make('App\Modules\Admin\Controllers\HomeController')->index();
         } ) );
 		Route::resource( 'menu', 'App\Modules\Admin\Controllers\MenuController' );
         Route::resource( 'rule', 'App\Modules\Admin\Controllers\RuleController' );
