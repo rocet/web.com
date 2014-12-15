@@ -125,7 +125,7 @@ return array(
 	'_nested_media' => array(
 		'grid' => array(
 			'show' => false,
-			'links' => array( 'model' => 'media', 'icon' => 'fa fa-group' ),
+			'links' => array( 'model' => 'media', 'icon' => 'fa fa-image' ),
 		),
 	),
 	'media' => require 'media.php',
@@ -134,7 +134,7 @@ return array(
 	'_nested_comment' => array(
 		'grid' => array(
 			'show' => false,
-			'links' => array( 'model' => 'comment', 'icon' => 'fa fa-group' ),
+			'links' => array( 'model' => 'comment', 'icon' => 'fa fa-comments' ),
 		),
 	),
 	'comment' => require 'comment.php',

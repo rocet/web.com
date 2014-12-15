@@ -1,8 +1,11 @@
 <?php
 Route::group(array('domain' => 'www.web.com'), function () {
 	$default_agree = array(
-		array('path' => '/article', 'alias' => 'articleList', 'action' => 'App\External\Article\Controllers\ArticleController@index'),
-		array('path' => '/article/{id}', 'alias' => 'articleShow', 'action' => 'App\External\Article\Controllers\ArticleController@show')
+		array('path' => '/category/{id}/article', 'alias' => 'category.article', 'action' => 'App\External\Article\Controllers\ArticleController@index'),
+		array('path' => '/article/{id}', 'alias' => 'article.show', 'action' => 'App\External\Article\Controllers\ArticleController@show'),
+
+		array('path' => '/article/{id}/comment', 'alias' => 'article.comment', 'action' => 'App\External\Comment\Controllers\CommentController@index'),
+		array('path' => '/article/{id}/comment/store', 'alias' => 'article.comment.create', 'action' => 'App\External\Comment\Controllers\CommentController@store', 'method'=>'post')
 	);
 	foreach ($default_agree as $agree) {
 		$method = isset($agree['method']) ? $agree['method'] : 'get';

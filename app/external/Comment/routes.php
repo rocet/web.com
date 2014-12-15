@@ -1,8 +1,7 @@
 <?php
 Route::group(array('domain' => 'www.web.com'), function () {
 	$default_agree = array(
-		array('path' => '/comment', 'alias' => 'commentList', 'action' => 'App\External\Comment\Controllers\CommentController@index'),
-		array('path' => '/comment/{id}', 'alias' => 'commentShow', 'action' => 'App\External\Comment\Controllers\CommentController@show')
+
 	);
 	foreach ($default_agree as $agree) {
 		$method = isset($agree['method']) ? $agree['method'] : 'get';

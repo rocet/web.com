@@ -23,6 +23,23 @@ class InitController extends \Controller
     }
 
     /**
+     * 首页
+     *
+     * @return Response
+     */
+    public function indexWithRelate($relates = array())
+    {
+        //
+        $model = $this->model();
+        if(!empty($relates)){
+            foreach($relates as $relate){
+                $model = $model->with($relate);
+            }
+        }
+        return $model->paginate();
+    }
+
+    /**
      * 表格数据
      *
      * @return Response
