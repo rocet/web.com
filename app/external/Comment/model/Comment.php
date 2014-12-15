@@ -21,8 +21,8 @@ class Comment extends Eloquent
 		return $this->belongsTo('Component');
 	}
 
-	public function article()
+	public function item($component)
 	{
-		return $this->belongsTo('Article');
+		return $this->belongsTo($component);
 	}
 }

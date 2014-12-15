@@ -6,15 +6,8 @@
  * Time: 15:18
  */
 
-class ArticleCategory extends Tree
+class ArticleCategory extends \Category
 {
-	protected $table = 'category';
-
-    public function component()
-    {
-        return $this->belongsTo('Component');
-    }
-
 	public function articles()
 	{
 		return $this->hasMany('Article');

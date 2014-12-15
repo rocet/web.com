@@ -41,6 +41,11 @@ class User extends Eloquent implements UserInterface, RemindableInterface
 	{
 		return $this->belongsToMany('Organization')->withTimestamps();
 	}
+	//
+	public function articles()
+	{
+		return $this->hasMany('Article');
+	}
 
 	public function getAuthIdentifier()
 	{

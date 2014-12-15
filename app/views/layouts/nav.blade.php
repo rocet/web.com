@@ -20,7 +20,7 @@
         </li>
         @endif
         <li>
-            <a href="{{ URL::route("member") }}">{{ Lang::get('user.member') }}</a>
+            <a href="{{ URL::action('App\External\Member\Controllers\UserController@show', array('id'=>Auth::id())) }}">{{ Lang::get('user.home') }}</a>
         </li>
         <li>
             <a href="{{ URL::route("profile") }}">{{ Lang::get('user.profile') }}</a>
@@ -32,6 +32,9 @@
             <a href="{{ URL::route("logout") }}">{{ Lang::get('user.logout') }}</a>
         </li>
     @endif
+        <li>
+            <a href="{{ URL::route("member") }}">{{ Lang::get('user.member') }}</a>
+        </li>
         <li>
             <a href="{{ URL::route("shop") }}">{{ Lang::get('user.shop') }}</a>
         </li>

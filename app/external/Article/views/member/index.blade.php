@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('main')
     @if( $item->isEmpty() )
-    article index Empty !!!
+        article index Empty !!!
     @else
         @foreach( $item as $row )
             <ul class="list-group">
@@ -22,8 +22,10 @@
                 <li class="list-group-item"> category_link : <a href="{{ URL::action('App\External\Article\Controllers\ArticleController@index', array('id'=>$row->category_id)) }}">{{ URL::action('App\External\Article\Controllers\ArticleController@index', array('id'=>$row->category_id)) }}</a>  </li>
                 @if(Auth::id() == $row->user_id )
                 <li class="list-group-item"> edit_link : <a href="{{ URL::action('App\External\Article\Controllers\Member\ArticleController@edit', array('user' => $row->user_id, 'article'=>$row->id)) }}">{{ URL::action('App\External\Article\Controllers\Member\ArticleController@edit', array('user' => $row->user_id, 'article'=>$row->id)) }}</a>  </li>
+                <li class="list-group-item"> destroy_link : <a href="{{ URL::action('App\External\Article\Controllers\Member\ArticleController@destroy', array('user' => $row->user_id, 'article'=>$row->id)) }}">{{ URL::action('App\External\Article\Controllers\Member\ArticleController@destroy', array('user' => $row->user_id, 'article'=>$row->id)) }}</a>  </li>
                 @endif
             </ul>
         @endforeach
     @endif
+    member article index
 @stop

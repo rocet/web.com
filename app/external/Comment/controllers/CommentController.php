@@ -11,7 +11,7 @@ namespace App\External\Comment\Controllers;
 class CommentController extends \BaseController {
 
 	public function index(){
-		return \View::make('Comment::index');
+		return \View::make('Comment::index')->with(array('item' => $this->dataApi()->indexWithRelate( array('user') ) ));
 	}
 
 	public function store(){

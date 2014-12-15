@@ -5,12 +5,39 @@ Route::group(array('domain' => 'www.web.com'), function () {
 		array('path' => '/article/{id}', 'alias' => 'article.show', 'action' => 'App\External\Article\Controllers\ArticleController@show'),
 
 		array('path' => '/article/{id}/comment', 'alias' => 'article.comment', 'action' => 'App\External\Comment\Controllers\CommentController@index'),
-		array('path' => '/article/{id}/comment/store', 'alias' => 'article.comment.create', 'action' => 'App\External\Comment\Controllers\CommentController@store', 'method'=>'post')
 	);
 	foreach ($default_agree as $agree) {
 		$method = isset($agree['method']) ? $agree['method'] : 'get';
 		Route::$method($agree['path'], array('as' => $agree['alias'], 'uses' => $agree['action']));
 	}
+
+
+	Route::group(array("before" => "guest"), function () {
+
+	});
+
+	Route::group(array("before" => "auth"), function () {
+		$auth_agrees = array(
+			array('path' => '/article/{id}/comment/store', 'alias' => 'article.comment.create', 'action' => 'App\External\Comment\Controllers\CommentController@store', 'method'=>'post'),
+		);
+		foreach ($auth_agrees as $agree) {
+			$method = isset($agree['method']) ? $agree['method'] : 'get';
+			Route::$method($agree['path'], array('as' => $agree['alias'], 'uses' => $agree['action']));
+		}
+	});
+} );
+
+Route::group(array('domain' => 'member.web.com'), function () {
+	Route::group(array("before" => "auth"), function () {
+		$auth_agrees = array(
+
+		);
+		foreach ($auth_agrees as $agree) {
+			$method = isset($agree['method']) ? $agree['method'] : 'get';
+			Route::$method($agree['path'], array('as' => $agree['alias'], 'uses' => $agree['action']));
+		}
+		Route::resource( 'user.article', 'App\External\Article\Controllers\Member\ArticleController' );
+	});
 } );
 
 Route::group( array( 'domain' => 'admin.web.com' ), function () {
