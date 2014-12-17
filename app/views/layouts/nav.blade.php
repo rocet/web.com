@@ -39,6 +39,9 @@
             <a href="{{ URL::route("shop") }}">{{ Lang::get('user.shop') }}</a>
         </li>
         <li>
+            <a href="{{ URL::route("articles") }}">{{ Lang::get('user.articles') }}</a>
+        </li>
+        <li>
             <a href="http://cheats.jesse-obrien.ca/" target="_blank">cheatsheet</a>
         </li>
     </ul>

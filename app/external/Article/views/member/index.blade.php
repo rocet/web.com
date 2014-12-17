@@ -21,8 +21,8 @@
                 <li class="list-group-item"> user_link : <a href="{{ URL::action('App\External\Member\Controllers\UserController@show', array('id'=>$row->user_id)) }}">{{ URL::action('App\External\Member\Controllers\UserController@show', array('id'=>$row->user_id)) }}</a>  </li>
                 <li class="list-group-item"> category_link : <a href="{{ URL::action('App\External\Article\Controllers\ArticleController@index', array('id'=>$row->category_id)) }}">{{ URL::action('App\External\Article\Controllers\ArticleController@index', array('id'=>$row->category_id)) }}</a>  </li>
                 @if(Auth::id() == $row->user_id )
-                <li class="list-group-item"> edit_link : <a href="{{ URL::action('App\External\Article\Controllers\Member\ArticleController@edit', array('user' => $row->user_id, 'article'=>$row->id)) }}">{{ URL::action('App\External\Article\Controllers\Member\ArticleController@edit', array('user' => $row->user_id, 'article'=>$row->id)) }}</a>  </li>
-                <li class="list-group-item"> destroy_link : <a href="{{ URL::action('App\External\Article\Controllers\Member\ArticleController@destroy', array('user' => $row->user_id, 'article'=>$row->id)) }}">{{ URL::action('App\External\Article\Controllers\Member\ArticleController@destroy', array('user' => $row->user_id, 'article'=>$row->id)) }}</a>  </li>
+                <li class="list-group-item"> edit_link : <a href="{{ URL::action('user.articles.edit', array('user' => $row->user_id, 'article'=>$row->id)) }}">{{ URL::action('user.articles.edit', array('user' => $row->user_id, 'article'=>$row->id)) }}</a>  </li>
+                <li class="list-group-item"> destroy_link : <a href="{{ URL::action('user.articles.destroy', array('user' => $row->user_id, 'article'=>$row->id)) }}">{{ URL::action('user.articles.destroy', array('user' => $row->user_id, 'article'=>$row->id)) }}</a>  </li>
                 @endif
             </ul>
         @endforeach

@@ -1,6 +1,12 @@
 <?php
 Route::group(array('domain' => 'www.web.com'), function () {
 	$default_agree = array(
+		array('path' => '/articles', 'alias' => 'articles', 'action' => function(){
+			return View::make('Article::Articles')->with(array(
+				'item' => Article::with('user','category','comments', 'medias')->get()
+			));
+		}),
+
 		array('path' => '/category/{id}/article', 'alias' => 'category.article', 'action' => 'App\External\Article\Controllers\ArticleController@index'),
 		array('path' => '/article/{id}', 'alias' => 'article.show', 'action' => 'App\External\Article\Controllers\ArticleController@show'),
 
@@ -19,6 +25,7 @@ Route::group(array('domain' => 'www.web.com'), function () {
 	Route::group(array("before" => "auth"), function () {
 		$auth_agrees = array(
 			array('path' => '/article/{id}/comment/store', 'alias' => 'article.comment.create', 'action' => 'App\External\Comment\Controllers\CommentController@store', 'method'=>'post'),
+			array('path' => '/article/{id}/media/store', 'alias' => 'article.media.create', 'action' => 'App\External\Media\Controllers\MediaController@store', 'method'=>'post'),
 		);
 		foreach ($auth_agrees as $agree) {
 			$method = isset($agree['method']) ? $agree['method'] : 'get';
@@ -36,7 +43,7 @@ Route::group(array('domain' => 'member.web.com'), function () {
 			$method = isset($agree['method']) ? $agree['method'] : 'get';
 			Route::$method($agree['path'], array('as' => $agree['alias'], 'uses' => $agree['action']));
 		}
-		Route::resource( 'user.article', 'App\External\Article\Controllers\Member\ArticleController' );
+		Route::resource( 'user.articles', 'App\External\Article\Controllers\Member\ArticleController' );
 	});
 } );
 

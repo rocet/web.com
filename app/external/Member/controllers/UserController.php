@@ -16,7 +16,7 @@ class UserController extends \BaseController {
 	public function show( $id )
 	{
 		//
-		return \View::make('Member::show')->with(array('item' => $this->dataApi()->showWithRelate( $id, array('organization','region','group') ) ));
+		return \View::make('Member::show')->with(array('item' => $this->dataApi()->showWithRelate( $id, array('organization','region','group','comments','articles') ) ));
 	}
 	protected function modelName() {
 		return substr( strrchr( get_class( $this ), '\\' ), 1, - 10 );
