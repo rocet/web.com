@@ -24,8 +24,8 @@ Route::group(array('domain' => 'www.web.com'), function () {
 
 	Route::group(array("before" => "auth"), function () {
 		$auth_agrees = array(
-			array('path' => '/article/{id}/comment/store', 'alias' => 'article.comment.create', 'action' => 'App\External\Comment\Controllers\CommentController@store', 'method'=>'post'),
-			array('path' => '/article/{id}/media/store', 'alias' => 'article.media.create', 'action' => 'App\External\Media\Controllers\MediaController@store', 'method'=>'post'),
+			array('path' => '/article/{id}/comment/store', 'alias' => 'article.comment.store', 'action' => 'App\External\Comment\Controllers\CommentController@store', 'method'=>'post'),
+			array('path' => '/article/{id}/media/store', 'alias' => 'article.media.store', 'action' => 'App\External\Media\Controllers\MediaController@store', 'method'=>'post'),
 		);
 		foreach ($auth_agrees as $agree) {
 			$method = isset($agree['method']) ? $agree['method'] : 'get';

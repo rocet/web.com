@@ -1,5 +1,3 @@
-@extends('layouts.main')
-@section('main')
 {{ Form::open(array(
     'url' => URL::action('App\External\Article\Controllers\Member\ArticleController@store', array('id'=>$item->id)),
     'autocomplete' => 'off'
@@ -26,4 +24,3 @@
     {{ Form::submit(Lang::get('Article::article.edit')) }}
 {{ Form::close() }}
     member article edit
-@stop
