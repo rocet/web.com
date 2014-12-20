@@ -1,5 +1,3 @@
-@extends('layouts.main')
-@section('main')
 {{ Form::open(array(
     'url' => URL::action('App\External\Media\Controllers\Member\MediaController@store', array('id'=>$item->id)),
     'autocomplete' => 'off'
@@ -22,4 +20,3 @@
     {{ Form::submit(Lang::get('Media::media.edit')) }}
 {{ Form::close() }}
     member media edit
-@stop

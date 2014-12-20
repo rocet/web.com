@@ -39,6 +39,14 @@ class MemberController extends \BaseController {
 	 */
 	public function store() {
 		//
+		if ( $this->validPass( $process = $this->dataApi()->store( \Input::except( '_token' ) ) ) ) {
+			return \Redirect::route( 'message' )->with( 'message', 'Store Success <a href="' . \URL::route( $this->getCurrentController() . '.index', $this->getCurrentRelation() ) . '">return</a> <a href="' . \URL::route( $this->getCurrentController() . '.create', $this->getCurrentRelation() ) . '">create new</a>' );
+		}
+		if ( ! $process ) {
+			$process = new \Illuminate\Support\MessageBag( array( 'sys_error' => 'error' ) );
+		}
+
+		return \View::make( $this->tpl() )->withInput( \Input::except( '_token' ) )->withErrors( $process );
 	}
 
 
@@ -51,7 +59,8 @@ class MemberController extends \BaseController {
 	 */
 	public function show( $id ) {
 		//
-		return \View::make( $this->tpl() );
+		$id = $this->realId($id, func_get_args());
+		return \View::make( $this->tpl() )->with( 'item', $this->dataApi()->show( $id ) )->with( 'id', $id );
 	}
 
 
@@ -64,9 +73,8 @@ class MemberController extends \BaseController {
 	 */
 	public function edit( $id ) {
 		//
-		$id = $this->realId( $id, func_get_args() );
-
-		return \View::make( $this->tpl() )->with( array( 'item' => $this->dataApi()->edit( $id ) ) )->with( 'id', $id );
+		$id = $this->realId($id, func_get_args());
+		return \View::make( $this->tpl() )->with( 'item', $this->dataApi()->edit( $id ) )->with( 'id', $id );
 	}
 
 
@@ -79,6 +87,15 @@ class MemberController extends \BaseController {
 	 */
 	public function update( $id ) {
 		//
+		$id = $this->realId($id, func_get_args());
+		if ( $this->validPass( $process = $this->dataApi()->update( $id, \Input::except( '_token', '_method' ) ) ) ) {
+			return \Redirect::route( 'message' )->with( 'message', 'Store Success <a href="' . \URL::route( $this->getCurrentController() . '.index', $this->getCurrentRelation() ) . '">return</a> <a href="' . \URL::route( $this->getCurrentController() . '.edit', $this->getCurrentRelation() + array( 'id' => $id ) ) . '">edit again</a>' );
+		}
+		if ( ! $process ) {
+			$process = new \Illuminate\Support\MessageBag( array( 'sys_error' => 'error' ) );
+		}
+
+		return \View::make( $this->tpl() )->with( 'item', $this->dataApi()->edit( $id ) )->with( 'id', $id )->withInput( \Input::except( '_token', '_method' ) )->withErrors( $process );
 	}
 
 
@@ -91,6 +108,28 @@ class MemberController extends \BaseController {
 	 */
 	public function destroy( $id ) {
 		//
+		$id = $this->realId($id, func_get_args());
+		var_dump( 'destroy' . $id );
+	}
+
+	/**
+	 * 批量操作
+	 *
+	 * @return Response
+	 */
+	public function batch( $reqAll ) {
+		foreach ( $reqAll as $index => $req ) {
+			if ( $this->validPass( $process[ $index ] = call_user_func_array( array(
+				$this->dataApi(),
+				$req['method']
+			), array_except( $req, 'method' ) ) )
+			) {
+
+			}
+			if ( ! $process[ $index ] ) {
+				$process[ $index ] = new \Illuminate\Support\MessageBag( array( 'sys_error' => 'error' ) );
+			}
+		}
 	}
 
 	protected function realId( $id, $args = array() ) {

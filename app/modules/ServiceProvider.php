@@ -16,6 +16,13 @@ abstract class ServiceProvider extends \Illuminate\Support\ServiceProvider
 			foreach (\Config::get('app.aliases') as $alias => $source) {
 				class_alias($source, 'App\Modules\\' . $module . '\Controllers\\' . $alias);
 			}
+
+			$macro = app_path() . '/modules/' . $module . '/macro.php';
+			if (file_exists($macro)) require $macro;
+
+			$filters = app_path() . '/modules/' . $module . '/filters.php';
+			if (file_exists($filters)) require $filters;
+
 			$routes = app_path() . '/modules/' . $module . '/routes.php';
 			if (file_exists($routes)) require $routes;
 		}
