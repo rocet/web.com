@@ -72,9 +72,15 @@ Form::macro( 'regionSelect', function ( $name, $data = array(), $value = '', $at
 	return $ret;
 } );
 
-
 Form::macro('editor', function($name = '', $value = '', $attr = array()){
 	return \App::make('App\External\Media\Controllers\MediaController')->show($name, $value, $attr);
+});
+
+Form::macro('mediaSelect', function($name = '', $value = '', $attr = array()){
+	$ret = Form::hidden( $name, $value, $attr );
+	$ret .= '<img id="'.$name.'image" data-src="holder.js/140x140" style="width:140px;height:140px;" class="img-rounded">';
+	$ret .= '<script id="'.$name.'editor" style="display:none;"></script><script>dumpScripts.s'.time().' = function(){jQuery(function($){attachment.init("'.$name.'editor","'.$name.'","beforeInsertImage",{"item_id": "ss" });attachment.show("'.$name.'image","insertimage");});}</script>';
+	return $ret;
 });
 
 HTML::macro( 'tree', function () {

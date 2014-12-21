@@ -75,6 +75,10 @@ class MediaController extends \BaseController {
 			case 'listfile':
 				$result = $this->actionList( $CONFIG );
 				break;
+			/* 删除文件/图片 */
+			case 'destoryfile':
+				$result = $this->actionDestory( $CONFIG );
+				break;
 
 			/* 抓取远程文件 */
 			case 'catchimage':
@@ -223,6 +227,16 @@ class MediaController extends \BaseController {
 
 	}
 
+	protected function actionDestory( $CONFIG ) {
+		/* 返回数据 */
+		$result = array(
+			"state" => "SUCCESSS",
+			"msg" => "DDD",
+		);
+
+		return $result;
+	}
+
 	protected function actionCrawler( $CONFIG ) {
 		set_time_limit( 0 );
 		/* 上传配置 */
@@ -354,8 +368,10 @@ class MediaController extends \BaseController {
         ".ogg", ".ogv", ".mov", ".wmv", ".mp4", ".webm", ".mp3", ".wav", ".mid",
         ".rar", ".zip", ".tar", ".gz", ".7z", ".bz2", ".cab", ".iso",
         ".doc", ".docx", ".xls", ".xlsx", ".ppt", ".pptx", ".pdf", ".txt", ".md", ".xml"
-    ] /* 列出的文件类型 */
+    ], /* 列出的文件类型 */
 
+	/* 删除文件/图片 */
+	"destoryActionName": "destoryfile" /* 执行抓取远程图片的action名称 */
 }
 EOT;
 

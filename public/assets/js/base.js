@@ -52,3 +52,33 @@ $.each($('.tree[data-init]'), function(i, n) {
     var that = $(n);
     that.treeview({data: eval("("+that.attr('data-init')+")") });
 });
+var attachment = {
+    editor:null,
+    init:function(editorid,keyid,attachcallback,params){
+        var _editor =this.getEditor(editorid);
+        _editor.ready(function () {
+            //_editor.setDisabled();
+            _editor.execCommand('serverparam', params);
+            _editor.hide();
+            _editor.addListener(attachcallback, function (t, args) {
+                $("#"+keyid).val(args[0].src);
+            });
+        });
+    },
+    getEditor:function(editorid){
+        this.editor = UE.getEditor(editorid);
+        return this.editor;
+    },
+    show:function(id,attachtype){
+        var _editor = this.editor;
+        $("#"+id).click(function(){
+            var attachment = _editor.getDialog(attachtype);
+            attachment.render();
+            attachment.open();
+        });
+    },
+    render:function(editorid){
+        var _editor = this.getEditor(editorid);
+        _editor.render();
+    }
+};

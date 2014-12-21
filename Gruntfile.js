@@ -13,6 +13,7 @@ module.exports = function (grunt) {
                 src: [
                     './public/assets/bower/jquery/jquery.min.js',
                     './public/assets/bower/bootstrap/dist/js/bootstrap.js',
+                    './public/assets/bower/holderjs/src/holder.js',
                     // './public/assets/bower/bootstrap-treeview/dist/bootstrap-treeview.min.js',
                     './public/assets/js/base.js'
                 ],
@@ -63,6 +64,7 @@ module.exports = function (grunt) {
                 files: [
                     './public/assets/bower/jquery/jquery.min.js',
                     './public/assets/bower/bootstrap/dist/js/bootstrap.js',
+                    './public/assets/bower/holderjs/src/holder.js',
                     // './public/assets/bower/bootstrap-treeview/dist/bootstrap-treeview.min.js',
                     './public/assets/js/base.js',
                     './public/assets/bower/bootstrap/dist/css/bootstrap.css',

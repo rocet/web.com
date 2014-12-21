@@ -21,7 +21,7 @@ $btns = $('<div class="file-panel"><span class="cancel">' + lang.uploadDelete + 
 
                     });
 
-css ~ 800
+css ~ 580
 #online .list div.file-panel {
     position: absolute;
     height: 0;

@@ -88,7 +88,7 @@ return array(
 		),
 		'form' => array(
 			'show' => true,
-			'type' => 'text',
+			'type' => 'mediaSelect',
 			'attr' => array('class' => 'form-control')
 		),
 	),
