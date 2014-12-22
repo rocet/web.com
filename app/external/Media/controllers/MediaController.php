@@ -35,8 +35,8 @@ class MediaController extends \BaseController {
 		return class_exists( $controller ) ? \App::make( $controller, $this->getCurrentRelation() )->initRelation( $this->getCurrentRelation() ) : false;
 	}
 
-	public function show($name = '', $content = '') {
-		return \View::make( 'Media::show' )->with(array('name'=> $name, 'content' => $content))->render();
+	public function show($name = '', $content = '', $attrs = array(), $relates = array() ) {
+		return \View::make( 'Media::show' )->with(array('name'=> $name, 'content' => $content, 'attrs' => $attrs, 'relates' => $relates ))->render();
 	}
 
 	public function process() {
@@ -164,9 +164,20 @@ class MediaController extends \BaseController {
 		 */
 
 		/* 返回数据 */
+//		$info = $up->getFileInfo();
+//		if($info['state'] == 'SUCCESSS'){
+//			if ( $this->validPass( $process = $this->dataApi()->store( array('path' => $info['url']) ) ) ) {
+//				return $info;
+//			} else {
+//				return array(
+//					"state" => "数据库添加错误"
+//				);
+//			}
+//		} else {
+//			return $info;
+//		}
 
 		return $up->getFileInfo();
-
 	}
 
 	protected function actionList( $CONFIG ) {

@@ -44,6 +44,7 @@ Route::group(array('domain' => 'member.web.com'), function () {
 			Route::$method($agree['path'], array('as' => $agree['alias'], 'uses' => $agree['action']));
 		}
 		Route::resource( 'user.articles', 'App\External\Article\Controllers\Member\ArticleController' );
+		Route::resource( 'user.categorys.articles', 'App\External\Article\Controllers\Member\ArticleController' );
 	});
 } );
 

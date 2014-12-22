@@ -5,6 +5,10 @@
  * Date: 2014/11/24
  * Time: 12:03
  */
+Blade::extend(function($value) {
+	return preg_replace('/\{\?(.+)\?\}/', '<?php ${1}; ?>', $value);
+});
+
 
 Form::macro( 'treeSelect', function ( $name, $data = array(), $value = 0, $attr = array(), $model = array() ) {
 	$ret = '';
@@ -72,14 +76,14 @@ Form::macro( 'regionSelect', function ( $name, $data = array(), $value = '', $at
 	return $ret;
 } );
 
-Form::macro('editor', function($name = '', $value = '', $attr = array()){
-	return \App::make('App\External\Media\Controllers\MediaController')->show($name, $value, $attr);
+Form::macro('editor', function($name = '', $value = '', $attr = array(), $relates = array()){
+	return \App::make('App\External\Media\Controllers\MediaController')->show($name, $value, $attr, $relates);
 });
 
-Form::macro('mediaSelect', function($name = '', $value = '', $attr = array()){
+Form::macro('mediaSelect', function($name = '', $value = '', $attr = array(), $relates = array()){
 	$ret = Form::hidden( $name, $value, $attr );
-	$ret .= '<img id="'.$name.'image" data-src="holder.js/140x140" style="width:140px;height:140px;" class="img-rounded">';
-	$ret .= '<script id="'.$name.'editor" style="display:none;"></script><script>dumpScripts.s'.time().' = function(){jQuery(function($){attachment.init("'.$name.'editor","'.$name.'","beforeInsertImage",{"item_id": "ss" });attachment.show("'.$name.'image","insertimage");});}</script>';
+	$ret .= '<img id="'.$name.'image" data-src="holder.js/140x140" src="'.$value.'" style="width:140px;height:140px;" class="img-rounded">';
+	$ret .= '<script id="'.$name.'editor" style="display:none;"></script><script>dumpScripts.s'.time().' = function(){jQuery(function($){attachment.init("'.$name.'editor","'.$name.'","beforeInsertImage", '.json_encode($relates).');attachment.show("'.$name.'image","insertimage");});}</script>';
 	return $ret;
 });
 

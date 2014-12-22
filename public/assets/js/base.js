@@ -66,7 +66,7 @@ var attachment = {
         });
     },
     getEditor:function(editorid){
-        this.editor = UE.getEditor(editorid);
+        this.editor = UE.getEditor(editorid,{textarea : ''});
         return this.editor;
     },
     show:function(id,attachtype){

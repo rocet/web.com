@@ -12,7 +12,7 @@ Route::group(array('domain' => 'www.web.com'), function () {
 Route::group(array('domain' => 'member.web.com'), function () {
 	Route::group(array("before" => "auth"), function () {
 		$auth_agrees = array(
-
+			array('path' => '/media-editor', 'alias' => 'mediaEditor', 'action' => 'App\External\Media\Controllers\MediaController@process', 'method' => 'any'),
 		);
 		foreach ($auth_agrees as $agree) {
 			$method = isset($agree['method']) ? $agree['method'] : 'get';
