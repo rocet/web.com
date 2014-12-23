@@ -6,7 +6,6 @@
  * Time: 16:24
  */
 
-
 return array(
 	'id'           => array(
 		'grid' => array(

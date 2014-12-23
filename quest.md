@@ -2,9 +2,12 @@ module assets ??
 rule  ...
 custom table field ..
 model aggregate
+tag
 
 
 
+media gallery
+media title description
 uedit
 dialog attachment
 js   ~ 700

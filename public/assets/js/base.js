@@ -62,6 +62,7 @@ var attachment = {
             _editor.hide();
             _editor.addListener(attachcallback, function (t, args) {
                 $("#"+keyid).val(args[0].src);
+                $("#"+keyid+"image").attr('src', args[0].src);
             });
         });
     },

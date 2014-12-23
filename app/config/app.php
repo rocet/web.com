@@ -132,6 +132,7 @@ return array(
 
 		'App\External\Article\ArticleServiceProvider',
         'App\External\Media\MediaServiceProvider',
+		'App\External\CustomMeta\CustomMetaServiceProvider',
 		'App\External\Comment\CommentServiceProvider',
 		'App\External\Member\MemberServiceProvider',
 		'App\External\Shop\ShopServiceProvider',

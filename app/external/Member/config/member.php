@@ -20,12 +20,13 @@ foreach( \Component::with('parent')->get() as $component ){
 		))));
 	}
 }
+
 foreach( $views as $path ){
 	$fileName = pathinfo($path, PATHINFO_FILENAME);
 	$ret[$fileName] = isset($ret[$fileName]) && in_array($fileName, array('common', 'component','user')) ? array_replace_recursive($ret[$fileName], require $path) : require $path;
 }
 
 // dd('<pre>'.print_r($ret['user'], true).'</pre>');
-
+$ret['components'] = $components;
 return $ret;
 

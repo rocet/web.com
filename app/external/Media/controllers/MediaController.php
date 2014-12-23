@@ -107,7 +107,6 @@ class MediaController extends \BaseController {
 	}
 
 	protected function actionUpload( $CONFIG ) {
-
 		/* 上传配置 */
 		$base64 = "upload";
 		switch ( htmlspecialchars( $_GET['action'] ) ) {
@@ -164,20 +163,26 @@ class MediaController extends \BaseController {
 		 */
 
 		/* 返回数据 */
-//		$info = $up->getFileInfo();
-//		if($info['state'] == 'SUCCESSS'){
-//			if ( $this->validPass( $process = $this->dataApi()->store( array('path' => $info['url']) ) ) ) {
-//				return $info;
-//			} else {
-//				return array(
-//					"state" => "数据库添加错误"
-//				);
-//			}
-//		} else {
-//			return $info;
-//		}
-
-		return $up->getFileInfo();
+		$info = $up->getFileInfo();
+		if($info['state'] == 'SUCCESS'){
+			$datas = array();
+			$datas['path'] = $info['url'];
+			\Input::get('component_id') && $datas['component_id'] = \Input::get('component_id');
+			\Input::get('item_id') && $datas['item_id'] = \Input::get('item_id');
+			\Input::get('user_id') && $datas['user_id'] = \Input::get('user_id');
+			\Input::get('title') && $datas['title'] = \Input::get('title');
+			\Input::get('description') && $datas['description'] = \Input::get('description');
+			if ( $this->validPass( $process = $this->dataApi()->store( $datas ) ) ) {
+				$info['media_id'] = $process->id;
+				return $info;
+			} else {
+				return array(
+					"state" => "数据库添加错误"
+				);
+			}
+		} else {
+			return $info;
+		}
 	}
 
 	protected function actionList( $CONFIG ) {
@@ -240,6 +245,7 @@ class MediaController extends \BaseController {
 
 	protected function actionDestory( $CONFIG ) {
 		/* 返回数据 */
+		dd(\Input::all());
 		$result = array(
 			"state" => "SUCCESSS",
 			"msg" => "DDD",
@@ -288,6 +294,7 @@ class MediaController extends \BaseController {
 	}
 
 	protected function actionConfig() {
+		$auth_id = \Auth::id();
 		return <<<EOT
 {
     /* 上传图片配置项 */
@@ -299,7 +306,7 @@ class MediaController extends \BaseController {
     "imageCompressBorder": 1600, /* 图片压缩最长边限制 */
     "imageInsertAlign": "none", /* 插入的图片浮动方式 */
     "imageUrlPrefix": "", /* 图片访问路径前缀 */
-    "imagePathFormat": "/upload/image/{yyyy}{mm}{dd}/{time}{rand:6}", /* 上传保存路径,可以自定义保存路径和文件名格式 */
+    "imagePathFormat": "/upload/$auth_id/image/{yyyy}{mm}{dd}/{time}{rand:6}", /* 上传保存路径,可以自定义保存路径和文件名格式 */
                                 /* {filename} 会替换成原文件名,配置这项需要注意中文乱码问题 */
                                 /* {rand:6} 会替换成随机数,后面的数字是随机数的位数 */
                                 /* {time} 会替换成时间戳 */
@@ -316,14 +323,14 @@ class MediaController extends \BaseController {
     /* 涂鸦图片上传配置项 */
     "scrawlActionName": "uploadscrawl", /* 执行上传涂鸦的action名称 */
     "scrawlFieldName": "upfile", /* 提交的图片表单名称 */
-    "scrawlPathFormat": "/upload/image/{yyyy}{mm}{dd}/{time}{rand:6}", /* 上传保存路径,可以自定义保存路径和文件名格式 */
+    "scrawlPathFormat": "/upload/$auth_id/image/{yyyy}{mm}{dd}/{time}{rand:6}", /* 上传保存路径,可以自定义保存路径和文件名格式 */
     "scrawlMaxSize": 2048000, /* 上传大小限制，单位B */
     "scrawlUrlPrefix": "", /* 图片访问路径前缀 */
     "scrawlInsertAlign": "none",
 
     /* 截图工具上传 */
     "snapscreenActionName": "uploadimage", /* 执行上传截图的action名称 */
-    "snapscreenPathFormat": "/upload/image/{yyyy}{mm}{dd}/{time}{rand:6}", /* 上传保存路径,可以自定义保存路径和文件名格式 */
+    "snapscreenPathFormat": "/upload/$auth_id/image/{yyyy}{mm}{dd}/{time}{rand:6}", /* 上传保存路径,可以自定义保存路径和文件名格式 */
     "snapscreenUrlPrefix": "", /* 图片访问路径前缀 */
     "snapscreenInsertAlign": "none", /* 插入的图片浮动方式 */
 
@@ -331,7 +338,7 @@ class MediaController extends \BaseController {
     "catcherLocalDomain": ["127.0.0.1", "localhost", "img.baidu.com"],
     "catcherActionName": "catchimage", /* 执行抓取远程图片的action名称 */
     "catcherFieldName": "source", /* 提交的图片列表表单名称 */
-    "catcherPathFormat": "/upload/image/{yyyy}{mm}{dd}/{time}{rand:6}", /* 上传保存路径,可以自定义保存路径和文件名格式 */
+    "catcherPathFormat": "/upload/$auth_id/image/{yyyy}{mm}{dd}/{time}{rand:6}", /* 上传保存路径,可以自定义保存路径和文件名格式 */
     "catcherUrlPrefix": "", /* 图片访问路径前缀 */
     "catcherMaxSize": 2048000, /* 上传大小限制，单位B */
     "catcherAllowFiles": [".png", ".jpg", ".jpeg", ".gif", ".bmp"], /* 抓取图片格式显示 */
@@ -339,7 +346,7 @@ class MediaController extends \BaseController {
     /* 上传视频配置 */
     "videoActionName": "uploadvideo", /* 执行上传视频的action名称 */
     "videoFieldName": "upfile", /* 提交的视频表单名称 */
-    "videoPathFormat": "/upload/video/{yyyy}{mm}{dd}/{time}{rand:6}", /* 上传保存路径,可以自定义保存路径和文件名格式 */
+    "videoPathFormat": "/upload/$auth_id/video/{yyyy}{mm}{dd}/{time}{rand:6}", /* 上传保存路径,可以自定义保存路径和文件名格式 */
     "videoUrlPrefix": "", /* 视频访问路径前缀 */
     "videoMaxSize": 102400000, /* 上传大小限制，单位B，默认100MB */
     "videoAllowFiles": [
@@ -349,7 +356,7 @@ class MediaController extends \BaseController {
     /* 上传文件配置 */
     "fileActionName": "uploadfile", /* controller里,执行上传视频的action名称 */
     "fileFieldName": "upfile", /* 提交的文件表单名称 */
-    "filePathFormat": "/upload/file/{yyyy}{mm}{dd}/{time}{rand:6}", /* 上传保存路径,可以自定义保存路径和文件名格式 */
+    "filePathFormat": "/upload/$auth_id/file/{yyyy}{mm}{dd}/{time}{rand:6}", /* 上传保存路径,可以自定义保存路径和文件名格式 */
     "fileUrlPrefix": "", /* 文件访问路径前缀 */
     "fileMaxSize": 51200000, /* 上传大小限制，单位B，默认50MB */
     "fileAllowFiles": [
@@ -362,7 +369,7 @@ class MediaController extends \BaseController {
 
     /* 列出指定目录下的图片 */
     "imageManagerActionName": "listimage", /* 执行图片管理的action名称 */
-    "imageManagerListPath": "/upload/image/", /* 指定要列出图片的目录 */
+    "imageManagerListPath": "/upload/$auth_id/image/", /* 指定要列出图片的目录 */
     "imageManagerListSize": 20, /* 每次列出文件数量 */
     "imageManagerUrlPrefix": "", /* 图片访问路径前缀 */
     "imageManagerInsertAlign": "none", /* 插入的图片浮动方式 */
@@ -370,7 +377,7 @@ class MediaController extends \BaseController {
 
     /* 列出指定目录下的文件 */
     "fileManagerActionName": "listfile", /* 执行文件管理的action名称 */
-    "fileManagerListPath": "/upload/file/", /* 指定要列出文件的目录 */
+    "fileManagerListPath": "/upload/$auth_id/file/", /* 指定要列出文件的目录 */
     "fileManagerUrlPrefix": "", /* 文件访问路径前缀 */
     "fileManagerListSize": 20, /* 每次列出文件数量 */
     "fileManagerAllowFiles": [
