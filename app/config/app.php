@@ -131,7 +131,7 @@ return array(
 		'App\Modules\Data\DataServiceProvider',
 
 		'App\External\Article\ArticleServiceProvider',
-        'App\External\Media\MediaServiceProvider',
+		'App\External\Media\MediaServiceProvider',
 		'App\External\CustomMeta\CustomMetaServiceProvider',
 		'App\External\Comment\CommentServiceProvider',
 		'App\External\Member\MemberServiceProvider',

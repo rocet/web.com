@@ -13,7 +13,21 @@ class CustomMetaController extends \BaseController {
 
 	public function show(){
 		if( \Input::method() == 'POST' ){
-			return \Input::except('_token');
+			$ret = '';
+			if( is_array( \Input::get('attributes.value') ) ){
+				$attributes = \Input::get('attributes');
+				$ret .= '<span>';
+				foreach( \Input::get('attributes.value') as $key => $val ){
+					$attributes['value'] = $val;
+					$attributes['checked'] = $key == $attributes['checked'] ? true : false ;
+					$ret .= call_user_func_array('\Form::'.\Input::get('type'), $attributes);
+					$ret .= $key;
+				}
+				$ret .= '</span>';
+			} else {
+				$ret = call_user_func_array('\Form::'.\Input::get('type'), \Input::get('attributes'));
+			}
+			return $ret;
 		}
 		return \View::make('CustomMeta::show');
 	}
