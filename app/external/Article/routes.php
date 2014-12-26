@@ -7,10 +7,10 @@ Route::group(array('domain' => 'www.web.com'), function () {
 			));
 		}),
 
-		array('path' => '/category/{id}/article', 'alias' => 'category.article', 'action' => 'App\External\Article\Controllers\ArticleController@index'),
+		array('path' => '/category/{id}/articles', 'alias' => 'category.articles', 'action' => 'App\External\Article\Controllers\ArticleController@index'),
 		array('path' => '/article/{id}', 'alias' => 'article.show', 'action' => 'App\External\Article\Controllers\ArticleController@show'),
 
-		array('path' => '/article/{id}/comment', 'alias' => 'article.comment', 'action' => 'App\External\Comment\Controllers\CommentController@index'),
+		array('path' => '/article/{id}/comments', 'alias' => 'article.comments', 'action' => 'App\External\Comment\Controllers\CommentController@index'),
 	);
 	foreach ($default_agree as $agree) {
 		$method = isset($agree['method']) ? $agree['method'] : 'get';
