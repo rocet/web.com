@@ -5,7 +5,7 @@ model aggregate
 tag
 
 
-
+upload img thumb
 media gallery
 media title description
 uedit

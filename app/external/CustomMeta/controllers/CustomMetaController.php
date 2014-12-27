@@ -14,8 +14,11 @@ class CustomMetaController extends \BaseController {
 	public function show(){
 		if( \Input::method() == 'POST' ){
 			$ret = '';
+			$attributes = array();
+			foreach(\Input::get('attributes') as $key => $attr){
+				$attributes[$key] = is_array($attr) ? array_filter($attr, function($val){ return $val === '' ? false : true; }) : $attr ;
+			}
 			if( is_array( \Input::get('attributes.value') ) ){
-				$attributes = \Input::get('attributes');
 				$ret .= '<span>';
 				foreach( \Input::get('attributes.value') as $key => $val ){
 					$attributes['value'] = $val;
@@ -25,7 +28,7 @@ class CustomMetaController extends \BaseController {
 				}
 				$ret .= '</span>';
 			} else {
-				$ret = call_user_func_array('\Form::'.\Input::get('type'), \Input::get('attributes'));
+				$ret = call_user_func_array('\Form::'.\Input::get('type'), $attributes);
 			}
 			return $ret;
 		}

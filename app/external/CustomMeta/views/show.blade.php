@@ -181,16 +181,16 @@
                     }
                 }
                 if(valid){
-                    for(var i=that.length-1;i>0;i--){
-                        if(that[i].name.indexOf('][') !== -1 ) {
-                            if (!$.trim(that[i].value)) {
-                                if ($(that[i]).parent().is('.input-group')) {
-                                    $(that[i]).parent().prev('label').remove();
-                                    $(that[i]).parent('.input-group').remove();
-                                }
-                            }
-                        }
-                    }
+//                    for(var i=that.length-1;i>0;i--){
+//                        if(that[i].name.indexOf('][') !== -1 ) {
+//                            if (!$.trim(that[i].value)) {
+//                                if ($(that[i]).parent().is('.input-group')) {
+//                                    $(that[i]).parent().prev('label').remove();
+//                                    $(that[i]).parent('.input-group').remove();
+//                                }
+//                            }
+//                        }
+//                    }
                     $.post(this.action, $(that).serialize(), function(res) {
                         var el = $(res);
 //                        if( that.type.value == 'editor' ){
