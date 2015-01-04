@@ -1,4 +1,4 @@
 @extends('layout.layout')
 @section('main')
-{{ print_r( $user->toArray() ) }}
+{{ print_r( $items->toArray() ) }}
 @stop
