@@ -260,26 +260,50 @@ class GroupUser extends Model {
 }
 
 class User extends Model {
+	protected $perPage = 10;
 	protected $table = 'user';
+
+	public function orders() {
+		return $this->hasMany( 'Order' );
+	}
 }
 
 class Cate extends Model {
+	protected $perPage = 10;
 	protected $table = 'cate';
+
+	public function goods() {
+		return $this->hasMany( 'Goods' );
+	}
 }
 
 class Goods extends Model {
+	protected $perPage = 10;
 	protected $table = 'goods';
+
+	public function cate() {
+		return $this->belongsTo( 'Cate' );
+	}
 }
 
 class Order extends Model {
+	protected $perPage = 10;
 	protected $table = 'order';
+
+	public function user() {
+		return $this->belongsTo( 'User' );
+	}
+
+	public function goods() {
+		return $this->hasMany( 'Goods' );
+	}
 }
 
 App::registerAutoloader();
 $app = new App( array(
-	'baseUrl'                => 'http://www.web.com/other/sample-project/public',
+	'baseUrl'             => 'http://www.web.com/other/sample-project/public',
 	'view'                => new View\Blade(),
-	'templates.path'      => './../templates',
+	'templates.path'      => dirname( __FILE__ ) . '/../templates',
 	'cookies.encrypt'     => true,
 	'cookies.lifetime'    => '20 minutes',
 	'cookies.path'        => '/',
@@ -303,13 +327,16 @@ $app->add( new \Slim\Middleware\SessionCookie( array(
 ) ) );
 $app->view()->parserOptions = array(
 	'debug' => true,
-	'cache' => dirname( __FILE__ ) . './../cache'
+	'cache' => dirname( __FILE__ ) . '/../cache'
 );
+$app->view->setData( 'app', $app );
 
-function asset($path) {
+function asset( $path ) {
 	global $app;
-	return $app->config('baseUrl') . '/assets/' . $path;
+
+	return $app->config( 'baseUrl' ) . '/assets/' . $path;
 }
+
 $dbManager->getConnection()->setPaginator( function () use ( $app ) {
 	return new Paginator( $app, 'page' );
 } );
@@ -317,118 +344,142 @@ $dbManager->getConnection()->setPaginator( function () use ( $app ) {
 $app->get( '/', function () use ( $app ) {
 
 	$app->render( 'main', array( 'items' => Order::query()->paginate() ) );
-} );
+} )->name( 'home' );
 
 $app->group( '/mobile', function () use ( $app ) {
+	exit( 'Auth Error !!' );
+}, function () use ( $app ) {
 
 	$app->get( '/order(/:page)', function () use ( $app ) {
 
 		$app->render( 'mobile.order', array( 'items' => Order::query()->paginate()->toJson() ) );
-	} );
+	} )->name( 'mobile.order.index' );
 
 	$app->get( '/order/:id', function ( $id ) {
 
-	} );
+	} )->name( 'mobile.order.show' );
 
 	$app->get( '/order/:id/edit', function ( $id ) {
 
-	} );
+	} )->name( 'mobile.order.edit' );
 
 	$app->put( '/order/:id', function ( $id ) {
 
-	} );
+	} )->name( 'mobile.order.update' );
 
 	$app->delete( '/order/:id', function ( $id ) use ( $app ) {
 		$app->response->headers->set( 'Content-Type', 'application/json' );
 		$app->response->setBody( json_encode( array( 'SUCCESS' => $id ) ) );
-	} );
+	} )->name( 'mobile.order.delete' );
 } );
 
+$app->get( '/admin/login', function () use ( $app ) {
+	$app->render( 'admin.login' );
+} )->name( 'admin.login' );
+
+$app->post( '/login', function () use ( $app ) {
+	var_dump( $_SESSION );
+	var_dump( $app->request->post( 'username' ) );
+	var_dump( $app->request->post( 'password' ) );
+} )->name( 'admin.login.post' );
+
 $app->group( '/admin', function () use ( $app ) {
+	$app->flash( 'error', 'Login required' );
+	$app->redirect( $app->urlFor( 'admin.login' ) );
+}, function () use ( $app ) {
+
+	$app->get( '/', function () use ( $app ) {
+
+		$app->render( 'admin.main', array( 'items' => Order::query()->paginate() ) );
+	} )->name( 'admin.main' );
+
+	$app->get( '/logout', function () use ( $app ) {
+
+	} )->name( 'admin.logout' );
 
 	$app->get( '/order(/:page)', function () use ( $app ) {
 		$app->render( 'admin.order', array( 'items' => Order::query()->paginate() ) );
-	} );
+	} )->name( 'admin.order.index' );
 
 	$app->get( '/order/:id', function ( $id ) {
 
-	} );
+	} )->name( 'admin.order.show' );
 
 	$app->get( '/order/:id/edit', function ( $id ) {
 
-	} );
+	} )->name( 'admin.order.edit' );
 
 	$app->put( '/order/:id', function ( $id ) {
 
-	} );
+	} )->name( 'admin.order.update' );
 
 	$app->delete( '/order/:id', function ( $id ) use ( $app ) {
 		$app->response->headers->set( 'Content-Type', 'application/json' );
 		$app->response->setBody( json_encode( array( 'SUCCESS' => $id ) ) );
-	} );
+	} )->name( 'admin.order.delete' );
 
 	$app->get( '/goods(/:page)', function () use ( $app ) {
 		$app->render( 'admin.goods', array( 'items' => Goods::query()->paginate() ) );
-	} );
+	} )->name( 'admin.goods.index' );
 
 	$app->get( '/goods/:id', function ( $id ) {
 
-	} );
+	} )->name( 'admin.goods.show' );
 
 	$app->get( '/goods/:id/edit', function ( $id ) {
 
-	} );
+	} )->name( 'admin.goods.edit' );
 
 	$app->put( '/goods/:id', function ( $id ) {
 
-	} );
+	} )->name( 'admin.goods.update' );
 
 	$app->delete( '/goods/:id', function ( $id ) use ( $app ) {
 		$app->response->headers->set( 'Content-Type', 'application/json' );
 		$app->response->setBody( json_encode( array( 'SUCCESS' => $id ) ) );
-	} );
+	} )->name( 'admin.goods.delete' );
 
 	$app->get( '/user(/:page)', function () use ( $app ) {
 		$app->render( 'admin.user', array( 'items' => User::query()->paginate() ) );
-	} );
+	} )->name( 'admin.user.index' );
 
 	$app->get( '/user/:id', function ( $id ) {
 
-	} );
+	} )->name( 'admin.user.show' );
 
 	$app->get( '/user/:id/edit', function ( $id ) {
 
-	} );
+	} )->name( 'admin.user.edit' );
 
 	$app->put( '/user/:id', function ( $id ) {
 
-	} );
+	} )->name( 'admin.user.update' );
 
 	$app->delete( '/cate/:id', function ( $id ) use ( $app ) {
 		$app->response->headers->set( 'Content-Type', 'application/json' );
 		$app->response->setBody( json_encode( array( 'SUCCESS' => $id ) ) );
-	} );
+	} )->name( 'admin.user.delete' );
 
 	$app->get( '/cate(/:page)', function () use ( $app ) {
 		$app->render( 'admin.cate', array( 'items' => Cate::query()->paginate() ) );
-	} );
+	} )->name( 'admin.cate.index' );
 
 	$app->get( '/cate/:id', function ( $id ) {
 
-	} );
+	} )->name( 'admin.cate.show' );
 
 	$app->get( '/cate/:id/edit', function ( $id ) {
 
-	} );
+	} )->name( 'admin.cate.edit' );
 
 	$app->put( '/cate/:id', function ( $id ) {
 
-	} );
+	} )->name( 'admin.cate.update' );
 
 	$app->delete( '/cate/:id', function ( $id ) use ( $app ) {
 		$app->response->headers->set( 'Content-Type', 'application/json' );
 		$app->response->setBody( json_encode( array( 'SUCCESS' => $id ) ) );
-	} );
+	} )->name( 'admin.cate.delete' );
 } );
 
 $app->run();
