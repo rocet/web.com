@@ -5,10 +5,17 @@
 		"illuminate/database": "*"
 	},
 	"autoload": {
-		"psr-0": {"Requests": "library/"}
+		"psr-0": {
+			"Requests": "library/"
+		}
 	},
 	"repositories": [
-		{"type": "composer", "url": "http://pkg.phpcomposer.com/repo/packagist/"},
-		{"packagist": false}
+		{
+			"type": "composer",
+			"url": "http://pkg.phpcomposer.com/repo/packagist/"
+		},
+		{
+		  "packagist": false
+		}
 	]
 }

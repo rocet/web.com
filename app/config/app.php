@@ -134,6 +134,7 @@ return array(
 		'App\External\Media\MediaServiceProvider',
 		'App\External\CustomMeta\CustomMetaServiceProvider',
 		'App\External\Comment\CommentServiceProvider',
+		'App\External\Tag\TagServiceProvider',
 		'App\External\Member\MemberServiceProvider',
 		'App\External\Shop\ShopServiceProvider',
 	),

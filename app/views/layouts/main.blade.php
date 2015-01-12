@@ -8,6 +8,7 @@
         {{--<base href="http://web.com" />--}}
         {{--<base target="_blank" />--}}
         <link rel="stylesheet" type="text/css" href="/assets/css/app.css" />
+        <link rel="stylesheet" type="text/css" href="/assets/css/animate.min.css" />
     </head>
     <body class="container">
         <a class="sr-only" href="#content">Skip to main content</a>

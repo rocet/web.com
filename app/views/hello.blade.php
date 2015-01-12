@@ -26,5 +26,6 @@
     console.log(str);
     </pre>
     @include('icon')
+    @include('animate')
     @endif
 @stop
